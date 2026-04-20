@@ -1,0 +1,80 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript v1-y cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Workspace XML
+.yarn-integrity
+
+# dotenv environment variable files
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# next.js
+.next/
+out/
+
+# nuxt.js
+.nuxt/
+dist/
+
+# vuepress
+.vuepress/dist
+
+# Serverless Webpack directories
+.webpack/
+
+# Optional REPL history
+.node_repl_history
+
+# Output from 'npm run build'
+dist/
+dist-server/
+dist-client/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Misc
+tmp/
+temp/
+coverage/
+.cache/

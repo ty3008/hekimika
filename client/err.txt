@@ -1,0 +1,9 @@
+
+> client@0.0.0 build
+> tsc -b && vite build
+
+src/App.tsx(2,1): error TS6133: 'AnimatePresence' is declared but its value is never read.
+src/components/Footer.tsx(2,10): error TS2305: Module '"lucide-react"' has no exported member 'Facebook'.
+src/components/Footer.tsx(2,20): error TS2305: Module '"lucide-react"' has no exported member 'Youtube'.
+src/components/Footer.tsx(2,29): error TS2305: Module '"lucide-react"' has no exported member 'Instagram'.
+src/pages/Home.tsx(1,10): error TS6133: 'useEffect' is declared but its value is never read.
