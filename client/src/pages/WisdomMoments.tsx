@@ -127,7 +127,7 @@ export default function WisdomMoments() {
                         centered
                     />
                     <div className="flex flex-wrap gap-4 justify-center mt-8">
-                        <a href="https://youtube.com/@hekimika" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-4 inline-flex items-center gap-2">
+                        <a href="https://www.youtube.com/@Hekimika001" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-4 inline-flex items-center gap-2">
                             <Headphones size={18} /> Audio Teachings
                         </a>
                         <a href="/resources" className="btn-outline px-8 py-4 inline-flex items-center gap-2">

@@ -65,9 +65,11 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="flex items-center gap-6">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'var(--gold)' }}>
-                                <span className="text-navy font-bold text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>H</span>
-                            </div>
+                            <img 
+                                src="/hekimika_logo.png" 
+                                alt="Hekimika Logo" 
+                                className="w-10 h-10 object-contain"
+                            />
                             <div>
                                 <p className="text-white font-bold max-leading" style={{ fontFamily: 'Poppins, sans-serif' }}>Hekimika</p>
                                 <p className="text-[10px]" style={{ color: 'var(--gold)' }}>Wise Nation</p>
@@ -97,8 +99,8 @@ export default function Footer() {
 
                     {/* Contact - horizontal */}
                     <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
-                        <span className="flex items-center gap-2"><Mail size={14} style={{ color: 'var(--gold)' }} /> info@hekimika.org</span>
-                        <span className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--gold)' }} /> +254 700 000 000</span>
+                        <span className="flex items-center gap-2"><Mail size={14} style={{ color: 'var(--gold)' }} /> hekimika001@gmail.com</span>
+                        <span className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--gold)' }} /> +2540708084350</span>
                         <span className="flex items-center gap-2"><MapPin size={14} style={{ color: 'var(--gold)' }} /> Nairobi, Kenya</span>
                     </div>
                 </div>

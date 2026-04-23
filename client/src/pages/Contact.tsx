@@ -37,8 +37,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-bold text-navy mb-1">Email Details</p>
-                                    <p className="text-gray-500 text-sm">info@hekimika.org</p>
-                                    <p className="text-gray-500 text-sm">support@hekimika.org</p>
+                                    <p className="text-gray-500 text-sm">hekimika001@gmail.com</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -47,7 +46,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-bold text-navy mb-1">Call or WhatsApp</p>
-                                    <p className="text-gray-500 text-sm">+254 700 000 000</p>
+                                    <p className="text-gray-500 text-sm">+2540708084350</p>
                                     <p className="text-xs text-gray-400 mt-1">Available Mon-Fri, 9am - 5pm EAT</p>
                                 </div>
                             </li>

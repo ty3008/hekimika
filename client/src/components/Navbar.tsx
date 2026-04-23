@@ -29,9 +29,11 @@ export default function Navbar() {
             <nav className="container-xl flex items-center justify-between h-20 px-4 md:px-8 lg:px-16">
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--gold)' }}>
-                        <span className="text-navy font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>H</span>
-                    </div>
+                    <img 
+                        src="/hekimika_logo.png" 
+                        alt="Hekimika Logo" 
+                        className="w-12 h-12 object-contain"
+                    />
                     <div>
                         <span className="text-white font-bold text-xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             Hekimika
