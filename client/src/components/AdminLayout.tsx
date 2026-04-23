@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import {
-    LayoutDashboard, BookOpen, Video, FileText, LogOut, Menu, X, ChevronRight, Layers
+    LayoutDashboard, BookOpen, Video, FileText, LogOut, Menu, X, ChevronRight, Layers, MessageSquareQuote
 } from 'lucide-react';
 
 const ADMIN_NAV = [
@@ -11,6 +11,7 @@ const ADMIN_NAV = [
     { label: 'Books', path: '/admin/books', icon: BookOpen },
     { label: 'Free Resources', path: '/admin/free-resources', icon: Layers },
     { label: 'Blog & Devotionals', path: '/admin/blog', icon: FileText },
+    { label: 'Testimonials', path: '/admin/testimonials', icon: MessageSquareQuote },
 ];
 
 interface Props { children: React.ReactNode; }

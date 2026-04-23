@@ -1,23 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { TESTIMONIALS } from '../utils/constants';
+import { useApi } from '../hooks/useApi';
+import { TESTIMONIALS as FALLBACK_TESTIMONIALS } from '../utils/constants';
 
 export default function TestimonialCarousel() {
+    const { data: apiTestimonials, loading } = useApi<any[]>('/testimonials');
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(1);
+    const [testimonials, setTestimonials] = useState<any[]>([]);
+
+    useEffect(() => {
+        if (!loading) {
+            if (apiTestimonials && apiTestimonials.length > 0) {
+                setTestimonials(apiTestimonials);
+            } else {
+                setTestimonials(FALLBACK_TESTIMONIALS);
+            }
+        }
+    }, [apiTestimonials, loading]);
 
     const prev = () => {
         setDirection(-1);
-        setIndex((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+        setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
     };
 
     const next = () => {
         setDirection(1);
-        setIndex((i) => (i + 1) % TESTIMONIALS.length);
+        setIndex((i) => (i + 1) % testimonials.length);
     };
 
-    const t = TESTIMONIALS[index];
+    if (loading || testimonials.length === 0) {
+        return (
+            <div className="flex justify-center py-20 min-h-[300px] items-center">
+                <div className="w-8 h-8 rounded-full border-2 border-gold border-t-transparent animate-spin"></div>
+            </div>
+        );
+    }
+
+    const t = testimonials[index];
 
     return (
         <div className="relative max-w-3xl mx-auto">
@@ -55,11 +76,11 @@ export default function TestimonialCarousel() {
                     <ChevronLeft size={18} />
                 </button>
                 <div className="flex gap-2">
-                    {TESTIMONIALS.map((_, i) => (
+                    {testimonials.map((_, i) => (
                         <button
                             key={i}
                             onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
-                            className="w-2.5 h-2.5 rounded-full transition-all duration-200"
+                            className="w-2.5 h-2.5 rounded-full transition-all duration-200 cursor-pointer"
                             style={{ background: i === index ? 'var(--gold)' : 'rgba(212,175,55,0.3)' }}
                         />
                     ))}

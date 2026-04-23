@@ -105,7 +105,7 @@ export default function Reader() {
             </div>
 
             {/* Viewer */}
-            <div className="flex-1 relative bg-[#323639]">
+            <div className="flex-1 relative bg-[#323639] min-h-[60vh]">
                 {iframeUrl ? (
                     <iframe
                         src={iframeUrl}

@@ -62,11 +62,11 @@ export default function Navbar() {
                         Join a Program
                     </Link>
                     <button
-                        className="lg:hidden text-white p-2"
+                        className="lg:hidden text-white p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                         onClick={() => setOpen((v) => !v)}
                         aria-label="Toggle menu"
                     >
-                        {open ? <X size={24} /> : <Menu size={24} />}
+                        {open ? <X size={26} /> : <Menu size={26} />}
                     </button>
                 </div>
             </nav>
@@ -82,12 +82,12 @@ export default function Navbar() {
                         className="lg:hidden overflow-hidden"
                         style={{ background: 'var(--navy-light)' }}
                     >
-                        <ul className="flex flex-col px-6 py-4 gap-4">
+                        <ul className="flex flex-col px-6 py-4 gap-1">
                             {NAV_LINKS.map((link) => (
                                 <li key={link.path}>
                                     <Link
                                         to={link.path}
-                                        className={`block text-base font-medium py-2 border-b border-white/10 ${pathname === link.path ? 'text-gold' : 'text-white'
+                                        className={`block text-base font-medium py-3 px-2 border-b border-white/10 min-h-[44px] ${pathname === link.path ? 'text-gold' : 'text-white'
                                             }`}
                                         style={{ color: pathname === link.path ? 'var(--gold)' : undefined }}
                                     >

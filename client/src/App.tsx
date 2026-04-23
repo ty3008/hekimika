@@ -24,6 +24,7 @@ import AdminPrograms from './admin/AdminPrograms';
 import AdminBooks from './admin/AdminBooks';
 import AdminBlog from './admin/AdminBlog';
 import AdminFreeResources from './admin/AdminFreeResources';
+import AdminTestimonials from './admin/AdminTestimonials';
 import Reader from './pages/Reader';
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -63,6 +64,7 @@ export default function App() {
       <Route path="/admin/books" element={<ProtectedRoute><AdminLayout><AdminBooks /></AdminLayout></ProtectedRoute>} />
       <Route path="/admin/free-resources" element={<ProtectedRoute><AdminLayout><AdminFreeResources /></AdminLayout></ProtectedRoute>} />
       <Route path="/admin/blog" element={<ProtectedRoute><AdminLayout><AdminBlog /></AdminLayout></ProtectedRoute>} />
+      <Route path="/admin/testimonials" element={<ProtectedRoute><AdminLayout><AdminTestimonials /></AdminLayout></ProtectedRoute>} />
       <Route path="/admin/login" element={<Navigate to="/admin" replace />} />
 
       {/* 404 Route */}

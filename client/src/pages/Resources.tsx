@@ -196,11 +196,11 @@ export default function Resources() {
                         title="Books"
                         subtitle="Authored by Pastor Kevin Mulati, these books offer practical blueprints for godly living."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
-                                <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-gray-50 flex items-center justify-center p-2">
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute inset-0 bg-navy/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
                                         <p className="text-white text-sm line-clamp-4">{book.desc}</p>
                                     </div>
@@ -210,11 +210,16 @@ export default function Resources() {
                                 </div>
                                 <h3 className="font-bold text-navy text-lg mb-1 leading-tight group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{book.title}</h3>
                                 <p className="text-gray-400 text-xs mb-3">{book.author}</p>
-                                <div className="flex items-center justify-between mt-2">
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-2 gap-2">
                                     <span className="font-bold text-navy" style={{ color: 'var(--navy)' }}>{book.price}</span>
-                                    <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-gold hover:underline">
-                                        Buy Softcopy <ExternalLink size={12} />
-                                    </a>
+                                    <div className="flex flex-col gap-2 items-end">
+                                        <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-gold hover:underline">
+                                            Buy Softcopy <ExternalLink size={12} />
+                                        </a>
+                                        <a href={(book as any).amazonUrl || "https://www.amazon.com/dp/ASIN123"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gold hover:underline">
+                                            Buy Hardcopy on Amazon <ExternalLink size={12} />
+                                        </a>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
@@ -230,15 +235,18 @@ export default function Resources() {
                         title="Cultured in Love"
                         subtitle="Deep dive into the wisdom of love and relationships. These specialized volumes are part of our flagship series."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         {CULTURED_IN_LOVE_BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="flex flex-col">
-                                <div className="aspect-[3/4] rounded-3xl overflow-hidden mb-6 shadow-2xl border-4 border-white group relative">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent flex flex-col justify-end p-6">
-                                        <p className="text-white/80 text-xs italic mb-2 line-clamp-2">{book.desc}</p>
-                                        <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
+                                <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-6 shadow-2xl border-4 border-white group relative">
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-700" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent flex flex-col justify-end p-6 gap-2">
+                                        <p className="text-white/80 text-xs italic mb-1 line-clamp-2">{book.desc}</p>
+                                        <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
                                             <ExternalLink size={14} /> Buy Softcopy
+                                        </a>
+                                        <a href={(book as any).amazonUrl || "https://www.amazon.com/dp/ASIN123"} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
+                                            <ExternalLink size={14} /> Buy Hardcopy on Amazon
                                         </a>
                                     </div>
                                 </div>
@@ -291,13 +299,13 @@ export default function Resources() {
                         title="Magazines"
                         subtitle="Full-color digital magazines featuring articles, interviews, and testimonies from across the Wise Nation."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {magazines.map((mag, i) => (
                             <motion.div key={mag._id} {...sectionFade} transition={{ delay: i * 0.1 }} className="bg-navy rounded-3xl overflow-hidden flex flex-col md:flex-row h-full">
-                                <div className="md:w-1/3 bg-gray-200">
+                                <div className="h-48 md:h-auto md:w-1/3 bg-gray-200">
                                     <img src={mag.image || (ASSET_PATH + 'wisdom edition 1 the undefiled.jpg')} alt={mag.title} className="w-full h-full object-cover" />
                                 </div>
-                                <div className="md:w-2/3 p-8 flex flex-col justify-center">
+                                <div className="md:w-2/3 p-6 md:p-8 flex flex-col justify-center">
                                     <p className="text-gold text-[10px] font-bold uppercase tracking-widest mb-2">Magazine Issue</p>
                                     <h3 className="text-white text-2xl font-bold mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>{mag.title}</h3>
                                     <p className="text-white/60 text-sm mb-6 leading-relaxed">{mag.shortDescription || mag.desc}</p>

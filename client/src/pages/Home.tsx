@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, BookOpen, Users, Heart, Star, PlayCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
@@ -8,9 +8,13 @@ import ProgramCard from '../components/ProgramCard';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { PROGRAMS } from '../utils/constants';
 
-import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
-
-const HERO_BG = HeroBgImg;
+const CAROUSEL_IMAGES = [
+    '/assets/home-carousel/carousel 1.jpg',
+    '/assets/home-carousel/carousel 2.jpg',
+    '/assets/home-carousel/carousel 3.jpg',
+    '/assets/home-carousel/carousel 4.jpeg',
+    '/assets/home-carousel/carousel 5.jpeg',
+];
 
 const ARMS = [
     {
@@ -48,10 +52,33 @@ const fadeUp = {
     animate: { opacity: 1, y: 0 },
 };
 
+import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
+const HERO_BG = HeroBgImg;
+
 export default function Home() {
     const heroRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
     const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+
+    const [currentImage, setCurrentImage] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+
+    useEffect(() => {
+        if (isHovered) return;
+        const timer = setInterval(() => {
+            setCurrentImage((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [isHovered]);
+
+    const handleDragEnd = (_e: any, { offset }: any) => {
+        const swipe = offset.x;
+        if (swipe < -80) {
+            setCurrentImage((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+        } else if (swipe > 80) {
+            setCurrentImage((prev) => (prev - 1 + CAROUSEL_IMAGES.length) % CAROUSEL_IMAGES.length);
+        }
+    };
 
     const featured = PROGRAMS.filter((p) => ['Preparing for Love', 'School of Purity', 'Beginning Right', 'Built to Lead'].includes(p.title)).slice(0, 4);
 
@@ -63,26 +90,39 @@ export default function Home() {
             </Helmet>
 
             {/* ── Hero ── */}
-            <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                <motion.div className="absolute inset-0" style={{ y }}>
-                    <img src={HERO_BG} alt="Hero" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.7) 0%, rgba(0,31,63,0.85) 100%)' }} />
+            <section 
+                ref={heroRef} 
+                className="relative min-h-screen flex items-center justify-center overflow-hidden"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <motion.div 
+                    className="absolute inset-0" 
+                    style={{ y }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onDragEnd={handleDragEnd}
+                >
+                    <AnimatePresence initial={false}>
+                        <motion.img
+                            key={currentImage}
+                            src={CAROUSEL_IMAGES[currentImage]}
+                            alt="Hero Carousel"
+                            className="absolute w-full h-full object-cover"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1 }}
+                        />
+                    </AnimatePresence>
+                    <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.7) 0%, rgba(0,31,63,0.85) 100%)' }} />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                    <motion.p
-                        {...fadeUp}
-                        animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-sm font-semibold uppercase tracking-widest mb-4"
-                        style={{ color: 'var(--gold)' }}
-                    >
-                        A Global Outreach Ministry
-                    </motion.p>
+                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">
                     <motion.h1
                         {...fadeUp}
                         animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.4 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
                         style={{ fontFamily: 'Poppins, sans-serif' }}
                     >
@@ -93,7 +133,7 @@ export default function Home() {
                     <motion.p
                         {...fadeUp}
                         animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.5 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-sm font-semibold tracking-widest mb-4"
                         style={{ color: 'var(--gold)' }}
                     >
@@ -102,21 +142,18 @@ export default function Home() {
                     <motion.p
                         {...fadeUp}
                         animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.6 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
                         className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto"
                     >
-                        Transformative programs in relationships, purity, healing, and leadership — guided by Pastor Kevin & Lilian Mulati.
+                        A platform for wisdom for life, wholesome growth, and a life of dominion.
                     </motion.p>
                     <motion.div
                         {...fadeUp}
                         animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.8 }}
-                        className="flex flex-wrap gap-4 justify-center"
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="flex flex-wrap gap-4 justify-center pointer-events-auto"
                     >
-                        <Link to="/perfected-in-wisdom" className="btn-primary px-8 py-4 text-base flex items-center gap-2">
-                            Explore Programs <ArrowRight size={18} />
-                        </Link>
-                        <Link to="/about" className="btn-outline px-8 py-4 text-base flex items-center gap-2">
+                        <Link to="/about" className="btn-primary px-8 py-4 text-base flex items-center gap-2">
                             <PlayCircle size={18} /> Our Story
                         </Link>
                     </motion.div>
@@ -157,18 +194,13 @@ export default function Home() {
                 <div className="container-xl">
                     <SectionTitle
                         overline="Perfected in Wisdom"
-                        title="Programs That Transform Lives"
+                        title="Here is Sound Wisdom for You"
                         subtitle="Our curriculum is designed to bring real, lasting change — grounded in Scripture and delivered with excellence."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                         {featured.map((p, i) => (
                             <ProgramCard key={p.slug} {...p} index={i} />
                         ))}
-                    </div>
-                    <div className="text-center">
-                        <Link to="/perfected-in-wisdom" className="btn-primary px-8 py-4 text-base inline-flex items-center gap-2">
-                            View All Programs <ArrowRight size={18} />
-                        </Link>
                     </div>
                 </div>
             </section>
@@ -273,24 +305,31 @@ export default function Home() {
                     <div className="flex flex-wrap gap-6 justify-center">
                         {[
                             { icon: BookOpen, label: 'Softcopy Books', desc: 'Browse our library of ministry books', to: '/resources' },
-                            { icon: PlayCircle, label: 'Audio Teachings', desc: 'Listen on YouTube & Facebook', to: '/wisdom-moments' },
-                        ].map(({ icon: Icon, label, desc, to }, i) => (
+                            { icon: PlayCircle, label: 'Audio Teachings', desc: 'Listen on YouTube & Facebook', to: 'https://www.youtube.com/@Hekimika001', external: true },
+                        ].map(({ icon: Icon, label, desc, to, external }, i) => (
                             <motion.div
                                 key={label}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="card p-8 w-64 text-center"
+                                className="card p-8 w-64 text-center cursor-pointer transition-transform hover:-translate-y-2"
+                                onClick={() => external ? window.open(to, '_blank') : window.location.href = to}
                             >
                                 <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(0,31,63,0.06)' }}>
                                     <Icon size={28} style={{ color: 'var(--navy)' }} />
                                 </div>
                                 <h4 className="font-bold text-navy mb-2" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>{label}</h4>
                                 <p className="text-gray-400 text-sm mb-4">{desc}</p>
-                                <Link to={to} className="text-sm font-semibold flex items-center gap-1 justify-center" style={{ color: 'var(--gold)' }}>
-                                    Explore <ArrowRight size={13} />
-                                </Link>
+                                {external ? (
+                                    <a href={to} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold flex items-center gap-1 justify-center" style={{ color: 'var(--gold)' }}>
+                                        Explore <ArrowRight size={13} />
+                                    </a>
+                                ) : (
+                                    <Link to={to} className="text-sm font-semibold flex items-center gap-1 justify-center" style={{ color: 'var(--gold)' }}>
+                                        Explore <ArrowRight size={13} />
+                                    </Link>
+                                )}
                             </motion.div>
                         ))}
                     </div>

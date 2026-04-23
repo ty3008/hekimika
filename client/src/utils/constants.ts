@@ -267,7 +267,7 @@ export const NAV_LINKS = [
     { label: 'About', path: '/about' },
     { label: 'Programs', path: '/perfected-in-wisdom' },
     { label: 'Wisdom Moments', path: '/wisdom-moments' },
-    { label: 'Young & Wise', path: '/young-and-wise' },
+    { label: 'Teens Corner', path: '/young-and-wise' },
     { label: 'Resources', path: '/resources' },
     { label: 'Contact', path: '/contact' },
 ];
