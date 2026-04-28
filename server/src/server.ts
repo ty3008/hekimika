@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -15,7 +14,8 @@ import eventRoutes from './routes/events.routes';
 import registrationRoutes from './routes/registrations.routes';
 import contactRoutes from './routes/contact.routes';
 import testimonialRoutes from './routes/testimonials.routes';
-import { seedAdmin } from './utils/seed';
+import { seedAdmin, seedPrograms } from './utils/seed';
+import { testConnection, initDB } from './lib/db';
 
 dotenv.config();
 
@@ -23,8 +23,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const FRONTEND_URL = process.env.FRONTEND_URL || '';
-const MONGO_URI = process.env.MONGO_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
+
 const allowedOrigins = [
     CLIENT_URL,
     FRONTEND_URL,
@@ -32,10 +32,6 @@ const allowedOrigins = [
     'https://hekimika.org',
     'https://www.hekimika.org',
 ].filter(Boolean);
-
-if (!MONGO_URI) {
-    throw new Error('MONGO_URI is required in environment variables.');
-}
 
 if (!JWT_SECRET) {
     throw new Error('JWT_SECRET is required in environment variables.');
@@ -73,8 +69,13 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 
 // Health check
-app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', message: 'Hekimika API is running' });
+app.get('/api/health', async (_req, res) => {
+    const dbConnected = await testConnection();
+    res.json({
+        status: 'ok',
+        message: 'Hekimika API is running',
+        database: dbConnected ? 'connected' : 'disconnected',
+    });
 });
 
 // 404 handler
@@ -82,22 +83,26 @@ app.use((_req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-// Connect to MongoDB and start server
-mongoose
-    .connect(MONGO_URI)
-    .then(async () => {
-        console.log('✅ Connected to MongoDB Atlas');
-        await seedAdmin();
-        app.listen(PORT, () => {
-            console.log(`🚀 Hekimika server running on port ${PORT}`);
-        });
-    })
-    .catch((err) => {
-        console.error('❌ MongoDB connection error:', err.message);
-        // Start anyway for UI verification purposes without DB
-        app.listen(PORT, () => {
-            console.log(`🚀 Hekimika server running on port ${PORT} (No DB)`);
-        });
+// Connect to Postgres and start server
+const start = async () => {
+    try {
+        const connected = await testConnection();
+        if (connected) {
+            await initDB();
+            await seedAdmin();
+            await seedPrograms();
+        } else {
+            console.warn('⚠️  Starting without database connection');
+        }
+    } catch (err: any) {
+        console.error('❌ Database setup error:', err.message);
+    }
+
+    app.listen(PORT, () => {
+        console.log(`🚀 Hekimika server running on port ${PORT}`);
     });
+};
+
+start();
 
 export default app;

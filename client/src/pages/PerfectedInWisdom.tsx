@@ -14,9 +14,11 @@ interface Program {
     slug: string;
     category: string;
     description: string;
-    model: string;
+    fullDescription?: string;
     image: string;
     selarUrl: string;
+    isOpenForIntake?: boolean;
+    is_open_for_intake?: boolean;
 }
 
 export default function PerfectedInWisdom() {
@@ -26,7 +28,18 @@ export default function PerfectedInWisdom() {
 
     // Use API but fallback to constants if it fails/loading
     const { data: apiPrograms, loading } = useApi<Program[]>('/programs', PROGRAMS);
-    const programs = apiPrograms || PROGRAMS;
+    
+    // Merge API data with constants to ensure completeness
+    const programs = PROGRAMS.map(p => {
+        const remote = (apiPrograms || []).find(rp => rp.slug === p.slug);
+        if (!remote) return p;
+        return { 
+            ...p, 
+            ...remote,
+            // Prioritize remote intake status but fallback to local
+            isOpenForIntake: remote.isOpenForIntake ?? (remote as any).is_open_for_intake ?? p.isOpenForIntake 
+        };
+    });
 
     const filteredPrograms = programs.filter((p) => {
         const matchCategory = activeCategory === 'All' || p.category === activeCategory;
@@ -95,13 +108,40 @@ export default function PerfectedInWisdom() {
                             <div className="w-10 h-10 border-4 border-gray-200 border-t-gold rounded-full animate-spin" style={{ borderTopColor: 'var(--gold)' }} />
                         </div>
                     ) : (
-                        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <AnimatePresence>
-                                {filteredPrograms.map((program, i) => (
-                                    <ProgramCard key={program.slug} {...program} index={i} />
-                                ))}
-                            </AnimatePresence>
-                        </motion.div>
+                        <div className="space-y-16">
+                            {/* Open Programs */}
+                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) !== false).length > 0 && (
+                                <div>
+                                    <h3 className="text-2xl font-bold text-navy mb-8 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                        Currently Open Programs
+                                    </h3>
+                                    <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                        <AnimatePresence>
+                                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) !== false).map((program, i) => (
+                                                <ProgramCard key={program.slug} {...program} index={i} />
+                                            ))}
+                                        </AnimatePresence>
+                                    </motion.div>
+                                </div>
+                            )}
+
+                            {/* Coming Soon / Closed */}
+                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) === false).length > 0 && (
+                                <div>
+                                    <h3 className="text-2xl font-bold text-navy mb-8" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        All Programs / Coming Soon
+                                    </h3>
+                                    <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                        <AnimatePresence>
+                                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) === false).map((program, i) => (
+                                                <ProgramCard key={program.slug} {...program} index={i} />
+                                            ))}
+                                        </AnimatePresence>
+                                    </motion.div>
+                                </div>
+                            )}
+                        </div>
                     )}
 
                     {/* Empty State */}

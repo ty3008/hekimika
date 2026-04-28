@@ -15,6 +15,8 @@ import WisdomMoments from './pages/WisdomMoments';
 import YoungAndWise from './pages/YoungAndWise';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import ForumPage from './pages/ForumPage';
 import NotFound from './pages/NotFound';
 
 // Admin Pages
@@ -54,6 +56,8 @@ export default function App() {
       <Route path="/resources" element={<PublicLayout><Resources /></PublicLayout>} />
       <Route path="/read/:id" element={<Reader />} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+      <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+      <Route path="/forums/:slug" element={<PublicLayout><ForumPage /></PublicLayout>} />
 
       {/* Admin Auth Route (hidden entry point) */}
       <Route path="/admin" element={<AdminLogin />} />

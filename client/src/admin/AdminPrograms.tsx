@@ -12,11 +12,11 @@ export default function AdminPrograms() {
 
     const [formData, setFormData] = useState({
         title: '', category: 'Single & Built', description: '', fullDescription: '',
-        model: '8-week', image: '', selarUrl: '', curriculum: ''
+        model: 'Bootcamp', image: '', selarUrl: '', curriculum: '', isOpenForIntake: true, objectives: ''
     });
 
     const resetForm = () => {
-        setFormData({ title: '', category: 'Single & Built', description: '', fullDescription: '', model: '8-week', image: '', selarUrl: '', curriculum: '' });
+        setFormData({ title: '', category: 'Single & Built', description: '', fullDescription: '', model: 'Bootcamp', image: '', selarUrl: '', curriculum: '', isOpenForIntake: true, objectives: '' });
         setEditingId(null);
     };
 
@@ -26,7 +26,9 @@ export default function AdminPrograms() {
             setFormData({
                 title: program.title, category: program.category, description: program.description,
                 fullDescription: program.fullDescription || '', model: program.model, image: program.image || '',
-                selarUrl: program.selarUrl, curriculum: program.curriculum.join('\n')
+                selarUrl: program.selarUrl, curriculum: program.curriculum?.join('\n') || '',
+                isOpenForIntake: program.is_open_for_intake !== undefined ? program.is_open_for_intake : true,
+                objectives: program.objectives?.join('\n') || ''
             });
         } else {
             resetForm();
@@ -36,7 +38,11 @@ export default function AdminPrograms() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const payload = { ...formData, curriculum: formData.curriculum.split('\n').filter(s => s.trim()) };
+        const payload = { 
+            ...formData, 
+            curriculum: formData.curriculum.split('\n').filter(s => s.trim()),
+            objectives: formData.objectives.split('\n').filter(s => s.trim())
+        };
         try {
             if (editingId) {
                 await api.put(`/programs/${editingId}`, payload);
@@ -128,8 +134,12 @@ export default function AdminPrograms() {
                                 <div>
                                     <label className="block text-sm mb-1">Model</label>
                                     <select value={formData.model} onChange={e => setFormData({ ...formData, model: e.target.value })} className="w-full p-2 border rounded">
-                                        <option>8-week</option><option>workshop</option><option>ongoing</option>
+                                        <option>Bootcamp</option><option>workshop</option><option>ongoing</option>
                                     </select>
+                                </div>
+                                <div className="flex items-center gap-2 mt-6">
+                                    <input type="checkbox" id="isOpenForIntake" checked={formData.isOpenForIntake} onChange={e => setFormData({ ...formData, isOpenForIntake: e.target.checked })} />
+                                    <label htmlFor="isOpenForIntake" className="text-sm">Open for Intake</label>
                                 </div>
                                 <div>
                                     <label className="block text-sm mb-1">Selar URL</label>
@@ -144,7 +154,15 @@ export default function AdminPrograms() {
                                     <textarea required value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="w-full p-2 border rounded"></textarea>
                                 </div>
                                 <div className="col-span-2">
-                                    <label className="block text-sm mb-1">Curriculum (One per line)</label>
+                                    <label className="block text-sm mb-1">About the Program (Full Description)</label>
+                                    <textarea rows={5} required value={formData.fullDescription} onChange={e => setFormData({ ...formData, fullDescription: e.target.value })} className="w-full p-2 border rounded"></textarea>
+                                </div>
+                                <div className="col-span-2">
+                                    <label className="block text-sm mb-1">Program Objectives (One per line)</label>
+                                    <textarea rows={3} value={formData.objectives} onChange={e => setFormData({ ...formData, objectives: e.target.value })} className="w-full p-2 border rounded"></textarea>
+                                </div>
+                                <div className="col-span-2">
+                                    <label className="block text-sm mb-1">Program Curriculum (One per line)</label>
                                     <textarea rows={5} value={formData.curriculum} onChange={e => setFormData({ ...formData, curriculum: e.target.value })} className="w-full p-2 border rounded"></textarea>
                                 </div>
                             </div>

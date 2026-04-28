@@ -12,21 +12,25 @@ interface ProgramCardProps {
     model: string;
     image: string;
     selarUrl: string;
+    isOpenForIntake?: boolean;
+    is_open_for_intake?: boolean;
     index?: number;
 }
 
 const modelLabel: Record<string, string> = {
+    'Bootcamp': 'Bootcamp',
     '8-week': '8-Week Program',
     workshop: 'Workshop',
     ongoing: 'Ongoing',
 };
 
-export default function ProgramCard({ title, slug, category, description, model, image, selarUrl, index = 0 }: ProgramCardProps) {
+export default function ProgramCard({ title, slug, category, description, model, image, selarUrl, isOpenForIntake, is_open_for_intake, index = 0 }: ProgramCardProps) {
     const navigate = useNavigate();
+    const isOpen = isOpenForIntake !== undefined ? isOpenForIntake : (is_open_for_intake !== undefined ? is_open_for_intake : true);
 
     const handleCardClick = (e: React.MouseEvent) => {
-        // Prevent navigating if they clicked the Join Program button directly
-        if ((e.target as HTMLElement).closest('a')) return;
+        // Prevent navigating if they clicked a button or link directly
+        if ((e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('a')) return;
         navigate(`/programs/${slug}`);
     };
 
@@ -67,20 +71,23 @@ export default function ProgramCard({ title, slug, category, description, model,
                 <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">{description}</p>
 
                 <div className="flex gap-3 mt-auto">
-                    <Link
-                        to={`/programs/${slug}`}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/programs/${slug}`);
+                        }}
                         className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
                         style={{ borderColor: 'var(--navy)', color: 'var(--navy)' }}
                     >
                         Learn More <ArrowRight size={14} />
-                    </Link>
+                    </button>
                     <a
-                        href={selarUrl}
-                        target="_blank"
+                        href={isOpen ? selarUrl : "/contact"}
+                        target={isOpen ? "_blank" : "_self"}
                         rel="noopener noreferrer"
                         className="flex-1 btn-primary py-2.5 px-4 text-sm"
                     >
-                        Join Program
+                        {isOpen ? 'Join Program' : 'Join Community'}
                     </a>
                 </div>
             </div>

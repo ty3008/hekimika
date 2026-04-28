@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import ContactMessage from '../models/ContactMessage';
+import pool from '../lib/db';
 
 export const getContactMessages = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const messages = await ContactMessage.find().sort({ createdAt: -1 });
-        res.json(messages);
+        const result = await pool.query('SELECT * FROM contact_messages ORDER BY created_at DESC');
+        res.json(result.rows);
     } catch {
         res.status(500).json({ error: 'Failed to fetch contact messages' });
     }
@@ -12,8 +12,13 @@ export const getContactMessages = async (_req: Request, res: Response): Promise<
 
 export const createContactMessage = async (req: Request, res: Response): Promise<void> => {
     try {
-        const message = await ContactMessage.create(req.body);
-        res.status(201).json(message);
+        const { firstName, lastName, email, subject, message } = req.body;
+        const result = await pool.query(
+            `INSERT INTO contact_messages (first_name, last_name, email, subject, message)
+             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [firstName, lastName || '', email.toLowerCase(), subject, message]
+        );
+        res.status(201).json(result.rows[0]);
     } catch (err: unknown) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to create contact message';
         res.status(400).json({ error: errorMessage });
@@ -22,16 +27,15 @@ export const createContactMessage = async (req: Request, res: Response): Promise
 
 export const updateContactStatus = async (req: Request, res: Response): Promise<void> => {
     try {
-        const message = await ContactMessage.findByIdAndUpdate(
-            req.params.id,
-            { status: req.body.status },
-            { new: true, runValidators: true }
+        const result = await pool.query(
+            'UPDATE contact_messages SET status = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
+            [req.body.status, req.params.id]
         );
-        if (!message) {
+        if (result.rows.length === 0) {
             res.status(404).json({ error: 'Message not found' });
             return;
         }
-        res.json(message);
+        res.json(result.rows[0]);
     } catch (err: unknown) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to update contact message';
         res.status(400).json({ error: errorMessage });
@@ -40,8 +44,8 @@ export const updateContactStatus = async (req: Request, res: Response): Promise<
 
 export const deleteContactMessage = async (req: Request, res: Response): Promise<void> => {
     try {
-        const message = await ContactMessage.findByIdAndDelete(req.params.id);
-        if (!message) {
+        const result = await pool.query('DELETE FROM contact_messages WHERE id = $1 RETURNING id', [req.params.id]);
+        if (result.rows.length === 0) {
             res.status(404).json({ error: 'Message not found' });
             return;
         }

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { BookOpen, ExternalLink, ArrowRight } from 'lucide-react';
+import { BookOpen, ExternalLink, ArrowRight, PlayCircle, Users } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import { useApi } from '../hooks/useApi';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 // Book Assets
 import ThePureManImg from '../assets/The pure man.jpg';
 import WorkItOutImg from '../assets/work it out.jpg';
-import ChoosingWellImg from '../assets/choosing well.jpg';
-import DealingWithEndedImg from '../assets/dealing with ended relationships.jpg';
+import ChoosingWellImg from '../assets/book- choosing well.jpeg';
+import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
 import PreparingForLoveImg from '../assets/preparing for love.png';
 import KeepersImg from '../assets/Keepers.png';
 import CoupledAndBuiltImg from '../assets/Coupled and Built.png';
@@ -17,8 +17,9 @@ import BuiltToLeadImg from '../assets/Built to Lead.png';
 
 // Cultured In Love Assets
 import SolidCoreImg from '../assets/establishing a solid core.jpg';
-import SolidFormImg from '../assets/creating a solid form.jpg';
-import PassionImg from '../assets/passion.jpg';
+import SolidFormImg from '../assets/book- creating a solid form.jpeg';
+import PassionImg from '../assets/book- passion.jpeg';
+import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
 
 // Free Resources Assets
 import IdentityImg from '../assets/Identity.png';
@@ -36,7 +37,7 @@ const BOOKS = [
         title: 'The Pure Man',
         author: 'Pastor Kevin Mulati',
         image: ThePureManImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/pure-man',
         desc: 'A comprehensive guide for men on holiness, identity, and strength.'
     },
@@ -44,7 +45,7 @@ const BOOKS = [
         title: 'Work it Out',
         author: 'Pastor Kevin Mulati',
         image: WorkItOutImg,
-        price: 'KES 800',
+        price: 'KSh 800',
         selarUrl: 'https://selar.co/work-it-out',
         desc: 'Practical wisdom for navigating the daily realities of love.'
     },
@@ -52,7 +53,7 @@ const BOOKS = [
         title: 'Choosing Well',
         author: 'Pastor Kevin Mulati',
         image: ChoosingWellImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/choosing-well',
         desc: 'Discerning the right partner for a God-centered covenant.'
     },
@@ -60,7 +61,7 @@ const BOOKS = [
         title: 'Dealing with Ended Relationships',
         author: 'Pastor Kevin Mulati',
         image: DealingWithEndedImg,
-        price: 'KES 500',
+        price: 'KSh 500',
         selarUrl: 'https://selar.co/healing-heartbreak',
         desc: 'Finding healing and wholeness after the pain of a breakup.'
     },
@@ -68,7 +69,7 @@ const BOOKS = [
         title: 'Preparing for Love',
         author: 'Pastor Kevin Mulati',
         image: PreparingForLoveImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/preparing-love',
         desc: 'Tools and insights to get ready for a lasting covenant.'
     },
@@ -76,7 +77,7 @@ const BOOKS = [
         title: 'Keepers of Love',
         author: 'Pastor Kevin Mulati',
         image: KeepersImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/keepers',
         desc: 'Understanding what it takes to sustain lifelong love.'
     },
@@ -84,7 +85,7 @@ const BOOKS = [
         title: 'Coupled and Built',
         author: 'Pastor Kevin Mulati',
         image: CoupledAndBuiltImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/coupled-built',
         desc: 'Foundation and architecture for a successful godly marriage.'
     },
@@ -92,7 +93,7 @@ const BOOKS = [
         title: 'Built to Lead',
         author: 'Pastor Kevin Mulati',
         image: BuiltToLeadImg,
-        price: 'KES 1,500',
+        price: 'KSh 1,500',
         selarUrl: 'https://selar.co/built-to-lead',
         desc: 'Leadership principles for the generation of the wise.'
     },
@@ -103,7 +104,7 @@ const CULTURED_IN_LOVE_BOOKS = [
         title: 'Establishing a Solid Core',
         author: 'Pastor Kevin Mulati',
         image: SolidCoreImg,
-        price: 'KES 2,000',
+        price: 'KSh 2,000',
         selarUrl: 'https://selar.co/solid-core',
         desc: 'Building the non-negotiables of relationships and marriage.'
     },
@@ -111,7 +112,7 @@ const CULTURED_IN_LOVE_BOOKS = [
         title: 'Creating a Solid Form',
         author: 'Pastor Kevin Mulati',
         image: SolidFormImg,
-        price: 'KES 2,000',
+        price: 'KSh 2,000',
         selarUrl: 'https://selar.co/solid-form',
         desc: 'The foundational principles of the Cultured in Love series.'
     },
@@ -119,7 +120,7 @@ const CULTURED_IN_LOVE_BOOKS = [
         title: 'Passion',
         author: 'Pastor Kevin Mulati',
         image: PassionImg,
-        price: 'KES 2,000',
+        price: 'KSh 2,000',
         selarUrl: 'https://selar.co/passion',
         desc: 'Navigating passion, love, and intimacy the biblical way.'
     },
@@ -127,15 +128,15 @@ const CULTURED_IN_LOVE_BOOKS = [
         title: 'Conflict Resolution',
         author: 'Pastor Kevin Mulati',
         image: WorkItOutImg,
-        price: 'KES 2,000',
+        price: 'KSh 2,000',
         selarUrl: 'https://selar.co/conflict-resolution',
         desc: 'Resolving disputes gracefully in your marriage or relationship.'
     },
     {
         title: 'Praying for a Solid Man',
         author: 'Pastor Kevin Mulati',
-        image: PreparingForLoveImg,
-        price: 'KES 2,000',
+        image: PrayingSolidManImg,
+        price: 'KSh 2,000',
         selarUrl: 'https://selar.co/praying-solid-man',
         desc: 'A prayer guide for those seeking a God-fearing partner.'
     },
@@ -199,10 +200,10 @@ export default function Resources() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
-                                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-gray-50 flex items-center justify-center p-2">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute inset-0 bg-navy/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
-                                        <p className="text-white text-sm line-clamp-4">{book.desc}</p>
+                                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-gray-50 flex items-center justify-center p-4">
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" />
+                                    <div className="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
+                                        <p className="text-white text-sm font-medium leading-relaxed line-clamp-4">{book.desc}</p>
                                     </div>
                                     <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
                                         BOOK
@@ -238,9 +239,9 @@ export default function Resources() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         {CULTURED_IN_LOVE_BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="flex flex-col">
-                                <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-6 shadow-2xl border-4 border-white group relative">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-700" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent flex flex-col justify-end p-6 gap-2">
+                                <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-6 shadow-2xl border-4 border-white group relative bg-white flex items-center justify-center p-4">
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden transition-transform duration-700 group-hover:scale-105" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent flex flex-col justify-end p-6 gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         <p className="text-white/80 text-xs italic mb-1 line-clamp-2">{book.desc}</p>
                                         <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
                                             <ExternalLink size={14} /> Buy Softcopy
@@ -291,36 +292,87 @@ export default function Resources() {
                 </div>
             </section>
 
-            {/* Section 4: Magazines */}
+            {/* Section 4: Audio Library / Bible Study Guides */}
             <section className="section-pad bg-gray-50">
                 <div className="container-xl">
                     <SectionTitle
-                        overline="Periodicals"
-                        title="Magazines"
-                        subtitle="Full-color digital magazines featuring articles, interviews, and testimonies from across the Wise Nation."
+                        overline="Periodicals & Teachings"
+                        title="Audio Library / Bible Study Guides"
+                        subtitle="Full-color digital magazines and audio study guides featuring articles, interviews, and testimonies from across the Wise Nation."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {magazines.map((mag, i) => (
-                            <motion.div key={mag._id} {...sectionFade} transition={{ delay: i * 0.1 }} className="bg-navy rounded-3xl overflow-hidden flex flex-col md:flex-row h-full">
-                                <div className="h-48 md:h-auto md:w-1/3 bg-gray-200">
-                                    <img src={mag.image || (ASSET_PATH + 'wisdom edition 1 the undefiled.jpg')} alt={mag.title} className="w-full h-full object-cover" />
-                                </div>
-                                <div className="md:w-2/3 p-6 md:p-8 flex flex-col justify-center">
-                                    <p className="text-gold text-[10px] font-bold uppercase tracking-widest mb-2">Magazine Issue</p>
-                                    <h3 className="text-white text-2xl font-bold mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>{mag.title}</h3>
-                                    <p className="text-white/60 text-sm mb-6 leading-relaxed">{mag.shortDescription || mag.desc}</p>
-                                    <Link to={`/read/${mag._id || mag.id}`} className="btn-primary inline-flex items-center justify-center gap-2 py-3 px-6 text-sm">
-                                        Open Magazine <BookOpen size={16} />
-                                    </Link>
-                                </div>
-                            </motion.div>
-                        ))}
-                        {loading && <p className="text-center text-gray-400 py-10">Loading magazines...</p>}
-                        {!loading && magazines.length === 0 && (
-                            <div className="col-span-full text-center py-12 border-2 border-dashed border-gray-200 rounded-3xl">
-                                <p className="text-gray-400 italic">No magazine issues found in the archive yet.</p>
+                    <div id="teachings" className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* YouTube Card */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-white rounded-[2rem] p-10 shadow-2xl border border-gray-50 flex flex-col items-center text-center group"
+                        >
+                            <div className="w-24 h-24 rounded-3xl bg-red-50 flex items-center justify-center mb-8 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                                <PlayCircle size={48} className="text-[#FF0000]" />
                             </div>
-                        )}
+                            <h3 className="text-3xl font-bold text-navy mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>YouTube Channel</h3>
+                            <p className="text-gray-500 mb-10 max-w-sm">Watch hundreds of hours of powerful video teachings, live seminars, and ministry highlights.</p>
+                            <a 
+                                href="https://www.youtube.com/@Hekimika001" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="w-full bg-[#FF0000] text-white py-5 rounded-2xl font-bold text-lg hover:bg-navy transition-colors flex items-center justify-center gap-3 shadow-lg"
+                            >
+                                <PlayCircle size={24} /> Watch on YouTube
+                            </a>
+                        </motion.div>
+
+                        {/* Telegram Card */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-navy rounded-[2rem] p-10 shadow-2xl flex flex-col items-center text-center group"
+                        >
+                            <div className="w-24 h-24 rounded-3xl bg-white/10 flex items-center justify-center mb-8 transform group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500">
+                                <Users size={48} className="text-[#0088cc]" />
+                            </div>
+                            <h3 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Telegram Channel</h3>
+                            <p className="text-white/60 mb-10 max-w-sm">Receive fresh devotionals, audio teachings, and direct ministry updates straight to your phone.</p>
+                            <a 
+                                href="https://t.me/+YLkY8tmLLjw0MWNk" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="w-full bg-[#0088cc] text-white py-5 rounded-2xl font-bold text-lg hover:bg-white hover:text-navy transition-all flex items-center justify-center gap-3 shadow-lg"
+                            >
+                                <Users size={24} /> Join Telegram Channel
+                            </a>
+                        </motion.div>
+                    </div>
+
+                    {/* Optional: Latest Highlight */}
+                    <div className="mt-20 p-12 bg-white rounded-[2.5rem] border border-gray-100 shadow-xl overflow-hidden relative">
+                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <span className="bg-gold/10 text-gold text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6 inline-block">Deep Dive</span>
+                                <h4 className="text-4xl font-bold text-navy mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>The Generation of the Wise</h4>
+                                <p className="text-gray-500 leading-relaxed mb-8">Dive into our most impactful series on building a life of significance. Our video library is cataloged by topic to help you find exactly what you need for your current season.</p>
+                                <div className="flex flex-wrap gap-4">
+                                    <div className="flex items-center gap-2 text-sm font-bold text-navy">
+                                        <div className="w-2 h-2 rounded-full bg-gold" /> 500+ Videos
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm font-bold text-navy">
+                                        <div className="w-2 h-2 rounded-full bg-gold" /> Weekly Livestreams
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="aspect-video bg-navy rounded-[1.5rem] overflow-hidden shadow-2xl relative cursor-pointer group" onClick={() => window.open('https://www.youtube.com/@Hekimika001', '_blank')}>
+                                <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-all" />
+                                <div className="absolute inset-0 flex items-center justify-center text-white">
+                                    <PlayCircle size={64} className="opacity-80 group-hover:scale-110 transition-transform" />
+                                </div>
+                                <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20">
+                                    <p className="text-white text-xs font-bold uppercase tracking-widest mb-1">Latest Series</p>
+                                    <p className="text-white/80 text-sm">Join us every Sunday for fresh wisdom sessions.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

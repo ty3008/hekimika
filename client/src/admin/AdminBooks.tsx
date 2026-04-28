@@ -118,7 +118,7 @@ export default function AdminBooks() {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm mb-1">Price</label>
-                                    <input required value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} placeholder="e.g. KES 1,500" className="w-full p-2 border rounded" />
+                                    <input required value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} placeholder="e.g. KSh 1,500" className="w-full p-2 border rounded" />
                                 </div>
                                 <div>
                                     <label className="block text-sm mb-1">Selar URL</label>

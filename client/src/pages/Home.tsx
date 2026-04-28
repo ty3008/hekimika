@@ -8,6 +8,40 @@ import ProgramCard from '../components/ProgramCard';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { PROGRAMS } from '../utils/constants';
 
+// Featured Books Assets
+import PassionImg from '../assets/book- passion.jpeg';
+import ChoosingWellImg from '../assets/book- choosing well.jpeg';
+import SolidFormImg from '../assets/book- creating a solid form.jpeg';
+import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
+import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
+
+const FEATURED_BOOKS = [
+    {
+        title: 'Passion',
+        image: PassionImg,
+        desc: 'Navigating passion, love, and intimacy the biblical way.',
+        link: 'https://selar.co/passion'
+    },
+    {
+        title: 'Choosing Well',
+        image: ChoosingWellImg,
+        desc: 'Discerning the right partner for a God-centered covenant.',
+        link: 'https://selar.co/choosing-well'
+    },
+    {
+        title: 'Creating a Solid Form',
+        image: SolidFormImg,
+        desc: 'The foundational principles of the Cultured in Love series.',
+        link: 'https://selar.co/solid-form'
+    },
+    {
+        title: 'Pray for a Solid Man',
+        image: PrayingSolidManImg,
+        desc: 'A prayer guide for those seeking a God-fearing partner.',
+        link: 'https://selar.co/praying-solid-man'
+    }
+];
+
 const CAROUSEL_IMAGES = [
     '/assets/home-carousel/carousel 1.jpg',
     '/assets/home-carousel/carousel 2.jpg',
@@ -38,6 +72,25 @@ const ARMS = [
         to: '/young-and-wise',
         color: '#D4AF37',
     },
+];
+
+const TEACHING_CHANNELS = [
+    {
+        title: 'YouTube Channel',
+        desc: 'Watch powerful video teachings and live sessions by Pastor Kevin Mulati.',
+        icon: PlayCircle,
+        link: 'https://www.youtube.com/@Hekimika001',
+        action: 'Watch Now',
+        color: '#FF0000'
+    },
+    {
+        title: 'Telegram Channel',
+        desc: 'Join our digital sanctuary for daily teachings, devotionals, and community updates.',
+        icon: Users,
+        link: 'https://t.me/+YLkY8tmLLjw0MWNk',
+        action: 'Join Channel',
+        color: '#0088cc'
+    }
 ];
 
 const STATS = [
@@ -80,7 +133,7 @@ export default function Home() {
         }
     };
 
-    const featured = PROGRAMS.filter((p) => ['Preparing for Love', 'School of Purity', 'Beginning Right', 'Built to Lead'].includes(p.title)).slice(0, 4);
+    const featured = PROGRAMS.filter((p) => p.is_open_for_intake !== false).slice(0, 4);
 
     return (
         <>
@@ -92,7 +145,7 @@ export default function Home() {
             {/* ── Hero ── */}
             <section 
                 ref={heroRef} 
-                className="relative min-h-screen flex items-center justify-center overflow-hidden"
+                className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
@@ -109,10 +162,10 @@ export default function Home() {
                             src={CAROUSEL_IMAGES[currentImage]}
                             alt="Hero Carousel"
                             className="absolute w-full h-full object-cover"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            initial={{ opacity: 0, scale: 1.1 }}
+                            animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 1 }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
                         />
                     </AnimatePresence>
                     <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.7) 0%, rgba(0,31,63,0.85) 100%)' }} />
@@ -123,7 +176,7 @@ export default function Home() {
                         {...fadeUp}
                         animate={fadeUp.animate}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
                         style={{ fontFamily: 'Poppins, sans-serif' }}
                     >
                         Raising the Generation<br />
@@ -199,8 +252,110 @@ export default function Home() {
                     />
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                         {featured.map((p, i) => (
-                            <ProgramCard key={p.slug} {...p} index={i} />
+                            <ProgramCard key={p.slug} {...p} isOpenForIntake={true} index={i} />
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Featured Books ── */}
+            <section className="section-pad bg-white">
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="Featured Books"
+                        title="Wisdom for Your Library"
+                        subtitle="Powerful resources to build wisdom, purity, and strong relationships — authored by Pastor Kevin Mulati."
+                    />
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {FEATURED_BOOKS.map((book, i) => (
+                            <motion.div 
+                                key={book.title}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: i * 0.1 }}
+                                className="card group flex flex-col"
+                            >
+                                <div className="relative aspect-square overflow-hidden rounded-xl bg-white flex items-center justify-center p-0">
+                                    <img 
+                                        src={book.image} 
+                                        alt={book.title} 
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-navy/5 group-hover:opacity-0 transition-opacity" />
+                                    <div className="absolute top-4 right-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg z-10">
+                                        BOOK
+                                    </div>
+                                </div>
+                                <div className="flex flex-col flex-1 p-6">
+                                    <h3 className="text-lg font-bold text-navy mb-2 leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        {book.title}
+                                    </h3>
+                                    <p className="text-gray-500 text-sm mb-6 line-clamp-2">
+                                        {book.desc}
+                                    </p>
+                                    <div className="mt-auto">
+                                        <a 
+                                            href={book.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="btn-primary w-full py-2.5 text-sm flex items-center justify-center gap-2"
+                                        >
+                                            Get Softcopy <ArrowRight size={14} />
+                                        </a>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <Link to="/resources" className="inline-flex items-center gap-3 text-navy font-bold hover:text-gold transition-all group">
+                            Explore All Books <div className="w-10 h-px bg-gold group-hover:w-16 transition-all" /> <ArrowRight size={20} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Teachings Highlight ── */}
+            <section className="section-pad bg-gray-50">
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="Live Wisdom"
+                        title="Teachings"
+                        subtitle="Receive sound wisdom daily through audio and video teachings from the Wise Nation."
+                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        {TEACHING_CHANNELS.map((ch, i) => (
+                            <motion.div
+                                key={ch.title}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all group"
+                            >
+                                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:rotate-6" style={{ background: `${ch.color}10` }}>
+                                    <ch.icon size={32} style={{ color: ch.color }} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-navy mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>{ch.title}</h3>
+                                <p className="text-gray-500 mb-8 leading-relaxed">{ch.desc}</p>
+                                <a 
+                                    href={ch.link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="btn-primary w-full py-4 flex items-center justify-center gap-2"
+                                >
+                                    {ch.action} <ArrowRight size={18} />
+                                </a>
+                            </motion.div>
+                        ))}
+                    </div>
+                    <div className="mt-12 text-center">
+                        <Link to="/resources#teachings" className="text-navy font-bold hover:text-gold transition-colors flex items-center justify-center gap-2">
+                            Explore All Teachings <ArrowRight size={16} />
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -294,47 +449,10 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ── Resources Teaser ── */}
-            <section className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
-                <div className="container-xl text-center">
-                    <SectionTitle
-                        overline="Resources"
-                        title="Books & Teachings"
-                        subtitle="Bite-sized wisdom you can take home — softcopy books and audio teachings available at your fingertips."
-                    />
-                    <div className="flex flex-wrap gap-6 justify-center">
-                        {[
-                            { icon: BookOpen, label: 'Softcopy Books', desc: 'Browse our library of ministry books', to: '/resources' },
-                            { icon: PlayCircle, label: 'Audio Teachings', desc: 'Listen on YouTube & Facebook', to: 'https://www.youtube.com/@Hekimika001', external: true },
-                        ].map(({ icon: Icon, label, desc, to, external }, i) => (
-                            <motion.div
-                                key={label}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="card p-8 w-64 text-center cursor-pointer transition-transform hover:-translate-y-2"
-                                onClick={() => external ? window.open(to, '_blank') : window.location.href = to}
-                            >
-                                <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(0,31,63,0.06)' }}>
-                                    <Icon size={28} style={{ color: 'var(--navy)' }} />
-                                </div>
-                                <h4 className="font-bold text-navy mb-2" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>{label}</h4>
-                                <p className="text-gray-400 text-sm mb-4">{desc}</p>
-                                {external ? (
-                                    <a href={to} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold flex items-center gap-1 justify-center" style={{ color: 'var(--gold)' }}>
-                                        Explore <ArrowRight size={13} />
-                                    </a>
-                                ) : (
-                                    <Link to={to} className="text-sm font-semibold flex items-center gap-1 justify-center" style={{ color: 'var(--gold)' }}>
-                                        Explore <ArrowRight size={13} />
-                                    </Link>
-                                )}
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Bottom Tagline */}
+            <div className="py-16 text-center bg-gray-50">
+                <p className="text-gold font-bold tracking-[0.4em] text-xs opacity-50">SIGNIFICANCE | RELEVANCE | DOMINION</p>
+            </div>
         </>
     );
 }

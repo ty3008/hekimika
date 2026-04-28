@@ -98,7 +98,7 @@ export default function WisdomMoments() {
                                 transition={{ delay: i * 0.05 }}
                             >
                                 <Link
-                                    to={`/forums/${f.slug}`}
+                                    to={f.slug === 'blogs' ? '/blog' : `/forums/${f.slug}`}
                                     className="block bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all border-l-4 border-gray-100 hover:border-gold group cursor-pointer h-full"
                                     style={{ borderLeftColor: 'var(--navy)' }}
                                 >

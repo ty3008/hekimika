@@ -1,51 +1,63 @@
 import { Request, Response } from 'express';
-import FreeResource from '../models/FreeResource';
+import pool from '../lib/db';
 
-export const getFreeResources = async (req: Request, res: Response) => {
+export const getFreeResources = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const resources = await FreeResource.find().sort({ createdAt: -1 });
-        res.json(resources);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching free resources', error });
+        const result = await pool.query('SELECT * FROM free_resources ORDER BY created_at DESC');
+        res.json(result.rows);
+    } catch {
+        res.status(500).json({ error: 'Failed to fetch free resources' });
     }
 };
 
-export const getFreeResourceById = async (req: Request, res: Response) => {
+export const getFreeResourceById = async (req: Request, res: Response): Promise<void> => {
     try {
-        const resource = await FreeResource.findById(req.params.id);
-        if (!resource) return res.status(404).json({ message: 'Resource not found' });
-        res.json(resource);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching resource', error });
+        const result = await pool.query('SELECT * FROM free_resources WHERE id = $1', [req.params.id]);
+        if (result.rows.length === 0) { res.status(404).json({ error: 'Resource not found' }); return; }
+        res.json(result.rows[0]);
+    } catch {
+        res.status(500).json({ error: 'Failed to fetch resource' });
     }
 };
 
-export const createFreeResource = async (req: Request, res: Response) => {
+export const createFreeResource = async (req: Request, res: Response): Promise<void> => {
     try {
-        const resource = new FreeResource(req.body);
-        await resource.save();
-        res.status(201).json(resource);
-    } catch (error) {
-        res.status(400).json({ message: 'Error creating resource', error });
+        const { title, shortDescription, type, googleDriveLink } = req.body;
+        const result = await pool.query(
+            `INSERT INTO free_resources (title, short_description, type, google_drive_link)
+             VALUES ($1, $2, $3, $4) RETURNING *`,
+            [title, shortDescription, type, googleDriveLink]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Failed to create resource';
+        res.status(400).json({ error: msg });
     }
 };
 
-export const updateFreeResource = async (req: Request, res: Response) => {
+export const updateFreeResource = async (req: Request, res: Response): Promise<void> => {
     try {
-        const resource = await FreeResource.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!resource) return res.status(404).json({ message: 'Resource not found' });
-        res.json(resource);
-    } catch (error) {
-        res.status(400).json({ message: 'Error updating resource', error });
+        const { title, shortDescription, type, googleDriveLink } = req.body;
+        const result = await pool.query(
+            `UPDATE free_resources SET title = COALESCE($1, title), short_description = COALESCE($2, short_description),
+             type = COALESCE($3, type), google_drive_link = COALESCE($4, google_drive_link),
+             updated_at = NOW() WHERE id = $5 RETURNING *`,
+            [title, shortDescription, type, googleDriveLink, req.params.id]
+        );
+        if (result.rows.length === 0) { res.status(404).json({ error: 'Resource not found' }); return; }
+        res.json(result.rows[0]);
+    } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Failed to update resource';
+        res.status(400).json({ error: msg });
     }
 };
 
-export const deleteFreeResource = async (req: Request, res: Response) => {
+export const deleteFreeResource = async (req: Request, res: Response): Promise<void> => {
     try {
-        const resource = await FreeResource.findByIdAndDelete(req.params.id);
-        if (!resource) return res.status(404).json({ message: 'Resource not found' });
+        const result = await pool.query('DELETE FROM free_resources WHERE id = $1 RETURNING id', [req.params.id]);
+        if (result.rows.length === 0) { res.status(404).json({ error: 'Resource not found' }); return; }
         res.json({ message: 'Resource deleted' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting resource', error });
+    } catch {
+        res.status(500).json({ error: 'Failed to delete resource' });
     }
 };
