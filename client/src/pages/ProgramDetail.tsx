@@ -15,7 +15,6 @@ interface Program {
     selarUrl: string;
     curriculum: string[];
     objectives?: string[];
-    isOpenForIntake?: boolean;
     is_open_for_intake?: boolean;
     model: string;
 }
@@ -24,14 +23,14 @@ export default function ProgramDetail() {
     const { slug } = useParams<{ slug: string }>();
 
     const staticDbProgram = PROGRAMS.find((p) => p.slug === slug) || PROGRAMS.find((p) => p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug);
-    const { data: apiProgram, loading, error } = useApi<Program>(`/programs/${slug}`);
+    const { data: apiProgram, loading } = useApi<Program>(`/programs/${slug}`);
 
     // Merge data: prioritize API but fallback to static for robustness
     // If neither exists, we'll hit the check below
     const program = apiProgram ? { 
         ...staticDbProgram, 
         ...apiProgram,
-        isOpenForIntake: apiProgram.isOpenForIntake ?? (apiProgram as any).is_open_for_intake ?? staticDbProgram?.isOpenForIntake 
+        is_open_for_intake: apiProgram.is_open_for_intake ?? staticDbProgram?.is_open_for_intake 
     } : staticDbProgram;
 
     if (loading && !apiProgram && !staticDbProgram) {
@@ -90,12 +89,12 @@ export default function ProgramDetail() {
                         {program.description}
                     </p>
                     <a
-                        href={(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
-                        target={(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? "_blank" : "_self"}
+                        href={(program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
+                        target={(program.is_open_for_intake) !== false ? "_blank" : "_self"}
                         rel="noopener noreferrer"
                         className="btn-primary px-8 py-4 text-base font-bold shadow-2xl"
                     >
-                        {(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? (
+                        {(program.is_open_for_intake) !== false ? (
                             <>Join This Program <ExternalLink size={18} /></>
                         ) : (
                             <>Join Community <ArrowRight size={18} /></>
@@ -197,17 +196,17 @@ export default function ProgramDetail() {
 
                               <div className="pt-6 border-t border-gray-100">
                                 <p className="text-sm text-gray-500 mb-4 text-center">
-                                    {(program.isOpenForIntake ?? program.is_open_for_intake) !== false 
+                                    {(program.is_open_for_intake) !== false 
                                         ? "Registration is handled securely via Selar." 
                                         : "This program is currently closed for intake. Join our waitlist to be notified of the next session."}
                                 </p>
                                 <a
-                                    href={(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
-                                    target={(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? "_blank" : "_self"}
+                                    href={(program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
+                                    target={(program.is_open_for_intake) !== false ? "_blank" : "_self"}
                                     rel="noopener noreferrer"
                                     className="btn-primary w-full text-center"
                                 >
-                                    {(program.isOpenForIntake ?? program.is_open_for_intake) !== false ? 'Join Program' : 'Join Waitlist'}
+                                    {(program.is_open_for_intake) !== false ? 'Join Program' : 'Join Waitlist'}
                                 </a>
                             </div>
                         </div>

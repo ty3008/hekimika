@@ -2,7 +2,6 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { MessageSquare, Users, Shield, Zap, BookOpen, Quote, ArrowRight, ArrowLeft, Heart } from 'lucide-react';
-import SectionTitle from '../components/SectionTitle';
 
 const FORUM_CONTENT: Record<string, any> = {
     'singles': {

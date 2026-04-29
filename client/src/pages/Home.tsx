@@ -2,18 +2,43 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, BookOpen, Users, Heart, Star, PlayCircle } from 'lucide-react';
+import { ArrowRight, Users, Heart, Star, PlayCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import ProgramCard from '../components/ProgramCard';
-import TestimonialCarousel from '../components/TestimonialCarousel';
 import { PROGRAMS } from '../utils/constants';
 
 // Featured Books Assets
 import PassionImg from '../assets/book- passion.jpeg';
 import ChoosingWellImg from '../assets/book- choosing well.jpeg';
 import SolidFormImg from '../assets/book- creating a solid form.jpeg';
-import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
 import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
+import TestimonialCarousel from '../components/TestimonialCarousel';
+import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
+const HERO_BG = HeroBgImg;
+
+const ARMS = [
+    {
+        icon: Star,
+        title: 'Perfected in Wisdom',
+        description: 'Transformative programs for singles, couples, and leaders — building character, healing, and purpose.',
+        to: '/perfected-in-wisdom',
+        color: '#D4AF37',
+    },
+    {
+        icon: Heart,
+        title: 'Wisdom Moments',
+        description: 'Audio teachings, devotionals, and Q&A content to feed your spirit and renew your mind daily.',
+        to: '/wisdom-moments',
+        color: '#E8CC6A',
+    },
+    {
+        icon: Users,
+        title: 'Young & Wise',
+        description: 'Raising a wise generation of teens through mentorship, community, and purposeful guidance.',
+        to: '/young-and-wise',
+        color: '#D4AF37',
+    },
+];
 
 const FEATURED_BOOKS = [
     {
@@ -50,30 +75,6 @@ const CAROUSEL_IMAGES = [
     '/assets/home-carousel/carousel 5.jpeg',
 ];
 
-const ARMS = [
-    {
-        icon: Star,
-        title: 'Perfected in Wisdom',
-        description: 'Transformative programs for singles, couples, and leaders — building character, healing, and purpose.',
-        to: '/perfected-in-wisdom',
-        color: '#D4AF37',
-    },
-    {
-        icon: Heart,
-        title: 'Wisdom Moments',
-        description: 'Audio teachings, devotionals, and Q&A content to feed your spirit and renew your mind daily.',
-        to: '/wisdom-moments',
-        color: '#E8CC6A',
-    },
-    {
-        icon: Users,
-        title: 'Young & Wise',
-        description: 'Raising a wise generation of teens through mentorship, community, and purposeful guidance.',
-        to: '/young-and-wise',
-        color: '#D4AF37',
-    },
-];
-
 const TEACHING_CHANNELS = [
     {
         title: 'YouTube Channel',
@@ -104,9 +105,6 @@ const fadeUp = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
 };
-
-import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
-const HERO_BG = HeroBgImg;
 
 export default function Home() {
     const heroRef = useRef<HTMLDivElement>(null);

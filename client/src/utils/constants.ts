@@ -50,7 +50,7 @@ export const PROGRAMS: Program[] = [
             'Question and Answer Sessions',
             'Some Lessons include: Form and Function, Intimacy, Contentment, Why People Enter into Relationships, Singleness, etc.'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     },
     {
         title: 'Single & Built (Choosing Well)',
@@ -78,7 +78,7 @@ export const PROGRAMS: Program[] = [
             'Question and Answer Sessions',
             'Some Lessons include: Choosing Well, The Importance of Choosing Well, Vital Choices before and after, Protecting Yourself from Unnecessary Pains, Situationship, etc.'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     },
     {
         title: 'Single & Built (Keepers)',
@@ -106,7 +106,7 @@ export const PROGRAMS: Program[] = [
             'Building Community Support',
             'Ready for Sacred Covenant'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'School of Purity (Purity Basics)',
@@ -136,7 +136,7 @@ export const PROGRAMS: Program[] = [
             'Question and Answer Sessions',
             'Some Lessons include: Burning, Purity Basics, Loving the Pureness of Heart, Victory Within, Building Yourself, etc.'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     },
     {
         title: 'Beginning Right (Romance Bae-sics)',
@@ -164,7 +164,7 @@ export const PROGRAMS: Program[] = [
             'Question and Answer Sessions',
             'Some Lessons include: Form and Function, Intimacy, Contentment, Why People Enter into Relationships, Singleness, etc.'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     },
     {
         title: 'Coupled & Built (Conflict Resolution)',
@@ -194,7 +194,7 @@ export const PROGRAMS: Program[] = [
             'Question and Answer Sessions',
             'Some Lessons include: A Proper View of Conflict, Dos and Don’ts, The Place of Communication, Affirming Love, etc..'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     },
     {
         title: 'Built to Lead',
@@ -222,7 +222,7 @@ export const PROGRAMS: Program[] = [
             'Sustainability & Leadership Self-Care',
             'Creating a Lasting Legacy'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'School of Healing',
@@ -250,7 +250,7 @@ export const PROGRAMS: Program[] = [
             'Rebuilding Trust and Healthy Boundaries',
             'Walking in Wholeness and Purpose'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'Discovery Class',
@@ -273,7 +273,7 @@ export const PROGRAMS: Program[] = [
             'Finding Your Track: A Personal Assessment',
             'Community, Covenant & Building Together'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'Couples Coaching',
@@ -290,7 +290,7 @@ export const PROGRAMS: Program[] = [
             'Marriage planning',
             'Conflict resolution'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'Singles Coaching',
@@ -306,7 +306,7 @@ export const PROGRAMS: Program[] = [
             'Singlehood guidance',
             'Tailor-made sessions'
         ],
-        isOpenForIntake: false
+        is_open_for_intake: false
     },
     {
         title: 'Fountain',
@@ -322,7 +322,7 @@ export const PROGRAMS: Program[] = [
             'Module 2: Word Impartation',
             'Module 3: Growth in Faith'
         ],
-        isOpenForIntake: true
+        is_open_for_intake: true
     }
 ];
 

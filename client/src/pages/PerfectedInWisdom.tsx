@@ -17,7 +17,6 @@ interface Program {
     fullDescription?: string;
     image: string;
     selarUrl: string;
-    isOpenForIntake?: boolean;
     is_open_for_intake?: boolean;
 }
 
@@ -37,7 +36,7 @@ export default function PerfectedInWisdom() {
             ...p, 
             ...remote,
             // Prioritize remote intake status but fallback to local
-            isOpenForIntake: remote.isOpenForIntake ?? (remote as any).is_open_for_intake ?? p.isOpenForIntake 
+            is_open_for_intake: remote.is_open_for_intake ?? p.is_open_for_intake 
         };
     });
 
@@ -110,7 +109,7 @@ export default function PerfectedInWisdom() {
                     ) : (
                         <div className="space-y-16">
                             {/* Open Programs */}
-                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) !== false).length > 0 && (
+                            {filteredPrograms.filter(p => (p.is_open_for_intake) !== false).length > 0 && (
                                 <div>
                                     <h3 className="text-2xl font-bold text-navy mb-8 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                         <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -118,7 +117,7 @@ export default function PerfectedInWisdom() {
                                     </h3>
                                     <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                         <AnimatePresence>
-                                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) !== false).map((program, i) => (
+                                            {filteredPrograms.filter(p => (p.is_open_for_intake) !== false).map((program, i) => (
                                                 <ProgramCard key={program.slug} {...program} index={i} />
                                             ))}
                                         </AnimatePresence>
@@ -127,14 +126,14 @@ export default function PerfectedInWisdom() {
                             )}
 
                             {/* Coming Soon / Closed */}
-                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) === false).length > 0 && (
+                            {filteredPrograms.filter(p => (p.is_open_for_intake) === false).length > 0 && (
                                 <div>
                                     <h3 className="text-2xl font-bold text-navy mb-8" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                         All Programs / Coming Soon
                                     </h3>
                                     <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                         <AnimatePresence>
-                                            {filteredPrograms.filter(p => (p.isOpenForIntake ?? (p as any).is_open_for_intake) === false).map((program, i) => (
+                                            {filteredPrograms.filter(p => (p.is_open_for_intake) === false).map((program, i) => (
                                                 <ProgramCard key={program.slug} {...program} index={i} />
                                             ))}
                                         </AnimatePresence>

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { BookOpen, ExternalLink, ArrowRight, PlayCircle, Users } from 'lucide-react';
+import { ExternalLink, ArrowRight, PlayCircle, Users } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import { useApi } from '../hooks/useApi';
 import { Link } from 'react-router-dom';
@@ -21,13 +21,10 @@ import SolidFormImg from '../assets/book- creating a solid form.jpeg';
 import PassionImg from '../assets/book- passion.jpeg';
 import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
 
-// Free Resources Assets
+import Phos9Img from '../assets/the phos edition 9.png';
 import IdentityImg from '../assets/Identity.png';
 import Phos2Img from '../assets/the phos edition 2.jpg';
 import Phos5Img from '../assets/the phos edition 5.jpg';
-import Phos9Img from '../assets/the phos edition 9.png';
-import Wisdom1Img from '../assets/wisdom edition 1 the undefiled.jpg';
-import Wisdom2Img from '../assets/wisdom edition 2 - dear man dear woman.jpg';
 
 // Assets mapping based on dist/assets structure
 const ASSET_PATH = '/assets/';
@@ -149,20 +146,13 @@ const STATIC_DEVOTIONALS = [
     { id: '4', title: 'The Phos Edition 9', desc: 'Strength for the journey.', image: Phos9Img },
 ];
 
-const STATIC_MAGAZINES = [
-    { id: 'm1', title: 'Wisdom Edition 1: The Undefiled', desc: 'Living a life of purity and power.', image: Wisdom1Img },
-    { id: 'm2', title: 'Wisdom Edition 2: Dear Man, Dear Woman', desc: 'Heart-to-heart wisdom for relationships.', image: Wisdom2Img },
-];
-
 export default function Resources() {
     const { data: freeResources, loading } = useApi<any[]>('/free-resources');
 
     const devotionalsApi = freeResources?.filter(r => r.type === 'Devotional') || [];
-    const magazinesApi = freeResources?.filter(r => r.type === 'Magazine') || [];
 
     // Combine static and API for full list as requested
     const devotionals = devotionalsApi.length > 0 ? devotionalsApi : STATIC_DEVOTIONALS;
-    const magazines = magazinesApi.length > 0 ? magazinesApi : STATIC_MAGAZINES;
 
     const sectionFade = {
         initial: { opacity: 0, y: 30 },
