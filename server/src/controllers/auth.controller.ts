@@ -53,3 +53,42 @@ export const getMe = async (req: Request & { adminId?: string }, res: Response):
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+// ─── TEMPORARY: One-time admin reset endpoint ────────────────────────────────
+// Protected by a secret key. Remove this after use.
+export const resetAdmin = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const secretKey = req.headers['x-reset-secret'];
+        if (secretKey !== 'hekimika-reset-2024') {
+            res.status(403).json({ error: 'Forbidden' });
+            return;
+        }
+
+        const { email, password } = req.body;
+        if (!email || !password) {
+            res.status(400).json({ error: 'Email and password are required' });
+            return;
+        }
+
+        const hashed = await bcrypt.hash(password, 12);
+        const existing = await pool.query('SELECT id FROM admins WHERE email = $1', [email.toLowerCase()]);
+
+        if (existing.rows.length > 0) {
+            await pool.query(
+                'UPDATE admins SET password = $1 WHERE email = $2',
+                [hashed, email.toLowerCase()]
+            );
+            res.json({ message: `✅ Password updated for ${email}` });
+        } else {
+            await pool.query(
+                'INSERT INTO admins (email, password, name) VALUES ($1, $2, $3)',
+                [email.toLowerCase(), hashed, 'Hekimika Admin']
+            );
+            res.json({ message: `✅ Admin created: ${email}` });
+        }
+    } catch (err) {
+        console.error('Reset error:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
