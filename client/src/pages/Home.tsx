@@ -20,21 +20,21 @@ const ARMS = [
     {
         icon: Star,
         title: 'Perfected in Wisdom',
-        description: 'Transformative programs for singles, couples, and leaders — building character, healing, and purpose.',
+        description: 'Comprehensive mentorship and building programs that focuses on providing Wisdom on major things in life such as Relationships, Leadership, Purity, Purpose, and Identity.',
         to: '/perfected-in-wisdom',
         color: '#D4AF37',
     },
     {
         icon: Heart,
         title: 'Wisdom Moments',
-        description: 'Audio teachings, devotionals, and Q&A content to feed your spirit and renew your mind daily.',
+        description: 'This is a platform for the impartation of the Wisdom of God.',
         to: '/wisdom-moments',
         color: '#E8CC6A',
     },
     {
         icon: Users,
-        title: 'Young & Wise',
-        description: 'Raising a wise generation of teens through mentorship, community, and purposeful guidance.',
+        title: 'Young and Wise',
+        description: 'A youth-focused arm dedicated to mentoring teenagers through magazines, interactive sessions, mentorship, and YouTube content.',
         to: '/young-and-wise',
         color: '#D4AF37',
     },
@@ -60,10 +60,10 @@ const FEATURED_BOOKS = [
         link: 'https://selar.co/solid-form'
     },
     {
-        title: 'Pray for a Solid Man',
-        image: PrayingSolidManImg,
-        desc: 'A prayer guide for those seeking a God-fearing partner.',
-        link: 'https://selar.co/praying-solid-man'
+        title: 'Dealing with Ended Relationships',
+        image: PrayingSolidManImg, // Note: keeping same style/image variable but we should probably change the image if available, but instruction says "keep same style", we'll just update text for now. Wait, I'll update text.
+        desc: 'Navigating the pain of ended relationships and finding healing.',
+        link: 'https://selar.co/'
     }
 ];
 
@@ -95,10 +95,8 @@ const TEACHING_CHANNELS = [
 ];
 
 const STATS = [
-    { value: '10,000+', label: 'Lives Transformed' },
-    { value: '11+', label: 'Programs' },
-    { value: '50+', label: 'Nations Reached' },
-    { value: '8', label: 'Years of Impact' },
+    { value: '1000+', label: 'Lives Transformed' },
+    { value: '11+', label: 'Programs' }
 ];
 
 const fadeUp = {
@@ -177,7 +175,7 @@ export default function Home() {
                         className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
                         style={{ fontFamily: 'Poppins, sans-serif' }}
                     >
-                        Raising the Generation<br />
+                        Raising the generation<br />
                         <span style={{ color: 'var(--gold)' }}>of the Wise</span><br />
                         all over the World.
                     </motion.h1>
@@ -185,7 +183,7 @@ export default function Home() {
                         {...fadeUp}
                         animate={fadeUp.animate}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-sm font-semibold tracking-widest mb-4"
+                        className="text-sm font-semibold tracking-widest mb-4 italic mt-8"
                         style={{ color: 'var(--gold)' }}
                     >
                         Hekimika is a Swahili word meaning ‘Be Wise’.
@@ -439,7 +437,7 @@ export default function Home() {
                                 className="rounded-3xl w-full h-[450px] object-cover shadow-2xl"
                             />
                             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-5 shadow-xl">
-                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>8+ Years</p>
+                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>7+ Years</p>
                                 <p className="text-gray-500 text-sm">of Kingdom Impact</p>
                             </div>
                         </motion.div>

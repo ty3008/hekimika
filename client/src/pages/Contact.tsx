@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Phone, MessageSquare, Users } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 
 export default function Contact() {
@@ -23,6 +23,37 @@ export default function Contact() {
             </section>
 
             <section className="section-pad bg-white">
+                <div className="container-xl mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        <a 
+                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20like%20to%20know%20more%20about%20your%20programs%20and%20ministry." 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
+                        >
+                            <MessageSquare size={32} />
+                            <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Speak to Us on WhatsApp</span>
+                        </a>
+                        <a 
+                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20have%20a%20prayer%20request." 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
+                        >
+                            <MessageSquare size={32} />
+                            <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Send Prayer Request</span>
+                        </a>
+                        <a 
+                            href="https://chat.whatsapp.com/IMWKhV4pIVn3D0pSmEPkgG" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
+                        >
+                            <Users size={32} />
+                            <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Join WhatsApp Community</span>
+                        </a>
+                    </div>
+                </div>
                 <div className="container-xl grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                         <h2 className="text-3xl font-bold mb-6 text-navy" style={{ fontFamily: 'Poppins, sans-serif' }}>Contact Information</h2>
@@ -46,7 +77,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-bold text-navy mb-1">Call or WhatsApp</p>
-                                    <p className="text-gray-500 text-sm">+254708084350</p>
+                                    <p className="text-gray-500 text-sm">+254 708 084 350</p>
                                     <p className="text-xs text-gray-400 mt-1">Available Mon-Fri, 9am - 5pm EAT</p>
                                 </div>
                             </li>

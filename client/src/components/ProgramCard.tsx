@@ -68,7 +68,7 @@ export default function ProgramCard({ title, slug, category, description, model,
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">{description}</p>
 
-                <div className="flex gap-3 mt-auto">
+                <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                     <button
                         onClick={(e) => {
                             e.stopPropagation();

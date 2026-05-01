@@ -11,9 +11,6 @@ import WorkItOutImg from '../assets/work it out.jpg';
 import ChoosingWellImg from '../assets/book- choosing well.jpeg';
 import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
 import PreparingForLoveImg from '../assets/preparing for love.png';
-import KeepersImg from '../assets/Keepers.png';
-import CoupledAndBuiltImg from '../assets/Coupled and Built.png';
-import BuiltToLeadImg from '../assets/Built to Lead.png';
 
 // Cultured In Love Assets
 import SolidCoreImg from '../assets/establishing a solid core.jpg';
@@ -71,33 +68,6 @@ const BOOKS = [
         desc: 'Tools and insights to get ready for a lasting covenant.'
     },
     {
-        title: 'Keepers of Love',
-        author: 'Pastor Kevin Mulati',
-        image: KeepersImg,
-        price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/keepers',
-        desc: 'Understanding what it takes to sustain lifelong love.'
-    },
-    {
-        title: 'Coupled and Built',
-        author: 'Pastor Kevin Mulati',
-        image: CoupledAndBuiltImg,
-        price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/coupled-built',
-        desc: 'Foundation and architecture for a successful godly marriage.'
-    },
-    {
-        title: 'Built to Lead',
-        author: 'Pastor Kevin Mulati',
-        image: BuiltToLeadImg,
-        price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/built-to-lead',
-        desc: 'Leadership principles for the generation of the wise.'
-    },
-];
-
-const CULTURED_IN_LOVE_BOOKS = [
-    {
         title: 'Establishing a Solid Core',
         author: 'Pastor Kevin Mulati',
         image: SolidCoreImg,
@@ -136,7 +106,7 @@ const CULTURED_IN_LOVE_BOOKS = [
         price: 'KSh 2,000',
         selarUrl: 'https://selar.co/praying-solid-man',
         desc: 'A prayer guide for those seeking a God-fearing partner.'
-    },
+    }
 ];
 
 const STATIC_DEVOTIONALS = [
@@ -172,7 +142,7 @@ export default function Resources() {
                 <div className="container-xl text-center">
                     <SectionTitle
                         overline="Wisdom Library"
-                        title="Resources to Feed Your Spirit"
+                        title="Wisdom for your Glory"
                         subtitle="From deep-dive books to bite-sized devotionals, find the wisdom you need for every season."
                         light
                     />
@@ -218,38 +188,7 @@ export default function Resources() {
                 </div>
             </section>
 
-            {/* Section 2: Cultured in Love */}
-            <section className="section-pad bg-gray-50">
-                <div className="container-xl">
-                    <SectionTitle
-                        overline="Series Collections"
-                        title="Cultured in Love"
-                        subtitle="Deep dive into the wisdom of love and relationships. These specialized volumes are part of our flagship series."
-                    />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                        {CULTURED_IN_LOVE_BOOKS.map((book, i) => (
-                            <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="flex flex-col">
-                                <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-6 shadow-2xl border-4 border-white group relative bg-white flex items-center justify-center p-4">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden transition-transform duration-700 group-hover:scale-105" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent flex flex-col justify-end p-6 gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p className="text-white/80 text-xs italic mb-1 line-clamp-2">{book.desc}</p>
-                                        <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
-                                            <ExternalLink size={14} /> Buy Softcopy
-                                        </a>
-                                        <a href={(book as any).amazonUrl || "https://www.amazon.com/dp/ASIN123"} target="_blank" rel="noopener noreferrer" className="bg-gold text-navy text-center py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors">
-                                            <ExternalLink size={14} /> Buy Hardcopy on Amazon
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="text-center">
-                                    <h3 className="font-bold text-navy text-xl mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>{book.title}</h3>
-                                    <p className="text-gold font-bold">{book.price}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
 
             {/* Section 3: Devotionals */}
             <section className="section-pad bg-white">
@@ -278,6 +217,23 @@ export default function Resources() {
                                 <p className="text-gray-400">Our latest devotionals will be available here soon.</p>
                             </div>
                         )}
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 4: Our Library */}
+            <section className="py-24 px-4 bg-navy text-center">
+                <div className="container-xl">
+                    <SectionTitle
+                        title="Our Library"
+                        subtitle="Explore our comprehensive library of wisdom resources."
+                        light
+                        centered
+                    />
+                    <div className="flex justify-center mt-8">
+                        <Link to="/library" className="btn-primary px-8 py-4 inline-flex items-center gap-2">
+                            Go to Library <ArrowRight size={18} />
+                        </Link>
                     </div>
                 </div>
             </section>

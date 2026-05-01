@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 // Layouts
@@ -18,6 +19,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import ForumPage from './pages/ForumPage';
 import NotFound from './pages/NotFound';
+import VideoTeachings from './pages/VideoTeachings';
 
 // Admin Pages
 import AdminLogin from './admin/AdminLogin';
@@ -39,12 +41,26 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   const location = useLocation();
 
-  // Don't animate full page transitions to avoid layout thrashing, 
-  // framer motion is used extensively inside the pages themselves.
   return (
+    <>
+    <ScrollToTop />
     <Routes location={location} key={location.pathname}>
       {/* Public Routes */}
       <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
@@ -58,6 +74,7 @@ export default function App() {
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
       <Route path="/forums/:slug" element={<PublicLayout><ForumPage /></PublicLayout>} />
+      <Route path="/video-teachings" element={<PublicLayout><VideoTeachings /></PublicLayout>} />
 
       {/* Admin Auth Route (hidden entry point) */}
       <Route path="/admin" element={<AdminLogin />} />
@@ -74,5 +91,6 @@ export default function App() {
       {/* 404 Route */}
       <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
     </Routes>
+    </>
   );
 }
