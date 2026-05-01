@@ -60,9 +60,11 @@ export default function Navbar() {
 
                 {/* CTA + Hamburger */}
                 <div className="flex items-center gap-4">
-                    <Link to="/perfected-in-wisdom" className="hidden md:inline-flex btn-primary text-sm px-5 py-2.5">
-                        Join a Program
-                    </Link>
+                    <div className="hidden md:block">
+                        <Link to="/perfected-in-wisdom" className="btn-primary text-sm px-5 py-2.5">
+                            Join a Program
+                        </Link>
+                    </div>
                     <button
                         className="lg:hidden text-white p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                         onClick={() => setOpen((v) => !v)}

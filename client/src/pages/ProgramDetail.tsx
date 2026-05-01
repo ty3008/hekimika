@@ -92,7 +92,7 @@ export default function ProgramDetail() {
                         href={(program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
                         target={(program.is_open_for_intake) !== false ? "_blank" : "_self"}
                         rel="noopener noreferrer"
-                        className="btn-primary px-8 py-4 text-base font-bold shadow-2xl"
+                        className="btn-primary w-full sm:w-auto px-8 py-4 text-base font-bold shadow-2xl"
                     >
                         {(program.is_open_for_intake) !== false ? (
                             <>Join This Program <ExternalLink size={18} /></>

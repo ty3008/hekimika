@@ -74,7 +74,7 @@ export default function ProgramCard({ title, slug, category, description, model,
                             e.stopPropagation();
                             navigate(`/programs/${slug}`);
                         }}
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
+                        className="w-full sm:flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
                         style={{ borderColor: 'var(--navy)', color: 'var(--navy)' }}
                     >
                         Learn More <ArrowRight size={14} />
@@ -83,7 +83,7 @@ export default function ProgramCard({ title, slug, category, description, model,
                         href={isOpen ? selarUrl : "/contact"}
                         target={isOpen ? "_blank" : "_self"}
                         rel="noopener noreferrer"
-                        className="flex-1 btn-primary py-2.5 px-4 text-sm"
+                        className="w-full sm:flex-1 btn-primary py-2.5 px-4 text-sm"
                     >
                         {isOpen ? 'Join Program' : 'Join Community'}
                     </a>
