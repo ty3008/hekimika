@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
+import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { PROGRAMS } from '../utils/constants';
