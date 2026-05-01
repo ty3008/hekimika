@@ -3,9 +3,11 @@ import ChoosingWellImg from '../assets/Choosing Well.png';
 import KeepersImg from '../assets/Keepers.png';
 import ConflictResolutionImg from '../assets/Coupled and Built.png';
 import BeginningRightImg from '../assets/beginning right.jpeg';
-import SchoolOfPurityImg from '../assets/Life Changing - Singles.png';
+import SchoolOfPurityImg from '../assets/Purity Basics.png';
 import SchoolOfHealingImg from '../assets/School of Healing.png';
 import BuiltToLeadImg from '../assets/Built to Lead.png';
+import SinglesCoachingImg from '../assets/Life Couching - Singles.png';
+import CouplesCoachingImg from '../assets/Life Coaching- Couples.png';
 
 export interface Program {
     title: string;
@@ -282,7 +284,7 @@ export const PROGRAMS: Program[] = [
         description: 'In life there things that you know you don\'t know. This is a program for that couple who desire guidance in matters love and life.',
         fullDescription: 'In life there things that you know you don\'t know and then there are things you don\'t know that you don\'t know where love becomes tough. The new and unfamiliar doesn\'t need to be hard. This is a program for that couple who desire guidance in matters love and life especially in navigating uncharted waters. Whether you have just started dating, you have been dating for a while, organizing your wedding and planning for marriage, or are recently married, please contact us for tailor made sessions just for you.',
         model: 'Bootcamp',
-        image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800',
+        image: CouplesCoachingImg,
         selarUrl: 'https://selar.co/couples-coaching',
         curriculum: [
             'Tailor-made sessions',
@@ -299,7 +301,7 @@ export const PROGRAMS: Program[] = [
         description: 'Apart from the Single and Built Programs, this is a free and open space where you can receive personal coaching in your singlehood.',
         fullDescription: 'Apart from the Single and Built Programs, this is a free and open space where you can receive personal coaching in your singlehood. Please contact us for tailor made sessions just for you.',
         model: 'Bootcamp',
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800',
+        image: SinglesCoachingImg,
         selarUrl: 'https://selar.co/singles-coaching',
         curriculum: [
             'Personal coaching',

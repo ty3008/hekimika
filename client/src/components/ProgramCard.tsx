@@ -42,11 +42,11 @@ export default function ProgramCard({ title, slug, category, description, model,
             onClick={handleCardClick}
         >
             {/* Image */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-50 flex items-center justify-center p-2">
+            <div className="relative aspect-square overflow-hidden rounded-xl bg-white flex items-center justify-center p-0">
                 <img
                     src={image}
                     alt={title}
-                    className="w-full h-full object-contain overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                 />
                 <div className="absolute inset-0 gradient-overlay" />
