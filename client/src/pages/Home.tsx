@@ -45,25 +45,25 @@ const FEATURED_BOOKS = [
         title: 'Passion',
         image: PassionImg,
         desc: 'Navigating passion, love, and intimacy the biblical way.',
-        link: 'https://selar.co/passion'
+        link: 'https://selar.com/7hb2n47455'
     },
     {
         title: 'Choosing Well',
         image: ChoosingWellImg,
         desc: 'Discerning the right partner for a God-centered covenant.',
-        link: 'https://selar.co/choosing-well'
+        link: 'https://selar.com/7770f17ty0'
     },
     {
         title: 'Creating a Solid Form',
         image: SolidFormImg,
         desc: 'The foundational principles of the Cultured in Love series.',
-        link: 'https://selar.co/solid-form'
+        link: 'https://selar.com/66d7414624'
     },
     {
         title: 'Dealing with Ended Relationships',
         image: DealingWithEndedImg,
         desc: 'Navigating the pain of ended relationships and finding healing.',
-        link: 'https://selar.co/'
+        link: 'https://selar.com/477717r206'
     }
 ];
 
