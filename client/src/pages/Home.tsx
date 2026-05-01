@@ -11,7 +11,7 @@ import { PROGRAMS } from '../utils/constants';
 import PassionImg from '../assets/book- passion.jpeg';
 import ChoosingWellImg from '../assets/book- choosing well.jpeg';
 import SolidFormImg from '../assets/book- creating a solid form.jpeg';
-import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
+import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
 const HERO_BG = HeroBgImg;
@@ -61,7 +61,7 @@ const FEATURED_BOOKS = [
     },
     {
         title: 'Dealing with Ended Relationships',
-        image: PrayingSolidManImg, // Note: keeping same style/image variable but we should probably change the image if available, but instruction says "keep same style", we'll just update text for now. Wait, I'll update text.
+        image: DealingWithEndedImg,
         desc: 'Navigating the pain of ended relationships and finding healing.',
         link: 'https://selar.co/'
     }
@@ -183,7 +183,7 @@ export default function Home() {
                         {...fadeUp}
                         animate={fadeUp.animate}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-sm font-semibold tracking-widest mb-4 italic mt-8"
+                        className="text-sm font-semibold tracking-widest mb-4 italic mt-12 md:mt-16"
                         style={{ color: 'var(--gold)' }}
                     >
                         Hekimika is a Swahili word meaning ‘Be Wise’.
@@ -437,8 +437,8 @@ export default function Home() {
                                 className="rounded-3xl w-full h-[450px] object-cover shadow-2xl"
                             />
                             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-5 shadow-xl">
-                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>7+ Years</p>
-                                <p className="text-gray-500 text-sm">of Kingdom Impact</p>
+                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>7 years+</p>
+                                <p className="text-gray-500 text-sm">impact</p>
                             </div>
                         </motion.div>
                     </div>

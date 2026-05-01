@@ -68,13 +68,13 @@ export default function ProgramCard({ title, slug, category, description, model,
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">{description}</p>
 
-                <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                <div className="flex flex-col sm:flex-row gap-4 mt-auto">
                     <button
                         onClick={(e) => {
                             e.stopPropagation();
                             navigate(`/programs/${slug}`);
                         }}
-                        className="w-full sm:flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
+                        className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-4 min-h-[48px] rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
                         style={{ borderColor: 'var(--navy)', color: 'var(--navy)' }}
                     >
                         Learn More <ArrowRight size={14} />
@@ -83,7 +83,7 @@ export default function ProgramCard({ title, slug, category, description, model,
                         href={isOpen ? selarUrl : "/contact"}
                         target={isOpen ? "_blank" : "_self"}
                         rel="noopener noreferrer"
-                        className="w-full sm:flex-1 btn-primary py-2.5 px-4 text-sm"
+                        className="w-full sm:flex-1 btn-primary py-3 px-4 min-h-[48px] text-sm flex items-center justify-center"
                     >
                         {isOpen ? 'Join Program' : 'Join Community'}
                     </a>
