@@ -31,6 +31,8 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://hekimika.org',
     'https://www.hekimika.org',
+    'https://hekimika.netlify.app',
+    'https://www.hekimika.netlify.app',
 ].filter(Boolean);
 
 if (!JWT_SECRET) {
