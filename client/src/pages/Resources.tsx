@@ -6,14 +6,14 @@ import { useApi } from '../hooks/useApi';
 import { Link } from 'react-router-dom';
 
 // Book Assets
-import ThePureManImg from '../assets/The pure man.jpg';
-import WorkItOutImg from '../assets/work it out.jpg';
+import ThePureManImg from '../assets/The Pure Man.png';
+import WorkItOutImg from '../assets/Work it out.png';
 import ChoosingWellImg from '../assets/book- choosing well.jpeg';
 import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
-import PreparingForLoveImg from '../assets/preparing for love.png';
+import PreparingForLoveImg from '../assets/Preparing for Love(1).png';
 
 // Cultured In Love Assets
-import SolidCoreImg from '../assets/establishing a solid core.jpg';
+import SolidCoreImg from '../assets/ESTABLISHING A SOLID CORE.png';
 import SolidFormImg from '../assets/book- creating a solid form.jpeg';
 import PassionImg from '../assets/book- passion.jpeg';
 import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
@@ -92,14 +92,6 @@ const BOOKS = [
         desc: 'Navigating passion, love, and intimacy the biblical way.'
     },
     {
-        title: 'Conflict Resolution',
-        author: 'Pastor Kevin Mulati',
-        image: WorkItOutImg,
-        price: 'KSh 2,000',
-        selarUrl: 'https://selar.co/conflict-resolution',
-        desc: 'Resolving disputes gracefully in your marriage or relationship.'
-    },
-    {
         title: 'Praying for a Solid Man',
         author: 'Pastor Kevin Mulati',
         image: PrayingSolidManImg,
@@ -160,8 +152,8 @@ export default function Resources() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
-                                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-gray-50 flex items-center justify-center p-4">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" />
+                                <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
                                         <p className="text-white text-sm font-medium leading-relaxed line-clamp-4">{book.desc}</p>
                                     </div>
