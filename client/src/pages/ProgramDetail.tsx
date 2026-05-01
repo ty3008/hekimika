@@ -75,31 +75,13 @@ export default function ProgramDetail() {
                     <div className="absolute inset-0 bg-navy/40" />
                 </div>
 
-                <div className="relative z-10 container-xl px-4 text-center">
-                    <Link to="/perfected-in-wisdom" className="inline-flex items-center gap-2 text-white/80 hover:text-gold mb-6 transition-colors text-sm font-medium">
+                <div className="relative z-10 container-xl px-4 text-center mt-auto pb-12">
+                    <Link to="/perfected-in-wisdom" className="inline-flex items-center gap-2 text-white/80 hover:text-gold mb-4 transition-colors text-sm font-medium bg-navy/50 px-4 py-2 rounded-full backdrop-blur-sm">
                         <ArrowLeft size={16} /> Back to Programs
                     </Link>
-                    <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--gold)' }}>
-                        {program.category}
-                    </p>
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
                         {program.title}
                     </h1>
-                    <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
-                        {program.description}
-                    </p>
-                    <a
-                        href={(program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
-                        target={(program.is_open_for_intake) !== false ? "_blank" : "_self"}
-                        rel="noopener noreferrer"
-                        className="btn-primary w-full sm:w-auto px-8 py-4 text-base font-bold shadow-2xl"
-                    >
-                        {(program.is_open_for_intake) !== false ? (
-                            <>Join This Program <ExternalLink size={18} /></>
-                        ) : (
-                            <>Join Community <ArrowRight size={18} /></>
-                        )}
-                    </a>
                 </div>
             </section>
 
