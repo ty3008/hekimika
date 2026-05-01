@@ -32,7 +32,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: ThePureManImg,
         price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/pure-man',
+        selarUrl: 'https://selar.com/7467y6kq97',
         desc: 'A comprehensive guide for men on holiness, identity, and strength.'
     },
     {
@@ -40,7 +40,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: WorkItOutImg,
         price: 'KSh 800',
-        selarUrl: 'https://selar.co/work-it-out',
+        selarUrl: 'https://selar.com/l4777t41f7',
         desc: 'Practical wisdom for navigating the daily realities of love.'
     },
     {
@@ -48,7 +48,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: ChoosingWellImg,
         price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/choosing-well',
+        selarUrl: 'https://selar.com/7770f17ty0',
         desc: 'Discerning the right partner for a God-centered covenant.'
     },
     {
@@ -56,7 +56,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: DealingWithEndedImg,
         price: 'KSh 500',
-        selarUrl: 'https://selar.co/healing-heartbreak',
+        selarUrl: 'https://selar.com/477717r206',
         desc: 'Finding healing and wholeness after the pain of a breakup.'
     },
     {
@@ -64,7 +64,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: PreparingForLoveImg,
         price: 'KSh 1,500',
-        selarUrl: 'https://selar.co/preparing-love',
+        selarUrl: 'https://selar.com/1v6669vh7e',
         desc: 'Tools and insights to get ready for a lasting covenant.'
     },
     {
@@ -72,7 +72,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: SolidCoreImg,
         price: 'KSh 2,000',
-        selarUrl: 'https://selar.co/solid-core',
+        selarUrl: 'https://selar.com/551w577717',
         desc: 'Building the non-negotiables of relationships and marriage.'
     },
     {
@@ -80,7 +80,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: SolidFormImg,
         price: 'KSh 2,000',
-        selarUrl: 'https://selar.co/solid-form',
+        selarUrl: 'https://selar.com/66d7414624',
         desc: 'The foundational principles of the Cultured in Love series.'
     },
     {
@@ -88,7 +88,7 @@ const BOOKS = [
         author: 'Pastor Kevin Mulati',
         image: PassionImg,
         price: 'KSh 2,000',
-        selarUrl: 'https://selar.co/passion',
+        selarUrl: 'https://selar.com/7hb2n47455',
         desc: 'Navigating passion, love, and intimacy the biblical way.'
     },
     {

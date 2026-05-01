@@ -14,7 +14,7 @@ const CHANNELS = [
     {
         title: 'Young & Wise Channel',
         desc: 'Catch up on all the youth-focused interactive sessions, mentorship, and teen-focused content.',
-        url: 'https://www.youtube.com/@YoungAndWise', // placeholder URL as none was provided, user asked for both YouTube channels.
+        url: 'https://www.youtube.com/@Kevinmulati111',
         buttonText: 'Watch Young & Wise',
         color: '#FF0000'
     }
