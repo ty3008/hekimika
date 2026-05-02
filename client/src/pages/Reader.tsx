@@ -60,7 +60,7 @@ export default function Reader() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-900 overflow-hidden">
+        <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
             <Helmet>
                 <title>Reading: {resource.title} | Hekimika</title>
                 <meta name="description" content={resource.short_description || resource.shortDescription} />
@@ -105,11 +105,11 @@ export default function Reader() {
             </div>
 
             {/* Viewer */}
-            <div className="flex-1 relative bg-[#323639] min-h-[60vh]">
+            <div className="flex-1 relative bg-[#1a1c1e]">
                 {iframeUrl ? (
                     <iframe
                         src={iframeUrl}
-                        className="w-full h-full border-none"
+                        className="absolute inset-0 w-full h-full border-none"
                         allow="autoplay"
                         title={resource.title}
                     ></iframe>
