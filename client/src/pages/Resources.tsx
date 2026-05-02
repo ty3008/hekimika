@@ -192,13 +192,13 @@ export default function Resources() {
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {devotionals.map((devo, i) => (
-                            <motion.div key={devo._id} {...sectionFade} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all">
+                            <motion.div key={devo.id || devo._id || i} {...sectionFade} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all">
                                 <div className="w-full aspect-[4/5] rounded-xl overflow-hidden mb-6 bg-gray-100 border border-gray-100">
                                     <img src={devo.image || (ASSET_PATH + 'identity.jpg')} alt={devo.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                                 </div>
                                 <h3 className="font-bold text-navy text-lg mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>{devo.title}</h3>
-                                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{devo.shortDescription || devo.desc}</p>
-                                <Link to={`/read/${devo._id || devo.id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
+                                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{devo.short_description || devo.shortDescription || devo.desc}</p>
+                                <Link to={`/read/${devo.id || devo._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
                                     Read Now <ArrowRight size={16} />
                                 </Link>
                             </motion.div>

@@ -10,14 +10,14 @@ export default function Reader() {
     const [iframeUrl, setIframeUrl] = useState('');
 
     useEffect(() => {
-        if (resource?.googleDriveLink) {
+        const link = resource?.google_drive_link || resource?.googleDriveLink;
+        if (link) {
             // Convert sharing link to preview link for embedding
-            let url = resource.googleDriveLink;
-            if (url.includes('view?usp=sharing')) {
-                url = url.replace('view?usp=sharing', 'preview');
+            let url = link;
+            if (url.includes('view?usp=sharing') || url.includes('view?usp=drive_link')) {
+                url = url.replace(/view\?usp=(sharing|drive_link)/, 'preview');
             } else if (!url.includes('preview')) {
                 // Try to handle general sharing links if possible
-                // This is a basic transformation, might need refinement for different patterns
                 if (url.includes('/file/d/')) {
                     const parts = url.split('/file/d/');
                     const fileId = parts[1].split('/')[0];
@@ -50,7 +50,7 @@ export default function Reader() {
         if (navigator.share) {
             navigator.share({
                 title: resource.title,
-                text: resource.shortDescription,
+                text: resource.short_description || resource.shortDescription,
                 url: window.location.href,
             });
         } else {
@@ -63,7 +63,7 @@ export default function Reader() {
         <div className="min-h-screen flex flex-col bg-gray-900 overflow-hidden">
             <Helmet>
                 <title>Reading: {resource.title} | Hekimika</title>
-                <meta name="description" content={resource.shortDescription} />
+                <meta name="description" content={resource.short_description || resource.shortDescription} />
             </Helmet>
 
             {/* Top Bar */}
@@ -93,7 +93,7 @@ export default function Reader() {
                         <Share2 size={18} />
                     </button>
                     <a
-                        href={resource.googleDriveLink}
+                        href={resource.google_drive_link || resource.googleDriveLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hidden sm:flex items-center gap-2 p-2.5 hover:bg-white/10 rounded-lg text-white/70 hover:text-gold transition-all"
@@ -118,7 +118,7 @@ export default function Reader() {
                         <ExternalLink size={48} />
                         <p>Unable to load preview directly.</p>
                         <a
-                            href={resource.googleDriveLink}
+                            href={resource.google_drive_link || resource.googleDriveLink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary"

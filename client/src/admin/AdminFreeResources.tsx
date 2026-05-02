@@ -16,12 +16,12 @@ export default function AdminFreeResources() {
 
     const openForm = (resource?: any) => {
         if (resource) {
-            setEditingId(resource._id);
+            setEditingId(resource.id || resource._id);
             setFormData({
                 title: resource.title,
-                shortDescription: resource.shortDescription,
+                shortDescription: resource.short_description || resource.shortDescription,
                 type: resource.type,
-                googleDriveLink: resource.googleDriveLink
+                googleDriveLink: resource.google_drive_link || resource.googleDriveLink
             });
         } else {
             setEditingId(null);
@@ -96,10 +96,10 @@ export default function AdminFreeResources() {
                     </thead>
                     <tbody className="divide-y divide-gray-50">
                         {resources?.map((r) => (
-                            <tr key={r._id} className="hover:bg-gray-50 transition-colors">
+                            <tr key={r.id || r._id} className="hover:bg-gray-50 transition-colors">
                                 <td className="px-6 py-4">
                                     <p className="font-bold text-navy text-base">{r.title}</p>
-                                    <p className="text-gray-500 line-clamp-1 text-xs">{r.shortDescription}</p>
+                                    <p className="text-gray-500 line-clamp-1 text-xs">{r.short_description || r.shortDescription}</p>
                                 </td>
                                 <td className="px-6 py-4">
                                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
@@ -109,7 +109,7 @@ export default function AdminFreeResources() {
                                 </td>
                                 <td className="px-6 py-4">
                                     <a
-                                        href={r.googleDriveLink}
+                                        href={r.google_drive_link || r.googleDriveLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-gold hover:underline flex items-center gap-1 font-medium"
@@ -127,7 +127,7 @@ export default function AdminFreeResources() {
                                             <Edit2 size={18} />
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(r._id)}
+                                            onClick={() => handleDelete(r.id || r._id)}
                                             className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                                             title="Delete"
                                         >
