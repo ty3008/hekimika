@@ -108,6 +108,16 @@ const STATIC_DEVOTIONALS = [
     { id: '4', title: 'The Phos Edition 9', desc: 'Strength for the journey.', image: Phos9Img },
 ];
 
+const getDriveThumbnail = (url: string) => {
+    if (!url) return null;
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        const fileId = parts[1].split('/')[0];
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+    }
+    return null;
+};
+
 export default function Resources() {
     const { data: freeResources, loading } = useApi<any[]>('/free-resources');
 
@@ -191,18 +201,28 @@ export default function Resources() {
                         subtitle="Spiritual nourishment for your daily walk. These resources are designed for quick yet deep impartation."
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {devotionals.map((devo, i) => (
-                            <motion.div key={devo.id || devo._id || i} {...sectionFade} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all">
-                                <div className="w-full aspect-[4/5] rounded-xl overflow-hidden mb-6 bg-gray-100 border border-gray-100">
-                                    <img src={devo.image || (ASSET_PATH + 'identity.jpg')} alt={devo.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
-                                </div>
-                                <h3 className="font-bold text-navy text-lg mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>{devo.title}</h3>
-                                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{devo.short_description || devo.shortDescription || devo.desc}</p>
-                                <Link to={`/read/${devo.id || devo._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
-                                    Read Now <ArrowRight size={16} />
-                                </Link>
-                            </motion.div>
-                        ))}
+                        {devotionals.map((devo, i) => {
+                            const thumbnail = devo.image || getDriveThumbnail(devo.google_drive_link || devo.googleDriveLink);
+                            return (
+                                <motion.div key={devo.id || devo._id || i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
+                                    <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
+                                        <img 
+                                            src={thumbnail || (ASSET_PATH + 'identity.jpg')} 
+                                            alt={devo.title} 
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                        />
+                                        <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
+                                            {devo.type?.toUpperCase() || 'FREE'}
+                                        </div>
+                                    </div>
+                                    <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{devo.title}</h3>
+                                    <p className="text-gray-500 text-sm mb-6 line-clamp-3">{devo.short_description || devo.shortDescription || devo.desc}</p>
+                                    <Link to={`/read/${devo.id || devo._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
+                                        Read Now <ArrowRight size={16} />
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
                         {loading && <p className="text-center text-gray-400 py-10">Loading devotionals...</p>}
                         {!loading && devotionals.length === 0 && (
                             <div className="col-span-full text-center py-10 bg-gray-50 rounded-2xl">
