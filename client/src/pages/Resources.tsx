@@ -122,15 +122,52 @@ export default function Resources() {
     const { data: freeResources, loading } = useApi<any[]>('/free-resources');
 
     const devotionalsApi = freeResources?.filter(r => r.type === 'Devotional') || [];
+    const magazinesApi = freeResources?.filter(r => r.type === 'Magazine') || [];
 
-    // Combine static and API for full list as requested
-    const devotionals = devotionalsApi.length > 0 ? devotionalsApi : STATIC_DEVOTIONALS;
+    // Merge logic: Show all API devotionals, and add any static ones that aren't already there by title
+    const devotionals = [...devotionalsApi];
+    STATIC_DEVOTIONALS.forEach(staticDevo => {
+        if (!devotionals.some(d => d.title.toLowerCase() === staticDevo.title.toLowerCase())) {
+            devotionals.push(staticDevo);
+        }
+    });
 
     const sectionFade = {
         initial: { opacity: 0, y: 30 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true },
         transition: { duration: 0.6 }
+    };
+
+    // Reusable Resource Card Component
+    const ResourceCard = ({ item, index }: { item: any, index: number }) => {
+        // Manual image lookup for fallbacks (like Phos Edition 2)
+        const getManualImage = (title: string) => {
+            const staticItem = STATIC_DEVOTIONALS.find(s => s.title.toLowerCase() === title.toLowerCase());
+            return staticItem?.image;
+        };
+
+        const thumbnail = item.image || getManualImage(item.title) || getDriveThumbnail(item.google_drive_link || item.googleDriveLink);
+
+        return (
+            <motion.div {...sectionFade} transition={{ delay: index * 0.1 }} className="group">
+                <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
+                    <img 
+                        src={thumbnail || (ASSET_PATH + 'identity.jpg')} 
+                        alt={item.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
+                    <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
+                        {item.type?.toUpperCase() || 'FREE'}
+                    </div>
+                </div>
+                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h3>
+                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{item.short_description || item.shortDescription || item.desc}</p>
+                <Link to={`/read/${item.id || item._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
+                    Read Now <ArrowRight size={16} />
+                </Link>
+            </motion.div>
+        );
     };
 
     return (
@@ -193,7 +230,7 @@ export default function Resources() {
 
 
             {/* Section 3: Devotionals */}
-            <section className="section-pad bg-white">
+            <section className="section-pad bg-white pt-0">
                 <div className="container-xl">
                     <SectionTitle
                         overline="Daily Bread"
@@ -201,37 +238,31 @@ export default function Resources() {
                         subtitle="Spiritual nourishment for your daily walk. These resources are designed for quick yet deep impartation."
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {devotionals.map((devo, i) => {
-                            const thumbnail = devo.image || getDriveThumbnail(devo.google_drive_link || devo.googleDriveLink);
-                            return (
-                                <motion.div key={devo.id || devo._id || i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
-                                    <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
-                                        <img 
-                                            src={thumbnail || (ASSET_PATH + 'identity.jpg')} 
-                                            alt={devo.title} 
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                                        />
-                                        <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
-                                            {devo.type?.toUpperCase() || 'FREE'}
-                                        </div>
-                                    </div>
-                                    <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{devo.title}</h3>
-                                    <p className="text-gray-500 text-sm mb-6 line-clamp-3">{devo.short_description || devo.shortDescription || devo.desc}</p>
-                                    <Link to={`/read/${devo.id || devo._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
-                                        Read Now <ArrowRight size={16} />
-                                    </Link>
-                                </motion.div>
-                            );
-                        })}
+                        {devotionals.map((devo, i) => (
+                            <ResourceCard key={devo.id || devo._id || i} item={devo} index={i} />
+                        ))}
                         {loading && <p className="text-center text-gray-400 py-10">Loading devotionals...</p>}
-                        {!loading && devotionals.length === 0 && (
-                            <div className="col-span-full text-center py-10 bg-gray-50 rounded-2xl">
-                                <p className="text-gray-400">Our latest devotionals will be available here soon.</p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </section>
+
+            {/* Section 4: Magazines */}
+            {magazinesApi.length > 0 && (
+                <section className="section-pad bg-gray-50">
+                    <div className="container-xl">
+                        <SectionTitle
+                            overline="Periodicals"
+                            title="Magazines"
+                            subtitle="Full-color digital magazines featuring articles, interviews, and testimonies from across the Wise Nation."
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {magazinesApi.map((mag, i) => (
+                                <ResourceCard key={mag.id || mag._id || i} item={mag} index={i} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Section 4: Our Library */}
             <section className="py-24 px-4 bg-navy text-center">
