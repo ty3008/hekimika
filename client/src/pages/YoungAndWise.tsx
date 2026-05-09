@@ -54,7 +54,7 @@ function TeensLibrarySection() {
                             >
                                 <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
                                     {thumbnail ? (
-                                        <img src={thumbnail} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                        <img src={thumbnail} alt={item.title} className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" />
                                     ) : (
                                         <div className="w-full h-full bg-gradient-to-br from-gold/20 to-navy/10 flex items-center justify-center">
                                             <BookOpen size={48} className="text-gold/50" />

@@ -152,20 +152,23 @@ export default function Resources() {
 
         return (
             <motion.div {...sectionFade} transition={{ delay: index * 0.1 }} className="group">
-                <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
+                <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
                     <img 
                         src={thumbnail || (ASSET_PATH + 'Identity.webp')} 
                         alt={item.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                        className="w-full h-full object-contain p-2 overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" 
                     />
+                    <div className="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
+                        <p className="text-white text-sm font-medium leading-relaxed line-clamp-4">{item.short_description || item.shortDescription || item.desc}</p>
+                    </div>
                     <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
                         {item.type?.toUpperCase() || 'FREE'}
                     </div>
                 </div>
-                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h3>
-                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{item.short_description || item.shortDescription || item.desc}</p>
-                <Link to={`/read/${item.id || item._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
-                    Read Now <ArrowRight size={16} />
+                <h3 className="font-bold text-navy text-lg mb-1 leading-tight group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h3>
+                <p className="text-gray-400 text-xs mb-3">{item.short_description || item.shortDescription || item.desc}</p>
+                <Link to={`/read/${item.id || item._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-xs hover:text-gold transition-colors">
+                    Read Now <ArrowRight size={14} />
                 </Link>
             </motion.div>
         );
@@ -201,7 +204,7 @@ export default function Resources() {
                         {BOOKS.map((book, i) => (
                             <motion.div key={i} {...sectionFade} transition={{ delay: i * 0.1 }} className="group">
                                 <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
-                                    <img src={book.image} alt={book.title} className="w-full h-full object-cover overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" />
+                                    <img src={book.image} alt={book.title} className="w-full h-full object-contain p-2 overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center">
                                         <p className="text-white text-sm font-medium leading-relaxed line-clamp-4">{book.desc}</p>
                                     </div>
@@ -233,7 +236,7 @@ export default function Resources() {
                         title="Devotionals"
                         subtitle="Spiritual nourishment for your daily walk. These resources are designed for quick yet deep impartation."
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {devotionals.map((devo, i) => (
                             <ResourceCard key={devo.id || devo._id || i} item={devo} index={i} />
                         ))}
@@ -251,7 +254,7 @@ export default function Resources() {
                             title="Magazines"
                             subtitle="Full-color digital magazines featuring articles, interviews, and testimonies from across the Wise Nation."
                         />
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {magazinesApi.map((mag, i) => (
                                 <ResourceCard key={mag.id || mag._id || i} item={mag} index={i} />
                             ))}
@@ -269,7 +272,7 @@ export default function Resources() {
                             title="Teens Library"
                             subtitle="Explore writings on Identity, Purity, and more — crafted for the young and wise generation."
                         />
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {teensLibraryApi.map((item, i) => (
                                 <ResourceCard key={item.id || item._id || i} item={item} index={i} />
                             ))}
