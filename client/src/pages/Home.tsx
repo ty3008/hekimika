@@ -44,25 +44,25 @@ const FEATURED_BOOKS = [
     {
         title: 'Passion',
         image: PassionImg,
-        desc: 'passion is a beautiful thing which God has given every person.',
+        desc: 'Passion is a beautiful thing which God has given every person.',
         link: 'https://selar.com/7hb2n47455'
     },
     {
         title: 'Choosing Well',
         image: ChoosingWellImg,
-        desc: 'a practical guide for building strong, healthy relationships by making wise choices rooted in love.',
+        desc: 'A practical guide to building healthy relationships rooted in love.',
         link: 'https://selar.com/7770f17ty0'
     },
     {
         title: 'Creating a Solid Form',
         image: SolidFormImg,
-        desc: 'Your internal reality influences your life experiences including your love and marriage.',
+        desc: 'Your internal reality influences your experiences in love and life.',
         link: 'https://selar.com/66d7414624'
     },
     {
         title: 'Dealing with Ended Relationships',
         image: DealingWithEndedImg,
-        desc: 'a practical guide to healing, growing and stepping into the love and life you deserve after a relationship ends.',
+        desc: 'A practical guide to healing and growth after a relationship ends.',
         link: 'https://selar.com/477717r206'
     }
 ];
