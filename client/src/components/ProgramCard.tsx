@@ -23,10 +23,9 @@ const modelLabel: Record<string, string> = {
     ongoing: 'Ongoing',
 };
 
-export default function ProgramCard({ title, slug, category, description, model, image, selarUrl, isOpenForIntake, is_open_for_intake, index = 0 }: ProgramCardProps) {
+export default function ProgramCard({ title, slug, category, description, model, image, index = 0 }: ProgramCardProps) {
     const navigate = useNavigate();
     const [imageLoaded, setImageLoaded] = useState(false);
-    const isOpen = isOpenForIntake !== undefined ? isOpenForIntake : (is_open_for_intake !== undefined ? is_open_for_intake : true);
 
     const handleCardClick = (e: React.MouseEvent) => {
         // Prevent navigating if they clicked a button or link directly
@@ -98,12 +97,10 @@ export default function ProgramCard({ title, slug, category, description, model,
                         Learn More <ArrowRight size={14} />
                     </button>
                     <a
-                        href={isOpen ? selarUrl : "/contact"}
-                        target={isOpen ? "_blank" : "_self"}
-                        rel="noopener noreferrer"
+                        href="/contact"
                         className="w-full sm:flex-1 btn-primary py-3 px-4 min-h-[48px] text-sm flex items-center justify-center"
                     >
-                        {isOpen ? 'Join Program' : 'Join Community'}
+                        Join Community
                     </a>
                 </div>
             </div>

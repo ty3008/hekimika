@@ -179,17 +179,13 @@ export default function ProgramDetail() {
 
                               <div className="pt-6 border-t border-gray-100">
                                 <p className="text-sm text-gray-500 mb-4 text-center">
-                                    {(program.is_open_for_intake) !== false 
-                                        ? "Registration is handled securely via Selar." 
-                                        : "This program is currently closed for intake. Join our waitlist to be notified of the next session."}
+                                    Interested in this program? Reach out to join our community and get started.
                                 </p>
                                 <a
-                                    href={(program.is_open_for_intake) !== false ? program.selarUrl : "/contact"}
-                                    target={(program.is_open_for_intake) !== false ? "_blank" : "_self"}
-                                    rel="noopener noreferrer"
+                                    href="/contact"
                                     className="btn-primary w-full text-center"
                                 >
-                                    {(program.is_open_for_intake) !== false ? 'Join Program' : 'Join Waitlist'}
+                                    Join Community
                                 </a>
                             </div>
                         </div>

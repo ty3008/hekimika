@@ -61,7 +61,7 @@ export default function PerfectedInWisdom() {
                     <SectionTitle
                         overline="Our Flagship Track"
                         title="Perfected in Wisdom"
-                        subtitle="Comprehensive mentorship and building programs that focuses on providing Wisdom on major things in life such as Relationships, Leadership, Purity, Purpose, and Identity."
+                        subtitle="This is the transformative mentorship and building arm of Hekimika that focuses on imparting Wisdom in specific areas."
                         light
                     />
                 </div>
@@ -108,40 +108,18 @@ export default function PerfectedInWisdom() {
                             <div className="w-10 h-10 border-4 border-gray-200 border-t-gold rounded-full animate-spin" style={{ borderTopColor: 'var(--gold)' }} />
                         </div>
                     ) : (
-                        <div className="space-y-16">
-                            {/* Open Programs */}
-                            {filteredPrograms.filter(p => (p.is_open_for_intake) !== false).length > 0 && (
-                                <div>
+                        <div>
                                     <h3 className="text-2xl font-bold text-navy mb-8 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                        Currently Open Programs
+                                        All Programs
                                     </h3>
                                     <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                         <AnimatePresence>
-                                            {filteredPrograms.filter(p => (p.is_open_for_intake) !== false).map((program, i) => (
+                                            {filteredPrograms.map((program, i) => (
                                                 <ProgramCard key={program.slug} {...program} index={i} />
                                             ))}
                                         </AnimatePresence>
                                     </motion.div>
                                 </div>
-                            )}
-
-                            {/* Coming Soon / Closed */}
-                            {filteredPrograms.filter(p => (p.is_open_for_intake) === false).length > 0 && (
-                                <div>
-                                    <h3 className="text-2xl font-bold text-navy mb-8" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                        All Programs / Coming Soon
-                                    </h3>
-                                    <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                        <AnimatePresence>
-                                            {filteredPrograms.filter(p => (p.is_open_for_intake) === false).map((program, i) => (
-                                                <ProgramCard key={program.slug} {...program} index={i} />
-                                            ))}
-                                        </AnimatePresence>
-                                    </motion.div>
-                                </div>
-                            )}
-                        </div>
                     )}
 
                     {/* Empty State */}

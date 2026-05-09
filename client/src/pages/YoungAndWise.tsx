@@ -1,7 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Target, Users, BookOpen } from 'lucide-react';
+import { CheckCircle2, Target, Users, BookOpen, ArrowRight } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
+import { useApi } from '../hooks/useApi';
+import { Link } from 'react-router-dom';
 
 const OBJECTIVES = [
     'To be a choice place for building and mentorship in the ways of God.',
@@ -13,6 +15,68 @@ const OBJECTIVES = [
     'To train them on how to keep a healthy mind.',
     'To give understanding on how to keep and develop a healthy mind and heart.'
 ];
+
+const getDriveThumbnail = (url: string) => {
+    if (!url) return null;
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        const fileId = parts[1].split('/')[0];
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+    }
+    return null;
+};
+
+function TeensLibrarySection() {
+    const { data: freeResources } = useApi<any[]>('/free-resources');
+    const teensLibrary = freeResources?.filter(r => r.type === 'TeensLibrary') || [];
+
+    if (teensLibrary.length === 0) return null;
+
+    return (
+        <section className="section-pad bg-white">
+            <div className="container-xl">
+                <SectionTitle
+                    overline="Library"
+                    title="Teens Library"
+                    subtitle="Explore writings on Identity, Purity, and more — crafted for the young and wise generation."
+                />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {teensLibrary.map((item, i) => {
+                        const thumbnail = getDriveThumbnail(item.google_drive_link || item.googleDriveLink);
+                        return (
+                            <motion.div
+                                key={item.id || item._id || i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="group"
+                            >
+                                <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
+                                    {thumbnail ? (
+                                        <img src={thumbnail} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-gold/20 to-navy/10 flex items-center justify-center">
+                                            <BookOpen size={48} className="text-gold/50" />
+                                        </div>
+                                    )}
+                                    <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
+                                        TEENS
+                                    </div>
+                                </div>
+                                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h3>
+                                <p className="text-gray-500 text-sm mb-6 line-clamp-3">{item.short_description || item.shortDescription}</p>
+                                <Link to={`/read/${item.id || item._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-gold transition-colors">
+                                    Read Now <ArrowRight size={16} />
+                                </Link>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
+}
 
 export default function YoungAndWise() {
     return (
@@ -104,6 +168,9 @@ export default function YoungAndWise() {
                     </div>
                 </div>
             </section>
+
+            {/* Teens Library */}
+            <TeensLibrarySection />
 
             <section className="py-24 px-4 bg-navy text-center">
                 <div className="container-xl">

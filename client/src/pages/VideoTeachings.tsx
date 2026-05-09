@@ -12,10 +12,10 @@ const CHANNELS = [
         color: '#FF0000'
     },
     {
-        title: 'Young & Wise Channel',
-        desc: 'Catch up on all the youth-focused interactive sessions, mentorship, and teen-focused content.',
+        title: 'Impactful Bible Lessons Channel',
+        desc: 'Catch up on all the impactful Bible lessons, interactive sessions, mentorship, and life-changing content.',
         url: 'https://www.youtube.com/@Kevinmulati111',
-        buttonText: 'Watch Young & Wise',
+        buttonText: 'Watch Bible Lessons',
         color: '#FF0000'
     }
 ];

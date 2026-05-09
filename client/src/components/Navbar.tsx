@@ -61,8 +61,8 @@ export default function Navbar() {
                 {/* CTA + Hamburger */}
                 <div className="flex items-center gap-4">
                     <div className="hidden md:block">
-                        <Link to="/perfected-in-wisdom" className="btn-primary text-sm px-5 py-2.5">
-                            Join a Program
+                        <Link to="/contact" className="btn-primary text-sm px-5 py-2.5">
+                            Join Community
                         </Link>
                     </div>
                     <button
@@ -100,8 +100,8 @@ export default function Navbar() {
                                 </li>
                             ))}
                             <li>
-                                <Link to="/perfected-in-wisdom" className="btn-primary w-full text-center mt-2">
-                                    Join a Program
+                                <Link to="/contact" className="btn-primary w-full text-center mt-2">
+                                    Join Community
                                 </Link>
                             </li>
                         </ul>

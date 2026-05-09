@@ -20,14 +20,14 @@ const ARMS = [
     {
         icon: Star,
         title: 'Perfected in Wisdom',
-        description: 'Comprehensive mentorship and building programs that focuses on providing Wisdom on major things in life such as Relationships, Leadership, Purity, Purpose, and Identity.',
+        description: 'This is the transformative mentorship and building arm of Hekimika that focuses on imparting Wisdom in specific areas.',
         to: '/perfected-in-wisdom',
         color: '#D4AF37',
     },
     {
         icon: Heart,
         title: 'Wisdom Moments',
-        description: 'This is a platform for the impartation of the Wisdom of God.',
+        description: 'This is the platform for impartation of the Wisdom of God through organized meetings, forums, teachings, blogs, devotionals, etc.',
         to: '/wisdom-moments',
         color: '#E8CC6A',
     },

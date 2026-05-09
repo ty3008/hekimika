@@ -31,7 +31,7 @@ const BOOKS = [
         title: 'The Pure Man',
         author: 'Pastor Kevin Mulati',
         image: ThePureManImg,
-        price: 'KSh 1,500',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/7467y6kq97',
         desc: 'A comprehensive guide for men on holiness, identity, and strength.'
     },
@@ -39,7 +39,7 @@ const BOOKS = [
         title: 'Work it Out',
         author: 'Pastor Kevin Mulati',
         image: WorkItOutImg,
-        price: 'KSh 800',
+        price: 'KSh 600',
         selarUrl: 'https://selar.com/l4777t41f7',
         desc: 'Practical wisdom for navigating the daily realities of love.'
     },
@@ -47,7 +47,7 @@ const BOOKS = [
         title: 'Choosing Well',
         author: 'Pastor Kevin Mulati',
         image: ChoosingWellImg,
-        price: 'KSh 1,500',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/7770f17ty0',
         desc: 'Discerning the right partner for a God-centered covenant.'
     },
@@ -63,7 +63,7 @@ const BOOKS = [
         title: 'Preparing for Love',
         author: 'Pastor Kevin Mulati',
         image: PreparingForLoveImg,
-        price: 'KSh 1,500',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/1v6669vh7e',
         desc: 'Tools and insights to get ready for a lasting covenant.'
     },
@@ -71,7 +71,7 @@ const BOOKS = [
         title: 'Establishing a Solid Core',
         author: 'Pastor Kevin Mulati',
         image: SolidCoreImg,
-        price: 'KSh 2,000',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/551w577717',
         desc: 'Building the non-negotiables of relationships and marriage.'
     },
@@ -79,7 +79,7 @@ const BOOKS = [
         title: 'Creating a Solid Form',
         author: 'Pastor Kevin Mulati',
         image: SolidFormImg,
-        price: 'KSh 2,000',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/66d7414624',
         desc: 'The foundational principles of the Cultured in Love series.'
     },
@@ -87,7 +87,7 @@ const BOOKS = [
         title: 'Passion',
         author: 'Pastor Kevin Mulati',
         image: PassionImg,
-        price: 'KSh 2,000',
+        price: 'KSh 800',
         selarUrl: 'https://selar.com/7hb2n47455',
         desc: 'Navigating passion, love, and intimacy the biblical way.'
     },
@@ -95,7 +95,7 @@ const BOOKS = [
         title: 'Praying for a Solid Man',
         author: 'Pastor Kevin Mulati',
         image: PrayingSolidManImg,
-        price: 'KSh 2,000',
+        price: 'KSh 800',
         selarUrl: 'https://selar.co/praying-solid-man',
         desc: 'A prayer guide for those seeking a God-fearing partner.'
     }
@@ -123,6 +123,7 @@ export default function Resources() {
 
     const devotionalsApi = freeResources?.filter(r => r.type === 'Devotional') || [];
     const magazinesApi = freeResources?.filter(r => r.type === 'Magazine') || [];
+    const teensLibraryApi = freeResources?.filter(r => r.type === 'TeensLibrary') || [];
 
     // Merge logic: Show all API devotionals, and add any static ones that aren't already there by title
     const devotionals = [...devotionalsApi];
@@ -212,14 +213,9 @@ export default function Resources() {
                                 <p className="text-gray-400 text-xs mb-3">{book.author}</p>
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-2 gap-2">
                                     <span className="font-bold text-navy" style={{ color: 'var(--navy)' }}>{book.price}</span>
-                                    <div className="flex flex-col gap-2 items-end">
-                                        <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-gold hover:underline">
-                                            Buy Softcopy <ExternalLink size={12} />
-                                        </a>
-                                        <a href={(book as any).amazonUrl || "https://www.amazon.com/dp/ASIN123"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gold hover:underline">
-                                            Buy Hardcopy on Amazon <ExternalLink size={12} />
-                                        </a>
-                                    </div>
+                                    <a href={book.selarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-gold hover:underline">
+                                        Buy Softcopy <ExternalLink size={12} />
+                                    </a>
                                 </div>
                             </motion.div>
                         ))}
@@ -258,6 +254,24 @@ export default function Resources() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {magazinesApi.map((mag, i) => (
                                 <ResourceCard key={mag.id || mag._id || i} item={mag} index={i} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Section 5: Teens Library */}
+            {teensLibraryApi.length > 0 && (
+                <section className="section-pad bg-white">
+                    <div className="container-xl">
+                        <SectionTitle
+                            overline="Young & Wise"
+                            title="Teens Library"
+                            subtitle="Explore writings on Identity, Purity, and more — crafted for the young and wise generation."
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {teensLibraryApi.map((item, i) => (
+                                <ResourceCard key={item.id || item._id || i} item={item} index={i} />
                             ))}
                         </div>
                     </div>

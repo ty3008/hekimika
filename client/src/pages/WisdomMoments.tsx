@@ -11,7 +11,6 @@ const FORUMS = [
     { title: 'Leaders Forum', desc: 'Impartation for leadership in every sphere of life.', slug: 'leaders' },
     { title: 'Called to Serve', desc: 'Equipping those called to serve with ministry wisdom.', slug: 'called-to-serve' },
     { title: 'Solid Man', desc: 'Raising strong men as supreme models of love and family.', slug: 'solid-man' },
-    { title: 'Wisdom Edition Magazine', desc: 'Access regular editions of our ministry magazines.', slug: 'magazine' },
     { title: 'Q&A', desc: 'Find answers to life\'s most pressing questions through divine wisdom.', slug: 'qa' },
 ];
 
@@ -41,7 +40,7 @@ export default function WisdomMoments() {
                             Wisdom Moments
                         </h1>
                         <p className="text-white/70 text-lg max-w-2xl mx-auto leading-relaxed">
-                            A platform designed to impart people with godly wisdom through organized meetings, forums, and regular devotionals.
+                            This is the platform for impartation of the Wisdom of God through organized meetings, forums, teachings, blogs, devotionals, etc.
                         </p>
                     </motion.div>
                 </div>

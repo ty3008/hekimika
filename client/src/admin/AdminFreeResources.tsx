@@ -180,6 +180,7 @@ export default function AdminFreeResources() {
                                         <option value="Magazine">Magazine</option>
                                         <option value="Devotional">Devotional</option>
                                         <option value="FreeBook">Free Book</option>
+                                        <option value="TeensLibrary">Teens Library</option>
                                     </select>
                                 </div>
                                 <div>

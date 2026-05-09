@@ -10,13 +10,13 @@ const ARMS = [
     {
         icon: Lightbulb,
         title: 'Perfected in Wisdom',
-        description: 'Our flagship programs track for singles, couples, schools, and leaders — offering 8-week courses, workshops, and ongoing mentorship.',
+        description: 'This is the transformative mentorship and building arm of Hekimika that focuses on imparting Wisdom in specific areas.',
         to: '/perfected-in-wisdom',
     },
     {
         icon: Heart,
         title: 'Wisdom Moments',
-        description: 'A media and devotional arm delivering daily wisdom through audio teachings, devotionals, blog posts, and a Q&A platform.',
+        description: 'This is the platform for impartation of the Wisdom of God through organized meetings, forums, teachings, blogs, devotionals, etc.',
         to: '/wisdom-moments',
     },
     {
@@ -128,6 +128,42 @@ export default function About() {
                 </div>
             </section>
 
+            {/* Core Values */}
+            <section className="section-pad bg-white">
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="What Drives Us"
+                        title="Our Core Values"
+                        subtitle="The pillars that guide everything we do at Hekimika."
+                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        {[
+                            { title: 'Truth', desc: 'We believe that a life centered on God\'s Word is a life that is lived wisely and will live above the systems of this world. What we do is centered on God\'s unfailing Word.' },
+                            { title: 'Wisdom', desc: 'Wisdom is the principle thing and an encounter with Wisdom elevates us to operate with joy, power, accuracy and cutting-edge insight.' },
+                            { title: 'Progress', desc: 'At Hekimika we value consistent development and growth into a life that is significant, relevant, and dominant in Christ Jesus.' },
+                            { title: 'Character', desc: 'The solidity of a person\'s character determines what they can handle effectively and produce results consistently. We believe that through openness and genuine exposure of one\'s heart to God no level of development can be too high.' },
+                            { title: 'Willingness', desc: 'It takes a willing heart to advance in the Wisdom of God. We value hearts that are willing to go on a journey of perfection.' },
+                            { title: 'Diligence', desc: 'While time and chance happens to all men, only the diligent take hold of opportunities like this and turn them to their advantage.' },
+                        ].map((value, i) => (
+                            <motion.div
+                                key={value.title}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="p-8 rounded-2xl border border-gray-100 bg-gray-50 hover:shadow-md transition-all"
+                            >
+                                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: 'rgba(212,175,55,0.15)' }}>
+                                    <span className="text-lg font-bold" style={{ color: 'var(--gold)' }}>{value.title[0]}</span>
+                                </div>
+                                <h3 className="text-xl font-bold mb-3" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--navy)' }}>{value.title}</h3>
+                                <p className="text-gray-500 leading-relaxed text-sm">{value.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Leadership */}
             <section className="section-pad bg-white">
                 <div className="container-xl">
@@ -147,8 +183,17 @@ export default function About() {
                                 <div className="p-8 md:p-12 flex flex-col justify-center">
                                     <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--gold)' }}>Visionaries</p>
                                     <h3 className="text-3xl font-bold mb-6" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--navy)' }}>Pastor Kevin & Lilian Mulati</h3>
+                                    <p className="text-gray-500 leading-relaxed mb-4">
+                                        Pastor Kevin and Lilian Mulati are visionaries of the Wise Nation which is a global outreach program that aims to impart all with the Wisdom of God to live a life of significance, relevance, and dominion while pursuing purpose.
+                                    </p>
+                                    <p className="text-gray-500 leading-relaxed mb-4">
+                                        They are passionate about the Wisdom, love and power of God finding expression in men.
+                                    </p>
+                                    <p className="text-gray-500 leading-relaxed mb-4">
+                                        They have dedicated their lives to help many arise to a place of dominion through cutting-edge mentorships, life coaching, and powerful teachings. Through his books, Pastor Kevin has impacted many to win in love and relationships and build wisely on a firm foundation.
+                                    </p>
                                     <p className="text-gray-500 leading-relaxed">
-                                        Pastor Kevin and Lilian Mulati are visionaries of the Wise Nation which is a global outreach program that aims to impart all with the Wisdom of God to live a life of significance, relevance, and dominion while pursuing purpose. They are passionate about the Wisdom, love and power of God finding expression in men.
+                                        Their zeal and love for Jesus has influenced many to walk with God and develop in their walk with God.
                                     </p>
                                 </div>
                             </div>
