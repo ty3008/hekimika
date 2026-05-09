@@ -50,7 +50,7 @@ const FEATURED_BOOKS = [
     {
         title: 'Choosing Well',
         image: ChoosingWellImg,
-        desc: 'A practical guide to building healthy relationships rooted in love.',
+        desc: 'Building healthy relationships through wise, godly choices.',
         link: 'https://selar.com/7770f17ty0'
     },
     {
