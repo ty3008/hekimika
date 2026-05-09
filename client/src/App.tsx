@@ -21,6 +21,7 @@ import ForumPage from './pages/ForumPage';
 import NotFound from './pages/NotFound';
 import VideoTeachings from './pages/VideoTeachings';
 import Partnerships from './pages/Partnerships';
+import Library from './pages/Library';
 
 // Admin Pages
 import AdminLogin from './admin/AdminLogin';
@@ -77,6 +78,7 @@ export default function App() {
       <Route path="/forums/:slug" element={<PublicLayout><ForumPage /></PublicLayout>} />
       <Route path="/video-teachings" element={<PublicLayout><VideoTeachings /></PublicLayout>} />
       <Route path="/partnerships" element={<PublicLayout><Partnerships /></PublicLayout>} />
+      <Route path="/library" element={<PublicLayout><Library /></PublicLayout>} />
 
       {/* Admin Auth Route (hidden entry point) */}
       <Route path="/admin" element={<AdminLogin />} />

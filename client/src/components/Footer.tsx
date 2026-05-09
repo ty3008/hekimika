@@ -112,7 +112,7 @@ export default function Footer() {
                     <p>© {new Date().getFullYear()} Hekimika – Wise Nation. All rights reserved.</p>
                     <p style={{ color: 'var(--gold)' }}>SIGNIFICANCE | RELEVANCE | DOMINION</p>
                     <p>
-                        Dev by <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-medium text-white/60">Your Name</a>
+                        Dev by <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-medium text-white/60">Newton Ty </a>
                     </p>
                 </div>
             </div>
