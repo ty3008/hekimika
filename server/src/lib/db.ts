@@ -128,7 +128,7 @@ export const initDB = async (): Promise<void> => {
                 id SERIAL PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
                 short_description TEXT NOT NULL,
-                type VARCHAR(50) NOT NULL CHECK (type IN ('Magazine', 'Devotional', 'FreeBook')),
+                type VARCHAR(50) NOT NULL CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary')),
                 google_drive_link VARCHAR(500) NOT NULL,
                 created_at TIMESTAMPTZ DEFAULT NOW(),
                 updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -173,6 +173,10 @@ export const initDB = async (): Promise<void> => {
             -- Ensure columns exist for existing tables
             ALTER TABLE programs ADD COLUMN IF NOT EXISTS is_open_for_intake BOOLEAN DEFAULT true;
             ALTER TABLE programs ADD COLUMN IF NOT EXISTS objectives TEXT[] DEFAULT '{}';
+            
+            -- Update the check constraint for free_resources type
+            ALTER TABLE free_resources DROP CONSTRAINT IF EXISTS free_resources_type_check;
+            ALTER TABLE free_resources ADD CONSTRAINT free_resources_type_check CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary'));
         `);
         console.log('✅ Database tables initialized');
     } catch (err: any) {
