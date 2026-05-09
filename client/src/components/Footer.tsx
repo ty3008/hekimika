@@ -111,7 +111,9 @@ export default function Footer() {
                 <div className="container-xl flex flex-col sm:flex-row items-center justify-between gap-2">
                     <p>© {new Date().getFullYear()} Hekimika – Wise Nation. All rights reserved.</p>
                     <p style={{ color: 'var(--gold)' }}>SIGNIFICANCE | RELEVANCE | DOMINION</p>
-                    <Link to="/admin" className="hover:text-gold transition-colors">Admin Login</Link>
+                    <p>
+                        Developed by <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-medium text-white/60">Your Name</a>
+                    </p>
                 </div>
             </div>
         </footer>
