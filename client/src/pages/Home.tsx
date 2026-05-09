@@ -44,25 +44,25 @@ const FEATURED_BOOKS = [
     {
         title: 'Passion',
         image: PassionImg,
-        desc: 'Navigating passion, love, and intimacy the biblical way.',
+        desc: 'passion is a beautiful thing which God has given every person.',
         link: 'https://selar.com/7hb2n47455'
     },
     {
         title: 'Choosing Well',
         image: ChoosingWellImg,
-        desc: 'Discerning the right partner for a God-centered covenant.',
+        desc: 'a practical guide for building strong, healthy relationships by making wise choices rooted in love.',
         link: 'https://selar.com/7770f17ty0'
     },
     {
         title: 'Creating a Solid Form',
         image: SolidFormImg,
-        desc: 'The foundational principles of the Cultured in Love series.',
+        desc: 'Your internal reality influences your life experiences including your love and marriage.',
         link: 'https://selar.com/66d7414624'
     },
     {
         title: 'Dealing with Ended Relationships',
         image: DealingWithEndedImg,
-        desc: 'Navigating the pain of ended relationships and finding healing.',
+        desc: 'a practical guide to healing, growing and stepping into the love and life you deserve after a relationship ends.',
         link: 'https://selar.com/477717r206'
     }
 ];
