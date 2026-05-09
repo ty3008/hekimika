@@ -171,31 +171,35 @@ export default function About() {
                         overline="Leadership"
                         title="Meet the Founders"
                     />
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-5xl mx-auto pt-20">
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="card overflow-hidden"
+                            className="relative bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8 md:p-16 pt-0 text-center"
                         >
-                            <div className="grid grid-cols-1 md:grid-cols-2">
-                                <img src={FoundersImg} alt="Pastor Kevin and Lilian Mulati" className="w-full h-[400px] object-cover object-top" />
-                                <div className="p-8 md:p-12 flex flex-col justify-center">
-                                    <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--gold)' }}>Visionaries</p>
-                                    <h3 className="text-3xl font-bold mb-6" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--navy)' }}>Pastor Kevin & Lilian Mulati</h3>
-                                    <p className="text-gray-500 leading-relaxed mb-4">
-                                        Pastor Kevin and Lilian Mulati are visionaries of the Wise Nation which is a global outreach program that aims to impart all with the Wisdom of God to live a life of significance, relevance, and dominion while pursuing purpose.
-                                    </p>
-                                    <p className="text-gray-500 leading-relaxed mb-4">
-                                        They are passionate about the Wisdom, love and power of God finding expression in men.
-                                    </p>
-                                    <p className="text-gray-500 leading-relaxed mb-4">
-                                        They have dedicated their lives to help many arise to a place of dominion through cutting-edge mentorships, life coaching, and powerful teachings. Through his books, Pastor Kevin has impacted many to win in love and relationships and build wisely on a firm foundation.
-                                    </p>
-                                    <p className="text-gray-500 leading-relaxed">
-                                        Their zeal and love for Jesus has influenced many to walk with God and develop in their walk with God.
-                                    </p>
-                                </div>
+                            {/* Premium Centered Image Overlapping Top */}
+                            <div className="mx-auto w-48 h-48 md:w-72 md:h-72 rounded-full border-[10px] border-white shadow-2xl overflow-hidden -mt-24 md:-mt-36 mb-8 relative z-10 ring-4 ring-gold/20 bg-gray-50">
+                                <img src={FoundersImg} alt="Pastor Kevin and Lilian Mulati" className="w-full h-full object-cover object-top" />
+                            </div>
+
+                            <p className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--gold)' }}>Visionaries</p>
+                            <h3 className="text-3xl md:text-4xl font-bold mb-12" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--navy)' }}>Pastor Kevin & Lilian Mulati</h3>
+
+                            {/* 2-Column Magazine Layout for Text */}
+                            <div className="text-left md:columns-2 gap-12 text-gray-500 leading-relaxed space-y-6 md:space-y-0 text-base md:text-lg">
+                                <p className="mb-6 break-inside-avoid">
+                                    Pastor Kevin and Lilian Mulati are visionaries of the Wise Nation which is a global outreach program that aims to impart all with the Wisdom of God to live a life of significance, relevance, and dominion while pursuing purpose.
+                                </p>
+                                <p className="mb-6 break-inside-avoid">
+                                    They are passionate about the Wisdom, love and power of God finding expression in men.
+                                </p>
+                                <p className="mb-6 break-inside-avoid">
+                                    They have dedicated their lives to help many arise to a place of dominion through cutting-edge mentorships, life coaching, and powerful teachings. Through his books, Pastor Kevin has impacted many to win in love and relationships and build wisely on a firm foundation.
+                                </p>
+                                <p className="break-inside-avoid">
+                                    Their zeal and love for Jesus has influenced many to walk with God and develop in their walk with God.
+                                </p>
                             </div>
                         </motion.div>
                     </div>

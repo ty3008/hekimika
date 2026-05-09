@@ -2,36 +2,36 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 const FacebookIcon = ({ size = 24, ...props }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.35L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
-  </svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.35L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+    </svg>
 );
 
 const InstagramIcon = ({ size = 24, ...props }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-  </svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
 );
 
 const YoutubeIcon = ({ size = 24, ...props }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.1 0 12 0 12s0 3.9.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.9 24 12 24 12s0-3.9-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-  </svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.1 0 12 0 12s0 3.9.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.9 24 12 24 12s0-3.9-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
 );
 
 const TikTokIcon = ({ size = 24, ...props }: any) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.01.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.95v7.4c-.01 1.96-.81 3.82-2.15 5.24-1.39 1.4-3.32 2.22-5.32 2.22-4.11-.02-7.46-3.35-7.48-7.45-.02-4.11 3.32-7.45 7.42-7.46 1.15.01 2.28.27 3.3.77.29.13.56.29.83.47v4.26c-.66-.39-1.41-.6-2.18-.61-1.89-.02-3.44 1.5-3.46 3.39-.02 1.89 1.5 3.44 3.39 3.46 1.89.02 3.44-1.5 3.46-3.39V0z" />
-  </svg>
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+    >
+        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.01.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.95v7.4c-.01 1.96-.81 3.82-2.15 5.24-1.39 1.4-3.32 2.22-5.32 2.22-4.11-.02-7.46-3.35-7.48-7.45-.02-4.11 3.32-7.45 7.42-7.46 1.15.01 2.28.27 3.3.77.29.13.56.29.83.47v4.26c-.66-.39-1.41-.6-2.18-.61-1.89-.02-3.44 1.5-3.46 3.39-.02 1.89 1.5 3.44 3.39 3.46 1.89.02 3.44-1.5 3.46-3.39V0z" />
+    </svg>
 );
 
 export default function Footer() {
@@ -65,9 +65,9 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="flex items-center gap-6">
                         <div className="flex items-center gap-3">
-                            <img 
-                                src="/hekimika_logo.png" 
-                                alt="Hekimika Logo" 
+                            <img
+                                src="/hekimika_logo.png"
+                                alt="Hekimika Logo"
                                 className="w-10 h-10 object-contain"
                             />
                             <div>
@@ -112,7 +112,7 @@ export default function Footer() {
                     <p>© {new Date().getFullYear()} Hekimika – Wise Nation. All rights reserved.</p>
                     <p style={{ color: 'var(--gold)' }}>SIGNIFICANCE | RELEVANCE | DOMINION</p>
                     <p>
-                        Developed by <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-medium text-white/60">Your Name</a>
+                        Dev by <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-medium text-white/60">Your Name</a>
                     </p>
                 </div>
             </div>
