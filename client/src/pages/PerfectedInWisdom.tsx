@@ -35,6 +35,7 @@ export default function PerfectedInWisdom() {
         return { 
             ...p, 
             ...remote,
+            image: remote.image?.startsWith('http') ? remote.image : p.image,
             // Prioritize remote intake status but fallback to local
             is_open_for_intake: remote.is_open_for_intake ?? p.is_open_for_intake 
         };

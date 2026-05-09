@@ -30,6 +30,7 @@ export default function ProgramDetail() {
     const program = apiProgram ? { 
         ...staticDbProgram, 
         ...apiProgram,
+        image: apiProgram.image?.startsWith('http') ? apiProgram.image : staticDbProgram?.image,
         is_open_for_intake: apiProgram.is_open_for_intake ?? staticDbProgram?.is_open_for_intake 
     } : staticDbProgram;
 
