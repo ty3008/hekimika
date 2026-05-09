@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { BookOpen, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import { useApi } from '../hooks/useApi';
@@ -36,8 +36,14 @@ export default function Library() {
             </Helmet>
 
             <section className="pt-36 pb-20 px-4 md:px-8 lg:px-16" style={{ background: 'var(--navy)' }}>
-                <div className="container-xl text-center">
-                    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                <div className="container-xl">
+                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-8 flex">
+                        <Link to="/resources" className="flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm font-bold">
+                            <ArrowLeft size={16} /> Back to Resources
+                        </Link>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center">
                         <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(212,175,55,0.15)' }}>
                             <BookOpen size={32} style={{ color: 'var(--gold)' }} />
                         </div>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ExternalLink, Download, Share2 } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 
 export default function Reader() {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const { data: resource, loading } = useApi<any>(`/free-resources/${id}`);
     const [iframeUrl, setIframeUrl] = useState('');
 
@@ -69,12 +70,12 @@ export default function Reader() {
             {/* Top Bar */}
             <div className="h-16 bg-navy text-white px-4 md:px-8 flex items-center justify-between border-b border-white/5 z-10 shrink-0">
                 <div className="flex items-center gap-4">
-                    <Link
-                        to="/resources"
+                    <button
+                        onClick={() => navigate(-1)}
                         className="flex items-center gap-2 px-3 py-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/70 hover:text-gold text-xs font-bold"
                     >
-                        <ArrowLeft size={16} /> <span className="hidden sm:inline">Back to Resources</span>
-                    </Link>
+                        <ArrowLeft size={16} /> <span className="hidden sm:inline">Back</span>
+                    </button>
                     <div className="h-6 w-px bg-white/10 hidden sm:block"></div>
                     <div>
                         <h1 className="font-bold text-sm md:text-base truncate max-w-[150px] md:max-w-md" style={{ fontFamily: 'Poppins, sans-serif' }}>
