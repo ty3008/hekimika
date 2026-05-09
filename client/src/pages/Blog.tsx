@@ -44,7 +44,7 @@ export default function Blog() {
                                     className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 flex flex-col"
                                 >
                                     <div className="h-48 overflow-hidden">
-                                        <img src={post.image || '/assets/home-carousel/carousel 1.jpg'} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                                        <img src={post.image || '/assets/home-carousel/carousel 1.webp'} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="p-6 flex flex-col flex-grow">
                                         <div className="flex items-center gap-4 text-xs text-gray-400 mb-4">

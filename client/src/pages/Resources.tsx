@@ -6,22 +6,22 @@ import { useApi } from '../hooks/useApi';
 import { Link } from 'react-router-dom';
 
 // Book Assets
-import ThePureManImg from '../assets/The Pure Man.png';
-import WorkItOutImg from '../assets/Work it out.png';
-import ChoosingWellImg from '../assets/book- choosing well.jpeg';
-import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
-import PreparingForLoveImg from '../assets/Preparing for Love(1).png';
+import ThePureManImg from '../assets/The Pure Man.webp';
+import WorkItOutImg from '../assets/Work it out.webp';
+import ChoosingWellImg from '../assets/book- choosing well.webp';
+import DealingWithEndedImg from '../assets/book- dealing with ended relationships.webp';
+import PreparingForLoveImg from '../assets/Preparing for Love(1).webp';
 
 // Cultured In Love Assets
-import SolidCoreImg from '../assets/ESTABLISHING A SOLID CORE.png';
-import SolidFormImg from '../assets/book- creating a solid form.jpeg';
-import PassionImg from '../assets/book- passion.jpeg';
-import PrayingSolidManImg from '../assets/book- praying for a solid man.jpeg';
+import SolidCoreImg from '../assets/ESTABLISHING A SOLID CORE.webp';
+import SolidFormImg from '../assets/book- creating a solid form.webp';
+import PassionImg from '../assets/book- passion.webp';
+import PrayingSolidManImg from '../assets/book- praying for a solid man.webp';
 
-import Phos9Img from '../assets/the phos edition 9.png';
-import IdentityImg from '../assets/Identity.png';
-import Phos2Img from '../assets/the phos edition 2.jpg';
-import Phos5Img from '../assets/the phos edition 5.jpg';
+import Phos9Img from '../assets/the phos edition 9.webp';
+import IdentityImg from '../assets/Identity.webp';
+import Phos2Img from '../assets/the phos edition 2.webp';
+import Phos5Img from '../assets/the phos edition 5.webp';
 
 // Assets mapping based on dist/assets structure
 const ASSET_PATH = '/assets/';
@@ -153,7 +153,7 @@ export default function Resources() {
             <motion.div {...sectionFade} transition={{ delay: index * 0.1 }} className="group">
                 <div className="aspect-square rounded-2xl overflow-hidden mb-6 shadow-lg border border-gray-100 relative bg-white flex items-center justify-center p-0">
                     <img 
-                        src={thumbnail || (ASSET_PATH + 'identity.jpg')} 
+                        src={thumbnail || (ASSET_PATH + 'Identity.webp')} 
                         alt={item.title} 
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                     />

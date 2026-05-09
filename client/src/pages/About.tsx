@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Target, Heart, Lightbulb, ArrowRight } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 
-import FoundersImg from '../assets/Pst Kevin and Lilian.jpg';
+import FoundersImg from '../assets/Pst Kevin and Lilian.webp';
 
 const ARMS = [
     {

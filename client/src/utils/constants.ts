@@ -1,13 +1,13 @@
-import PreparingForLoveImg from '../assets/single and built pic.jpeg';
-import ChoosingWellImg from '../assets/Choosing Well.png';
-import KeepersImg from '../assets/Keepers.png';
-import ConflictResolutionImg from '../assets/Coupled and Built.png';
-import BeginningRightImg from '../assets/beginning right.jpeg';
-import SchoolOfPurityImg from '../assets/Purity Basics.png';
-import SchoolOfHealingImg from '../assets/School of Healing.png';
-import BuiltToLeadImg from '../assets/Built to Lead.png';
-import SinglesCoachingImg from '../assets/Life Couching - Singles.png';
-import CouplesCoachingImg from '../assets/Life Coaching- Couples.png';
+import PreparingForLoveImg from '../assets/single and built pic.webp';
+import ChoosingWellImg from '../assets/Choosing Well.webp';
+import KeepersImg from '../assets/Keepers.webp';
+import ConflictResolutionImg from '../assets/Coupled and Built.webp';
+import BeginningRightImg from '../assets/beginning right.webp';
+import SchoolOfPurityImg from '../assets/Purity Basics.webp';
+import SchoolOfHealingImg from '../assets/School of Healing.webp';
+import BuiltToLeadImg from '../assets/Built to Lead.webp';
+import SinglesCoachingImg from '../assets/Life Couching - Singles.webp';
+import CouplesCoachingImg from '../assets/Life Coaching- Couples.webp';
 
 export interface Program {
     title: string;

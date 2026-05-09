@@ -8,12 +8,12 @@ import ProgramCard from '../components/ProgramCard';
 import { PROGRAMS } from '../utils/constants';
 
 // Featured Books Assets
-import PassionImg from '../assets/book- passion.jpeg';
-import ChoosingWellImg from '../assets/book- choosing well.jpeg';
-import SolidFormImg from '../assets/book- creating a solid form.jpeg';
-import DealingWithEndedImg from '../assets/book- dealing with ended relationships.jpeg';
+import PassionImg from '../assets/book- passion.webp';
+import ChoosingWellImg from '../assets/book- choosing well.webp';
+import SolidFormImg from '../assets/book- creating a solid form.webp';
+import DealingWithEndedImg from '../assets/book- dealing with ended relationships.webp';
 import TestimonialCarousel from '../components/TestimonialCarousel';
-import HeroBgImg from '../assets/Pst Kevin and Lilian.jpg';
+import HeroBgImg from '../assets/Pst Kevin and Lilian.webp';
 const HERO_BG = HeroBgImg;
 
 const ARMS = [
@@ -68,11 +68,11 @@ const FEATURED_BOOKS = [
 ];
 
 const CAROUSEL_IMAGES = [
-    '/assets/home-carousel/carousel 1.jpg',
-    '/assets/home-carousel/carousel 2.jpg',
-    '/assets/home-carousel/carousel 3.jpg',
-    '/assets/home-carousel/carousel 4.jpeg',
-    '/assets/home-carousel/carousel 5.jpeg',
+    '/assets/home-carousel/carousel 1.webp',
+    '/assets/home-carousel/carousel 2.webp',
+    '/assets/home-carousel/carousel 3.webp',
+    '/assets/home-carousel/carousel 4.webp',
+    '/assets/home-carousel/carousel 5.webp',
 ];
 
 const TEACHING_CHANNELS = [
