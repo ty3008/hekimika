@@ -13,7 +13,7 @@ import ChoosingWellImg from '../assets/book- choosing well.webp';
 import SolidFormImg from '../assets/book- creating a solid form.webp';
 import DealingWithEndedImg from '../assets/book- dealing with ended relationships.webp';
 import TestimonialCarousel from '../components/TestimonialCarousel';
-import HeroBgImg from '../assets/Pst Kevin and Lilian.webp';
+import HeroBgImg from '../assets/The Mulatis.webp';
 const HERO_BG = HeroBgImg;
 
 const ARMS = [
