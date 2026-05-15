@@ -52,9 +52,7 @@ export default function WisdomMoments() {
                     <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                         <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--gold)' }}>Our Intent</p>
 
-                        <p className="text-gray-500 leading-relaxed mb-6 text-lg">
-                            Wisdom Moments is the media and devotional arm of Hekimika, dedicated to delivering daily wisdom that feeds the spirit and renews the mind.
-                        </p>
+
                         <p className="text-gray-500 leading-relaxed mb-6 text-lg">
                             Through various forums and meetings, we provide a consistent stream of impartation, ensuring that the Wisdom of God is accessible to everyone, regardless of their season in life.
                         </p>

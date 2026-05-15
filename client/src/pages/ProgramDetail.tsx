@@ -73,7 +73,7 @@ export default function ProgramDetail() {
                     ) : (
                         <div className="w-full h-full bg-navy" />
                     )}
-                    <div className="absolute inset-0 bg-navy/40" />
+                    <div className="absolute inset-0 bg-navy/10" />
                 </div>
 
                 <div className="relative z-10 container-xl px-4 text-center mt-auto pb-12">

@@ -164,7 +164,7 @@ export default function Home() {
                             transition={{ duration: 1.5, ease: "easeOut" }}
                         />
                     </AnimatePresence>
-                    <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.7) 0%, rgba(0,31,63,0.85) 100%)' }} />
+                    <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.4) 100%)' }} />
                 </motion.div>
 
                 <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">

@@ -89,7 +89,7 @@ export default function YoungAndWise() {
             <section className="relative h-[50vh] min-h-[500px] flex items-center justify-center pt-20">
                 <div className="absolute inset-0">
                     <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1920" alt="Teens" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.85) 0%, rgba(0,31,63,0.9) 100%)' }} />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(0,31,63,0.4) 100%)' }} />
                 </div>
 
                 <div className="relative z-10 container-xl px-4 text-center">
