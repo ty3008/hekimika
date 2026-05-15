@@ -431,13 +431,13 @@ export default function Home() {
                             transition={{ duration: 0.6 }}
                             className="relative group"
                         >
-                            <div className="relative aspect-[4/5] md:aspect-square overflow-hidden rounded-2xl bg-white flex items-center justify-center p-4 shadow-xl border border-gray-100">
+                            <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-square overflow-hidden rounded-2xl bg-gray-100 shadow-2xl border border-gray-100">
                                 <img
                                     src={HERO_BG}
                                     alt="Pastor Kevin and Lilian Mulati"
-                                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-navy/5 group-hover:opacity-0 transition-opacity pointer-events-none" />
+                                <div className="absolute inset-0 bg-navy/10 group-hover:opacity-0 transition-opacity pointer-events-none" />
                             </div>
                             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-5 shadow-xl z-20">
                                 <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>7 years+</p>
