@@ -1,8 +1,27 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Headphones, Target, Heart, ArrowRight, PlayCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import { Link } from 'react-router-dom';
+import Lightbox from '../components/Lightbox';
+
+// Gallery images
+import WM1 from '../assets/WM1.webp';
+import WM2 from '../assets/WM2.webp';
+import WM3 from '../assets/WM3.webp';
+import WM4 from '../assets/WM4.webp';
+import WM5 from '../assets/WM5.webp';
+import WM6 from '../assets/WM6.webp';
+
+const GALLERY_IMAGES = [
+    { src: WM1, alt: 'Wisdom Moments 1' },
+    { src: WM2, alt: 'Wisdom Moments 2' },
+    { src: WM3, alt: 'Wisdom Moments 3' },
+    { src: WM4, alt: 'Wisdom Moments 4' },
+    { src: WM5, alt: 'Wisdom Moments 5' },
+    { src: WM6, alt: 'Wisdom Moments 6' },
+];
 
 const FORUMS = [
     { title: 'Blogs', desc: 'Read insightful articles and stories of wisdom.', slug: 'blogs' },
@@ -23,6 +42,8 @@ const GOALS = [
 ];
 
 export default function WisdomMoments() {
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
     return (
         <>
             <Helmet>
@@ -46,8 +67,49 @@ export default function WisdomMoments() {
                 </div>
             </section>
 
+            {/* Photo Gallery */}
+            <section className="py-12 px-4 md:px-8 lg:px-16 bg-white">
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="Gallery"
+                        title="Moments in Pictures"
+                        subtitle="A glimpse into the powerful gatherings and life-changing encounters at Wisdom Moments."
+                    />
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-8">
+                        {GALLERY_IMAGES.map((img, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: i * 0.07 }}
+                                className="group cursor-pointer overflow-hidden rounded-xl relative"
+                                style={{ aspectRatio: i === 0 || i === 3 ? '4/3' : '3/4' }}
+                                onClick={() => setLightboxIndex(i)}
+                            >
+                                <img
+                                    src={img.src}
+                                    alt={img.alt}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Lightbox */}
+            {lightboxIndex !== null && (
+                <Lightbox
+                    images={GALLERY_IMAGES}
+                    currentIndex={lightboxIndex}
+                    onClose={() => setLightboxIndex(null)}
+                />
+            )}
+
             {/* Ultimate Goals */}
-            <section className="section-pad bg-white">
+            <section className="section-pad bg-gray-50">
                 <div className="container-xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                         <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--gold)' }}>Our Intent</p>
@@ -58,11 +120,11 @@ export default function WisdomMoments() {
                         </p>
                     </motion.div>
 
-                    <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
+                    <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
                         <h3 className="text-2xl font-bold mb-6" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>Ultimate Goals</h3>
                         <div className="space-y-4">
                             {GOALS.map((goal, i) => (
-                                <div key={i} className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm">
+                                <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                                     <Target size={20} className="flex-shrink-0 mt-0.5" style={{ color: 'var(--gold)' }} />
                                     <p className="text-gray-600 leading-relaxed text-sm">{goal}</p>
                                 </div>
@@ -73,7 +135,7 @@ export default function WisdomMoments() {
             </section>
 
             {/* Ministry Forums */}
-            <section className="section-pad bg-gray-50">
+            <section className="section-pad bg-white">
                 <div className="container-xl">
                     <SectionTitle
                         overline="Interactive Communities"
@@ -91,7 +153,7 @@ export default function WisdomMoments() {
                             >
                                 <Link
                                     to={f.slug === 'blogs' ? '/blog' : `/forums/${f.slug}`}
-                                    className="block bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all border-l-4 border-gray-100 hover:border-gold group cursor-pointer h-full"
+                                    className="block bg-gray-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all border-l-4 border-gray-100 hover:border-gold group cursor-pointer h-full"
                                     style={{ borderLeftColor: 'var(--navy)' }}
                                 >
                                     <div className="flex items-center justify-between">

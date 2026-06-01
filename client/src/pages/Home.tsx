@@ -6,6 +6,8 @@ import { ArrowRight, Users, Heart, Star, PlayCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import ProgramCard from '../components/ProgramCard';
 import { PROGRAMS } from '../utils/constants';
+import { useApi } from '../hooks/useApi';
+import Lightbox from '../components/Lightbox';
 
 // Featured Books Assets
 import PassionImg from '../assets/book- passion.webp';
@@ -131,6 +133,16 @@ export default function Home() {
 
     const featured = PROGRAMS.filter((p) => p.is_open_for_intake !== false).slice(0, 4);
 
+    // Program Highlights
+    const { data: highlights } = useApi<{ id: number; title: string; photoUrl: string; youtubeUrl: string }[]>('/highlights', []);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+    const lightboxItems = highlights?.map(h => ({
+        src: h.photoUrl,
+        alt: h.title,
+        youtubeUrl: h.youtubeUrl
+    })) || [];
+
     return (
         <>
             <Helmet>
@@ -253,6 +265,59 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* ── Program Highlights ── */}
+            {highlights && highlights.length > 0 && (
+                <section className="section-pad" style={{ background: 'var(--navy)' }}>
+                    <div className="container-xl">
+                        <SectionTitle
+                            overline="Moments of Impact"
+                            title="Program Highlights"
+                            subtitle="Watch powerful highlights from our transformative programs — real moments of wisdom, healing, and community."
+                            light
+                        />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {highlights.map((h, i) => (
+                                <motion.div
+                                    key={h.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="group cursor-pointer"
+                                    onClick={() => setLightboxIndex(i)}
+                                >
+                                    <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10">
+                                        <img
+                                            src={h.photoUrl}
+                                            alt={h.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                                            <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform border border-white/30">
+                                                <PlayCircle size={36} className="text-white" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 className="text-white font-semibold mt-4 text-center group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        {h.title}
+                                    </h3>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Lightbox for Program Highlights */}
+            {lightboxIndex !== null && (
+                <Lightbox
+                    images={lightboxItems}
+                    currentIndex={lightboxIndex}
+                    onClose={() => setLightboxIndex(null)}
+                />
+            )}
+
 
             {/* ── Featured Books ── */}
             <section className="section-pad bg-white">

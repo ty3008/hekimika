@@ -65,24 +65,16 @@ export default function ProgramDetail() {
                 <meta name="description" content={program.description} />
             </Helmet>
 
-            {/* Hero */}
-            <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center pt-20 bg-navy">
-                <div className="absolute inset-0 flex items-center justify-center">
-                    {program.image ? (
-                        <img src={program.image} alt={program.title} className="w-full h-full object-contain" />
-                    ) : (
-                        <div className="w-full h-full bg-navy" />
-                    )}
-                    <div className="absolute inset-0 bg-navy/10" />
-                </div>
-
-                <div className="relative z-10 container-xl px-4 text-center mt-auto pb-12">
-                    <Link to="/perfected-in-wisdom" className="inline-flex items-center gap-2 text-white/80 hover:text-gold mb-4 transition-colors text-sm font-medium bg-navy/50 px-4 py-2 rounded-full backdrop-blur-sm">
+            {/* Hero – Clean Navy Header */}
+            <section className="pt-36 pb-16 px-4 md:px-8 lg:px-16" style={{ background: 'var(--navy)' }}>
+                <div className="container-xl text-center">
+                    <Link to="/perfected-in-wisdom" className="inline-flex items-center gap-2 text-white/70 hover:text-gold mb-8 transition-colors text-sm font-medium">
                         <ArrowLeft size={16} /> Back to Programs
                     </Link>
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '-0.02em' }}>
                         {program.title}
                     </h1>
+                    <div className="w-20 h-1 mx-auto mt-6 rounded-full" style={{ background: 'var(--gold)' }} />
                 </div>
             </section>
 

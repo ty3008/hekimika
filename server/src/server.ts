@@ -14,6 +14,7 @@ import eventRoutes from './routes/events.routes';
 import registrationRoutes from './routes/registrations.routes';
 import contactRoutes from './routes/contact.routes';
 import testimonialRoutes from './routes/testimonials.routes';
+import highlightRoutes from './routes/highlights.routes';
 import { seedAdmin, seedPrograms } from './utils/seed';
 import { testConnection, initDB } from './lib/db';
 
@@ -69,6 +70,7 @@ app.use('/api/events', eventRoutes);
 app.use('/api/registrations', registrationRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/highlights', highlightRoutes);
 
 // Health check
 app.get('/api/health', async (_req, res) => {

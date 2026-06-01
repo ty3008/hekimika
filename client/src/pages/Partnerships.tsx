@@ -1,8 +1,54 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Users, Award, Lightbulb, Heart, Shield } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 import { Link } from 'react-router-dom';
+import Lightbox from '../components/Lightbox';
+
+// Image imports
+import Dekut1 from '../assets/Dekut 1.webp';
+import Dekut2 from '../assets/Dekut 2.webp';
+import Dekut3 from '../assets/Dekut 3.webp';
+import Dekut4 from '../assets/Dekut 4.webp';
+
+import Egerton1 from '../assets/Egerton 1.webp';
+import Egerton2 from '../assets/Egerton 2.webp';
+import Egerton3 from '../assets/Egerton 3.webp';
+import Egerton4 from '../assets/Egerton 4.webp';
+
+import Germaine1 from '../assets/Germaine 1.webp';
+import Germaine2 from '../assets/Germaine 2.webp';
+import Germaine3 from '../assets/Germaine 3.webp';
+
+const PARTNERS_GALLERIES = [
+    {
+        name: 'DeKUT City of Refuge',
+        images: [
+            { src: Dekut1, alt: 'DeKUT City of Refuge 1' },
+            { src: Dekut2, alt: 'DeKUT City of Refuge 2' },
+            { src: Dekut3, alt: 'DeKUT City of Refuge 3' },
+            { src: Dekut4, alt: 'DeKUT City of Refuge 4' }
+        ]
+    },
+    {
+        name: 'Egerton University',
+        images: [
+            { src: Egerton1, alt: 'Egerton University 1' },
+            { src: Egerton2, alt: 'Egerton University 2' },
+            { src: Egerton3, alt: 'Egerton University 3' },
+            { src: Egerton4, alt: 'Egerton University 4' }
+        ]
+    },
+    {
+        name: 'Germaine',
+        images: [
+            { src: Germaine1, alt: 'Germaine 1' },
+            { src: Germaine2, alt: 'Germaine 2' },
+            { src: Germaine3, alt: 'Germaine 3' }
+        ]
+    }
+];
 
 const OFFERINGS = [
     {
@@ -43,6 +89,9 @@ const OFFERINGS = [
 ];
 
 export default function Partnerships() {
+    const [activeGallery, setActiveGallery] = useState<number | null>(null);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
     return (
         <>
             <Helmet>
@@ -134,6 +183,62 @@ export default function Partnerships() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Photo Galleries */}
+            <section className="section-pad bg-white">
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="Partnerships"
+                        title="Partners in Action"
+                        subtitle="A visual celebration of our impact and active collaborations with institutions."
+                    />
+                    <div className="space-y-16 mt-12">
+                        {PARTNERS_GALLERIES.map((partner, pIdx) => (
+                            <div key={partner.name} className="border-b border-gray-100 pb-12 last:border-0 last:pb-0">
+                                <h3 className="text-2xl font-bold text-navy mb-6 tracking-tight animate-fade-in" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    {partner.name}
+                                </h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {partner.images.map((img, iIdx) => (
+                                        <motion.div
+                                            key={iIdx}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.4, delay: iIdx * 0.08 }}
+                                            className="group cursor-pointer overflow-hidden rounded-2xl relative shadow-md aspect-video"
+                                            onClick={() => {
+                                                setActiveGallery(pIdx);
+                                                setLightboxIndex(iIdx);
+                                            }}
+                                        >
+                                            <img
+                                                src={img.src}
+                                                alt={img.alt}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Lightbox */}
+            {activeGallery !== null && lightboxIndex !== null && (
+                <Lightbox
+                    images={PARTNERS_GALLERIES[activeGallery].images}
+                    currentIndex={lightboxIndex}
+                    onClose={() => {
+                        setActiveGallery(null);
+                        setLightboxIndex(null);
+                    }}
+                />
+            )}
+
 
             {/* CTA */}
             <section className="py-24 px-4 text-center" style={{ background: 'var(--navy)' }}>

@@ -170,6 +170,16 @@ export const initDB = async (): Promise<void> => {
                 updated_at TIMESTAMPTZ DEFAULT NOW()
             );
             
+            CREATE TABLE IF NOT EXISTS program_highlights (
+                id SERIAL PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                photo_url VARCHAR(500) NOT NULL,
+                youtube_url VARCHAR(500) NOT NULL,
+                sort_order INTEGER DEFAULT 0,
+                created_at TIMESTAMPTZ DEFAULT NOW(),
+                updated_at TIMESTAMPTZ DEFAULT NOW()
+            );
+
             -- Ensure columns exist for existing tables
             ALTER TABLE programs ADD COLUMN IF NOT EXISTS is_open_for_intake BOOLEAN DEFAULT true;
             ALTER TABLE programs ADD COLUMN IF NOT EXISTS objectives TEXT[] DEFAULT '{}';
