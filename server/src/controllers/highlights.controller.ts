@@ -11,41 +11,13 @@ const toCamel = (row: any) => {
     return newRow;
 };
 
-const FALLBACK_HIGHLIGHTS = [
-    {
-        id: 1,
-        title: 'Single & Built Bootcamps',
-        photoUrl: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop',
-        youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        sortOrder: 0
-    },
-    {
-        id: 2,
-        title: 'School of Purity Highlights',
-        photoUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=600&auto=format&fit=crop',
-        youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        sortOrder: 1
-    },
-    {
-        id: 3,
-        title: 'Wisdom Moments & Mentorship',
-        photoUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop',
-        youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        sortOrder: 2
-    }
-];
-
 // GET /api/highlights
 export const getHighlights = async (_req: Request, res: Response): Promise<void> => {
     try {
         const result = await pool.query('SELECT * FROM program_highlights ORDER BY sort_order ASC, created_at DESC');
-        if (result.rows.length === 0) {
-            res.json(FALLBACK_HIGHLIGHTS);
-        } else {
-            res.json(result.rows.map(toCamel));
-        }
+        res.json(result.rows.map(toCamel));
     } catch {
-        res.json(FALLBACK_HIGHLIGHTS);
+        res.status(500).json({ error: 'Failed to fetch highlights' });
     }
 };
 

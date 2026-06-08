@@ -152,7 +152,7 @@ export default function Home() {
     const featured = PROGRAMS.filter((p) => p.is_open_for_intake !== false).slice(0, 4);
 
     // Program Highlights
-    const { data: highlights } = useApi<{ id: number; title: string; photoUrl: string; youtubeUrl: string }[]>('/highlights', []);
+    const { data: highlights } = useApi<{ id: number; title: string; photoUrl: string; youtubeUrl: string }[]>('/highlights', [], { pollInterval: 30000 });
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const lightboxItems = highlights?.map(h => ({

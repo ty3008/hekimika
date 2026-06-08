@@ -16,7 +16,7 @@ const getDriveThumbnail = (url: string) => {
 };
 
 export default function Library() {
-    const { data: freeResources, loading } = useApi<any[]>('/free-resources');
+    const { data: freeResources, loading } = useApi<any[]>('/free-resources', [], { pollInterval: 30000 });
     
     // Filter out only FreeBooks
     const freeBooks = freeResources?.filter(r => r.type === 'FreeBook') || [];

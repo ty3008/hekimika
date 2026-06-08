@@ -18,10 +18,7 @@ import SolidFormImg from '../assets/book- creating a solid form.webp';
 import PassionImg from '../assets/book- passion.webp';
 import PrayingSolidManImg from '../assets/book- praying for a solid man.webp';
 
-import Phos9Img from '../assets/the phos edition 9.webp';
-import IdentityImg from '../assets/Identity.webp';
-import Phos2Img from '../assets/the phos edition 2.webp';
-import Phos5Img from '../assets/the phos edition 5.webp';
+
 
 // Assets mapping based on dist/assets structure
 const ASSET_PATH = '/assets/';
@@ -101,12 +98,7 @@ const BOOKS = [
     }
 ];
 
-const STATIC_DEVOTIONALS = [
-    { id: '1', title: 'Identity', desc: 'Understanding who you are in Christ.', image: IdentityImg },
-    { id: '2', title: 'The Phos Edition 2', desc: 'Light for your path.', image: Phos2Img },
-    { id: '3', title: 'The Phos Edition 5', desc: 'Wisdom to build.', image: Phos5Img },
-    { id: '4', title: 'The Phos Edition 9', desc: 'Strength for the journey.', image: Phos9Img },
-];
+
 
 const getDriveThumbnail = (url: string): string | null => {
     if (!url) return null;
@@ -127,20 +119,13 @@ const getDriveThumbnail = (url: string): string | null => {
 };
 
 export default function Resources() {
-    const { data: freeResources, loading } = useApi<any[]>('/free-resources');
+    const { data: freeResources, loading } = useApi<any[]>('/free-resources', [], { pollInterval: 30000 });
+
 
     const devotionalsApi = freeResources?.filter(r => r.type === 'Devotional') || [];
     const magazinesApi = freeResources?.filter(r => r.type === 'Magazine') || [];
     const teensLibraryApi = freeResources?.filter(r => r.type === 'TeensLibrary') || [];
     const audioTeachingsApi = freeResources?.filter(r => r.type === 'Audio') || [];
-
-    // Merge logic: Show all API devotionals, and add any static ones that aren't already there by title
-    const devotionals = [...devotionalsApi];
-    STATIC_DEVOTIONALS.forEach(staticDevo => {
-        if (!devotionals.some(d => d.title.toLowerCase() === staticDevo.title.toLowerCase())) {
-            devotionals.push(staticDevo);
-        }
-    });
 
     const sectionFade = {
         initial: { opacity: 0, y: 30 },
@@ -151,19 +136,14 @@ export default function Resources() {
 
     // Reusable Resource Card Component
     const ResourceCard = ({ item, index }: { item: any, index: number }) => {
-        // Manual image lookup for fallbacks (like Phos Edition 2)
-        const getManualImage = (title: string) => {
-            const staticItem = STATIC_DEVOTIONALS.find(s => s.title.toLowerCase() === title.toLowerCase());
-            return staticItem?.image;
-        };
+
 
         const rawCoverLink = item.cover_image_link || item.coverImageLink || '';
         const rawDriveLink  = item.google_drive_link || item.googleDriveLink || '';
 
         // Resolve cover image: Drive share link → thumbnail URL, direct URL → as-is
         const coverThumbnail = rawCoverLink ? getDriveThumbnail(rawCoverLink) : null;
-        // Fallback: try drive link thumbnail, then static asset lookup, then direct image field
-        const fallbackThumbnail = getDriveThumbnail(rawDriveLink) || getManualImage(item.title) || item.image || null;
+        const fallbackThumbnail = getDriveThumbnail(rawDriveLink) || item.image || null;
 
         const thumbnail = coverThumbnail || fallbackThumbnail;
 
@@ -254,10 +234,13 @@ export default function Resources() {
                         subtitle="Spiritual nourishment for your daily walk. These resources are designed for quick yet deep impartation."
                     />
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {devotionals.map((devo, i) => (
+                        {devotionalsApi.length === 0 && !loading && (
+                            <p className="col-span-4 text-center text-gray-400 py-10">No devotionals added yet. Add them from the admin dashboard.</p>
+                        )}
+                        {devotionalsApi.map((devo, i) => (
                             <ResourceCard key={devo.id || devo._id || i} item={devo} index={i} />
                         ))}
-                        {loading && <p className="text-center text-gray-400 py-10">Loading devotionals...</p>}
+                        {loading && <p className="col-span-4 text-center text-gray-400 py-10">Loading devotionals...</p>}
                     </div>
                 </div>
             </section>

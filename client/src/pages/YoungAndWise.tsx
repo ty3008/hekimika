@@ -27,7 +27,7 @@ const getDriveThumbnail = (url: string) => {
 };
 
 function TeensLibrarySection() {
-    const { data: freeResources } = useApi<any[]>('/free-resources');
+    const { data: freeResources } = useApi<any[]>('/free-resources', [], { pollInterval: 30000 });
     const teensLibrary = freeResources?.filter(r => r.type === 'TeensLibrary') || [];
 
     if (teensLibrary.length === 0) return null;
