@@ -68,14 +68,14 @@ export default function WisdomMoments() {
             </section>
 
             {/* Photo Gallery */}
-            <section className="py-12 px-4 md:px-8 lg:px-16 bg-white">
+            <section className="py-8 px-4 md:px-8 lg:px-16 bg-white">
                 <div className="container-xl">
                     <SectionTitle
                         overline="Gallery"
                         title="Moments in Pictures"
                         subtitle="A glimpse into the powerful gatherings and life-changing encounters at Wisdom Moments."
                     />
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-6">
                         {GALLERY_IMAGES.map((img, i) => (
                             <motion.div
                                 key={i}
@@ -111,13 +111,14 @@ export default function WisdomMoments() {
             )}
 
             {/* Ultimate Goals */}
-            <section className="section-pad bg-gray-50">
-                <div className="container-xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50">
+                <div className="container-xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                         <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--gold)' }}>Our Intent</p>
-
-
-                        <p className="text-gray-500 leading-relaxed mb-6 text-lg">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>
+                            The Heart Behind Wisdom Moments
+                        </h2>
+                        <p className="text-gray-500 leading-relaxed mb-4 text-lg">
                             Through various forums and meetings, we provide a consistent stream of impartation, ensuring that the Wisdom of God is accessible to everyone, regardless of their season in life.
                         </p>
                     </motion.div>
@@ -137,7 +138,7 @@ export default function WisdomMoments() {
             </section>
 
             {/* Ministry Forums */}
-            <section className="section-pad bg-white">
+            <section className="py-16 px-4 md:px-8 lg:px-16 bg-white">
                 <div className="container-xl">
                     <SectionTitle
                         overline="Interactive Communities"
@@ -174,7 +175,7 @@ export default function WisdomMoments() {
                 </div>
             </section>
 
-            <section className="py-24 px-4 bg-navy text-center">
+            <section className="py-16 px-4 bg-navy text-center">
                 <div className="container-xl">
                     <SectionTitle
                         title="Access Our Media"
