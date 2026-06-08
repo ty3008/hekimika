@@ -124,6 +124,7 @@ export default function Resources() {
     const devotionalsApi = freeResources?.filter(r => r.type === 'Devotional') || [];
     const magazinesApi = freeResources?.filter(r => r.type === 'Magazine') || [];
     const teensLibraryApi = freeResources?.filter(r => r.type === 'TeensLibrary') || [];
+    const audioTeachingsApi = freeResources?.filter(r => r.type === 'Audio') || [];
 
     // Merge logic: Show all API devotionals, and add any static ones that aren't already there by title
     const devotionals = [...devotionalsApi];
@@ -148,7 +149,7 @@ export default function Resources() {
             return staticItem?.image;
         };
 
-        const thumbnail = item.image || getManualImage(item.title) || getDriveThumbnail(item.google_drive_link || item.googleDriveLink);
+        const thumbnail = item.cover_image_link || item.coverImageLink || item.image || getManualImage(item.title) || getDriveThumbnail(item.google_drive_link || item.googleDriveLink);
 
         return (
             <motion.div {...sectionFade} transition={{ delay: index * 0.1 }} className="group">
@@ -162,13 +163,13 @@ export default function Resources() {
                         <p className="text-white text-sm font-medium leading-relaxed line-clamp-4">{item.short_description || item.shortDescription || item.desc}</p>
                     </div>
                     <div className="absolute top-3 right-3 bg-gold text-navy text-[10px] font-bold px-2 py-1 rounded">
-                        {item.type?.toUpperCase() || 'FREE'}
+                        {item.type === 'Audio' ? 'AUDIO' : (item.type?.toUpperCase() || 'FREE')}
                     </div>
                 </div>
                 <h3 className="font-bold text-navy text-lg mb-1 leading-tight group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>{item.title}</h3>
                 <p className="text-gray-400 text-xs mb-3">{item.short_description || item.shortDescription || item.desc}</p>
                 <Link to={`/read/${item.id || item._id}`} className="inline-flex items-center gap-2 text-navy font-bold text-xs hover:text-gold transition-colors">
-                    Read Now <ArrowRight size={14} />
+                    {item.type === 'Audio' ? 'Listen Now' : 'Read Now'} <ArrowRight size={14} />
                 </Link>
             </motion.div>
         );
@@ -274,6 +275,24 @@ export default function Resources() {
                         />
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {teensLibraryApi.map((item, i) => (
+                                <ResourceCard key={item.id || item._id || i} item={item} index={i} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Section 6: Audio Teachings */}
+            {audioTeachingsApi.length > 0 && (
+                <section className="section-pad bg-gray-50">
+                    <div className="container-xl">
+                        <SectionTitle
+                            overline="Divine Encounters"
+                            title="Audio Teachings"
+                            subtitle="Listen to life-changing audio sessions, sermons, and teaching series by Pastor Kevin Mulati."
+                        />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {audioTeachingsApi.map((item, i) => (
                                 <ResourceCard key={item.id || item._id || i} item={item} index={i} />
                             ))}
                         </div>

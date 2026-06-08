@@ -63,7 +63,7 @@ export default function Reader() {
     return (
         <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
             <Helmet>
-                <title>Reading: {resource.title} | Hekimika</title>
+                <title>{resource.type === 'Audio' ? 'Listening' : 'Reading'}: {resource.title} | Hekimika</title>
                 <meta name="description" content={resource.short_description || resource.shortDescription} />
             </Helmet>
 
@@ -81,7 +81,9 @@ export default function Reader() {
                         <h1 className="font-bold text-sm md:text-base truncate max-w-[150px] md:max-w-md" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             {resource.title}
                         </h1>
-                        <p className="text-[9px] md:text-[10px] uppercase tracking-widest text-gold font-bold">{resource.type}</p>
+                        <p className="text-[9px] md:text-[10px] uppercase tracking-widest text-gold font-bold">
+                            {resource.type === 'Audio' ? 'Audio Teaching' : resource.type}
+                        </p>
                     </div>
                 </div>
 

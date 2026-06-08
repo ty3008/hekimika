@@ -101,6 +101,24 @@ const STATS = [
     { value: '11+', label: 'Programs' }
 ];
 
+const getDriveThumbnail = (url: string) => {
+    if (!url) return '';
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
+
 const fadeUp = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
@@ -138,7 +156,7 @@ export default function Home() {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const lightboxItems = highlights?.map(h => ({
-        src: h.photoUrl,
+        src: getDriveThumbnail(h.photoUrl) || h.photoUrl,
         alt: h.title,
         youtubeUrl: h.youtubeUrl
     })) || [];
@@ -289,7 +307,7 @@ export default function Home() {
                                 >
                                     <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10">
                                         <img
-                                            src={h.photoUrl}
+                                            src={getDriveThumbnail(h.photoUrl) || h.photoUrl}
                                             alt={h.title}
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         />

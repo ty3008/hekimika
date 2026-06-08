@@ -1,9 +1,27 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
-import { Plus, Edit2, Trash2, ExternalLink, FileText, BookOpen, Layers } from 'lucide-react';
+import { Plus, Edit2, Trash2, ExternalLink, FileText, BookOpen, Layers, Headphones } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 import api from '../utils/api';
+
+const getDriveThumbnail = (url: string) => {
+    if (!url) return '';
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
 
 export default function AdminFreeResources() {
     const { data: resources, loading, refetch } = useApi<any[]>('/free-resources');
@@ -11,7 +29,7 @@ export default function AdminFreeResources() {
     const [editingId, setEditingId] = useState<string | null>(null);
 
     const [formData, setFormData] = useState({
-        title: '', shortDescription: '', type: 'Magazine', googleDriveLink: ''
+        title: '', shortDescription: '', type: 'Magazine', googleDriveLink: '', coverImageLink: ''
     });
 
     const openForm = (resource?: any) => {
@@ -21,11 +39,12 @@ export default function AdminFreeResources() {
                 title: resource.title,
                 shortDescription: resource.short_description || resource.shortDescription,
                 type: resource.type,
-                googleDriveLink: resource.google_drive_link || resource.googleDriveLink
+                googleDriveLink: resource.google_drive_link || resource.googleDriveLink,
+                coverImageLink: resource.cover_image_link || resource.coverImageLink || ''
             });
         } else {
             setEditingId(null);
-            setFormData({ title: '', shortDescription: '', type: 'Magazine', googleDriveLink: '' });
+            setFormData({ title: '', shortDescription: '', type: 'Magazine', googleDriveLink: '', coverImageLink: '' });
         }
         setIsModalOpen(true);
     };
@@ -64,6 +83,7 @@ export default function AdminFreeResources() {
             case 'Magazine': return <Layers size={16} />;
             case 'Devotional': return <FileText size={16} />;
             case 'FreeBook': return <BookOpen size={16} />;
+            case 'Audio': return <Headphones size={16} />;
             default: return <FileText size={16} />;
         }
     };
@@ -181,6 +201,7 @@ export default function AdminFreeResources() {
                                         <option value="Devotional">Devotional</option>
                                         <option value="FreeBook">Free Book</option>
                                         <option value="TeensLibrary">Teens Library</option>
+                                        <option value="Audio">Audio Teaching</option>
                                     </select>
                                 </div>
                                 <div>
@@ -193,6 +214,31 @@ export default function AdminFreeResources() {
                                         placeholder="https://drive.google.com/..."
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                                    Cover Image Google Drive Link {formData.type === 'Audio' ? '(Recommended)' : '(Optional)'}
+                                </label>
+                                <input
+                                    value={formData.coverImageLink}
+                                    onChange={e => setFormData({ ...formData, coverImageLink: e.target.value })}
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                                    placeholder="https://drive.google.com/..."
+                                />
+                                {formData.coverImageLink && (
+                                    <div className="mt-2 flex items-center gap-2">
+                                        <span className="text-xs text-gray-400">Preview:</span>
+                                        <img
+                                            src={getDriveThumbnail(formData.coverImageLink)}
+                                            alt="Cover Preview"
+                                            className="h-16 w-16 object-cover rounded-lg border border-gray-200"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div>

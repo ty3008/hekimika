@@ -17,7 +17,10 @@ async function updateConstraint() {
         await client.query(`
             ALTER TABLE free_resources 
             ADD CONSTRAINT free_resources_type_check 
-            CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary'));
+            CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary', 'Audio'));
+            
+            ALTER TABLE free_resources 
+            ADD COLUMN IF NOT EXISTS cover_image_link VARCHAR(500) DEFAULT '';
         `);
         
         console.log('Successfully updated constraint!');

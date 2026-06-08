@@ -75,24 +75,26 @@ export default function WisdomMoments() {
                         title="Moments in Pictures"
                         subtitle="A glimpse into the powerful gatherings and life-changing encounters at Wisdom Moments."
                     />
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-8">
                         {GALLERY_IMAGES.map((img, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: i * 0.07 }}
-                                className="group cursor-pointer overflow-hidden rounded-xl relative"
-                                style={{ aspectRatio: i === 0 || i === 3 ? '4/3' : '3/4' }}
+                                transition={{ duration: 0.5, delay: i * 0.05 }}
+                                className="group cursor-pointer overflow-hidden rounded-2xl relative shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 aspect-square"
                                 onClick={() => setLightboxIndex(i)}
                             >
                                 <img
                                     src={img.src}
                                     alt={img.alt}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                                {/* Premium hover overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/0 to-navy/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p className="text-white text-xs font-semibold tracking-wider uppercase">View Fullscreen</p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>

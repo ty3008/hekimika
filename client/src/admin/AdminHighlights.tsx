@@ -5,6 +5,24 @@ import { Plus, Edit2, Trash2, ExternalLink } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 import api from '../utils/api';
 
+const getDriveThumbnail = (url: string) => {
+    if (!url) return '';
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
+
 interface Highlight {
     id: number;
     title: string;
@@ -106,7 +124,7 @@ export default function AdminHighlights() {
                         {highlights?.map((h) => (
                             <tr key={h.id} className="border-b border-gray-50 hover:bg-gray-50/50">
                                 <td className="px-6 py-3">
-                                    <img src={h.photoUrl} alt={h.title} className="w-16 h-12 object-cover rounded-lg" />
+                                    <img src={getDriveThumbnail(h.photoUrl) || h.photoUrl} alt={h.title} className="w-16 h-12 object-cover rounded-lg" />
                                 </td>
                                 <td className="px-6 py-3 font-medium text-navy">{h.title}</td>
                                 <td className="px-6 py-3">
@@ -154,7 +172,7 @@ export default function AdminHighlights() {
                                     placeholder="https://example.com/photo.webp"
                                 />
                                 {formData.photoUrl && (
-                                    <img src={formData.photoUrl} alt="Preview" className="mt-2 w-full h-32 object-cover rounded-lg border" />
+                                    <img src={getDriveThumbnail(formData.photoUrl) || formData.photoUrl} alt="Preview" className="mt-2 w-full h-32 object-cover rounded-lg border" />
                                 )}
                             </div>
                             <div>

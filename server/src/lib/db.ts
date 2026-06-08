@@ -128,8 +128,9 @@ export const initDB = async (): Promise<void> => {
                 id SERIAL PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
                 short_description TEXT NOT NULL,
-                type VARCHAR(50) NOT NULL CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary')),
+                type VARCHAR(50) NOT NULL CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary', 'Audio')),
                 google_drive_link VARCHAR(500) NOT NULL,
+                cover_image_link VARCHAR(500) DEFAULT '',
                 created_at TIMESTAMPTZ DEFAULT NOW(),
                 updated_at TIMESTAMPTZ DEFAULT NOW()
             );
@@ -186,7 +187,10 @@ export const initDB = async (): Promise<void> => {
             
             -- Update the check constraint for free_resources type
             ALTER TABLE free_resources DROP CONSTRAINT IF EXISTS free_resources_type_check;
-            ALTER TABLE free_resources ADD CONSTRAINT free_resources_type_check CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary'));
+            ALTER TABLE free_resources ADD CONSTRAINT free_resources_type_check CHECK (type IN ('Magazine', 'Devotional', 'FreeBook', 'TeensLibrary', 'Audio'));
+            
+            -- Add cover_image_link column to free_resources if it doesn't exist
+            ALTER TABLE free_resources ADD COLUMN IF NOT EXISTS cover_image_link VARCHAR(500) DEFAULT '';
         `);
         console.log('✅ Database tables initialized');
     } catch (err: any) {
