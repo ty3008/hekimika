@@ -108,13 +108,21 @@ const STATIC_DEVOTIONALS = [
     { id: '4', title: 'The Phos Edition 9', desc: 'Strength for the journey.', image: Phos9Img },
 ];
 
-const getDriveThumbnail = (url: string) => {
+const getDriveThumbnail = (url: string): string | null => {
     if (!url) return null;
     if (url.includes('/file/d/')) {
         const parts = url.split('/file/d/');
         const fileId = parts[1].split('/')[0];
         return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
     }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    // Not a Drive URL — return as-is (direct image link)
+    if (url.startsWith('http')) return url;
     return null;
 };
 
@@ -149,7 +157,15 @@ export default function Resources() {
             return staticItem?.image;
         };
 
-        const thumbnail = item.cover_image_link || item.coverImageLink || item.image || getManualImage(item.title) || getDriveThumbnail(item.google_drive_link || item.googleDriveLink);
+        const rawCoverLink = item.cover_image_link || item.coverImageLink || '';
+        const rawDriveLink  = item.google_drive_link || item.googleDriveLink || '';
+
+        // Resolve cover image: Drive share link → thumbnail URL, direct URL → as-is
+        const coverThumbnail = rawCoverLink ? getDriveThumbnail(rawCoverLink) : null;
+        // Fallback: try drive link thumbnail, then static asset lookup, then direct image field
+        const fallbackThumbnail = getDriveThumbnail(rawDriveLink) || getManualImage(item.title) || item.image || null;
+
+        const thumbnail = coverThumbnail || fallbackThumbnail;
 
         return (
             <motion.div {...sectionFade} transition={{ delay: index * 0.1 }} className="group">

@@ -305,11 +305,14 @@ export default function Home() {
                                     className="group cursor-pointer"
                                     onClick={() => setLightboxIndex(i)}
                                 >
-                                    <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10">
+                                    <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-navy/60">
                                         <img
                                             src={getDriveThumbnail(h.photoUrl) || h.photoUrl}
                                             alt={h.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.opacity = '0';
+                                            }}
                                         />
                                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                                             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform border border-white/30">
