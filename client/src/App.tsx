@@ -17,6 +17,7 @@ import YoungAndWise from './pages/YoungAndWise';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import ForumPage from './pages/ForumPage';
 import NotFound from './pages/NotFound';
 import VideoTeachings from './pages/VideoTeachings';
@@ -76,6 +77,7 @@ export default function App() {
       <Route path="/read/:id" element={<Reader />} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+      <Route path="/blog/:slug" element={<PublicLayout><BlogPost /></PublicLayout>} />
       <Route path="/forums/:slug" element={<PublicLayout><ForumPage /></PublicLayout>} />
       <Route path="/video-teachings" element={<PublicLayout><VideoTeachings /></PublicLayout>} />
       <Route path="/partnerships" element={<PublicLayout><Partnerships /></PublicLayout>} />

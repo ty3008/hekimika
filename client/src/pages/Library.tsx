@@ -82,6 +82,7 @@ export default function Library() {
                                                     src={thumbnail} 
                                                     alt={item.title} 
                                                     className="w-full h-full object-contain p-2 overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-500" 
+                                                    loading="lazy"
                                                 />
                                             ) : (
                                                 <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">

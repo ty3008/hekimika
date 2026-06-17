@@ -294,7 +294,7 @@ export default function Home() {
                             subtitle="Watch powerful highlights from our transformative programs — real moments of wisdom, healing, and community."
                             light
                         />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mt-10">
                             {highlights.map((h, i) => (
                                 <motion.div
                                     key={h.id}
@@ -320,7 +320,7 @@ export default function Home() {
                                             </div>
                                         </div>
                                     </div>
-                                    <h3 className="text-white font-semibold mt-4 text-center group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    <h3 className="text-white text-sm md:text-base font-semibold mt-5 px-4 text-center group-hover:text-gold transition-colors leading-snug" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                         {h.title}
                                     </h3>
                                 </motion.div>
@@ -364,6 +364,7 @@ export default function Home() {
                                         src={book.image} 
                                         alt={book.title} 
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-navy/5 group-hover:opacity-0 transition-opacity" />
                                     <div className="absolute top-4 right-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg z-10">
@@ -522,6 +523,7 @@ export default function Home() {
                                     src={HERO_BG}
                                     alt="Pastor Kevin and Lilian Mulati"
                                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                                    loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-navy/10 group-hover:opacity-0 transition-opacity pointer-events-none" />
                             </div>

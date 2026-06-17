@@ -91,7 +91,7 @@ export default function ProgramCard({ title, slug, category, description, model,
                             e.stopPropagation();
                             navigate(`/programs/${slug}`);
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-3 px-4 min-h-[48px] rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
+                        className="w-full sm:w-auto sm:px-6 flex items-center justify-center gap-2 py-3 px-4 min-h-[48px] rounded-lg border-2 text-sm font-semibold transition-all duration-200 hover:bg-navy hover:text-white"
                         style={{ borderColor: 'var(--navy)', color: 'var(--navy)' }}
                     >
                         Learn More <ArrowRight size={14} />

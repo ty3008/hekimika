@@ -191,6 +191,45 @@ export const initDB = async (): Promise<void> => {
             
             -- Add cover_image_link column to free_resources if it doesn't exist
             ALTER TABLE free_resources ADD COLUMN IF NOT EXISTS cover_image_link VARCHAR(500) DEFAULT '';
+
+            -- Blog: admin-managed categories
+            CREATE TABLE IF NOT EXISTS blog_categories (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(100) UNIQUE NOT NULL,
+                slug VARCHAR(100) UNIQUE NOT NULL,
+                sort_order INTEGER DEFAULT 0,
+                created_at TIMESTAMPTZ DEFAULT NOW()
+            );
+
+            -- Seed default blog categories (ignore conflicts)
+            INSERT INTO blog_categories (name, slug) VALUES
+                ('General', 'general'),
+                ('Love', 'love'),
+                ('Grace', 'grace'),
+                ('Prayer', 'prayer'),
+                ('Marriage', 'marriage'),
+                ('Healing', 'healing'),
+                ('Faith', 'faith'),
+                ('Family', 'family'),
+                ('Youth', 'youth')
+            ON CONFLICT (slug) DO NOTHING;
+
+            -- Blog: augment blog_posts with new columns
+            ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS category VARCHAR(100) DEFAULT 'General';
+            ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'published'
+                CHECK (status IN ('draft', 'published'));
+            ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS read_time INTEGER DEFAULT 5;
+
+            -- Blog comments (moderated)
+            CREATE TABLE IF NOT EXISTS blog_comments (
+                id SERIAL PRIMARY KEY,
+                post_id INTEGER REFERENCES blog_posts(id) ON DELETE CASCADE NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) DEFAULT '',
+                message TEXT NOT NULL,
+                approved BOOLEAN DEFAULT false,
+                created_at TIMESTAMPTZ DEFAULT NOW()
+            );
         `);
         console.log('✅ Database tables initialized');
     } catch (err: any) {

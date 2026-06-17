@@ -61,7 +61,7 @@ export default function TestimonialCarousel() {
                         "{t.text}"
                     </p>
                     <div className="flex items-center justify-center gap-4">
-                        <img src={t.photo} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2" style={{ borderColor: 'var(--gold)' }} />
+                        <img src={t.photo} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2" style={{ borderColor: 'var(--gold)' }} loading="lazy" />
                         <div className="text-left">
                             <p className="font-bold text-navy" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>{t.name}</p>
                             <p className="text-sm" style={{ color: 'var(--gold)' }}>{t.program}</p>

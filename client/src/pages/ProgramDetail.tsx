@@ -66,15 +66,19 @@ export default function ProgramDetail() {
             </Helmet>
 
             {/* Hero – Clean Navy Header */}
-            <section className="pt-36 pb-16 px-4 md:px-8 lg:px-16" style={{ background: 'var(--navy)' }}>
-                <div className="container-xl text-center">
+            <section className="pt-36 pb-20 px-4 md:px-8 lg:px-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--navy) 0%, #003366 100%)' }}>
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 pointer-events-none" style={{ background: 'var(--gold)', transform: 'translate(30%, -30%)' }} />
+                <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 pointer-events-none" style={{ background: 'var(--gold)', transform: 'translate(-30%, 30%)' }} />
+
+                <div className="container-xl text-center relative z-10">
                     <Link to="/perfected-in-wisdom" className="inline-flex items-center gap-2 text-white/70 hover:text-gold mb-8 transition-colors text-sm font-medium">
                         <ArrowLeft size={16} /> Back to Programs
                     </Link>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '-0.02em' }}>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-4xl mx-auto" style={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '-0.02em' }}>
                         {program.title}
                     </h1>
-                    <div className="w-20 h-1 mx-auto mt-6 rounded-full" style={{ background: 'var(--gold)' }} />
+                    <div className="w-20 h-1 mx-auto mt-8 rounded-full" style={{ background: 'var(--gold)' }} />
                 </div>
             </section>
 

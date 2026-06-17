@@ -180,7 +180,12 @@ export default function About() {
                         >
                             {/* Premium Centered Image Overlapping Top */}
                             <div className="mx-auto w-48 h-48 md:w-72 md:h-72 rounded-full border-[10px] border-white shadow-2xl overflow-hidden -mt-24 md:-mt-36 mb-8 relative z-10 ring-4 ring-gold/20 bg-gray-50">
-                                <img src={FoundersImg} alt="Pastor Kevin and Lilian Mulati" className="w-full h-full object-cover object-top" />
+                                <img 
+                                    src={FoundersImg} 
+                                    alt="Pastor Kevin and Lilian Mulati" 
+                                    className="w-full h-full object-cover object-top" 
+                                    loading="lazy"
+                                />
                             </div>
 
                             <p className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--gold)' }}>Visionaries</p>

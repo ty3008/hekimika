@@ -216,6 +216,7 @@ export default function Partnerships() {
                                                 src={img.src}
                                                 alt={img.alt}
                                                 className="w-full h-full object-contain bg-gray-50 transition-transform duration-500 group-hover:scale-110"
+                                                loading="lazy"
                                             />
                                             <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
                                         </motion.div>

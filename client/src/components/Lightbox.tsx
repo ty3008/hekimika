@@ -71,10 +71,10 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                    className="absolute top-4 right-4 z-10 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                     aria-label="Close lightbox"
                 >
-                    <X size={24} />
+                    <X size={32} />
                 </button>
 
                 {/* Counter */}
@@ -86,10 +86,10 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
                 {images.length > 1 && (
                     <button
                         onClick={handlePrev}
-                        className="absolute left-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        className="absolute left-4 z-10 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                         aria-label="Previous image"
                     >
-                        <ChevronLeft size={28} />
+                        <ChevronLeft size={36} />
                     </button>
                 )}
 
@@ -97,10 +97,10 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
                 {images.length > 1 && (
                     <button
                         onClick={handleNext}
-                        className="absolute right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        className="absolute right-4 z-10 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                         aria-label="Next image"
                     >
-                        <ChevronRight size={28} />
+                        <ChevronRight size={36} />
                     </button>
                 )}
 

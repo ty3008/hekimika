@@ -40,8 +40,8 @@ export default function AdminDashboard() {
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gray-100 text-gray-500 group-hover:bg-gray-200 transition-colors">
                         <FileText size={24} />
                     </div>
-                    <h3 className="font-bold text-lg text-navy mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>Blog & Devotionals</h3>
-                    <p className="text-sm text-gray-500">Create, edit, and publish new devotionals or blog content.</p>
+                    <h3 className="font-bold text-lg text-navy mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>Blogs</h3>
+                    <p className="text-sm text-gray-500">Write, edit, publish posts and manage community comments.</p>
                 </Link>
 
                 <Link to="/admin/highlights" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
