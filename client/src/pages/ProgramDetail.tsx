@@ -174,8 +174,10 @@ export default function ProgramDetail() {
                                     Interested in this program? Reach out to join our community and get started.
                                 </p>
                                 <a
-                                    href="/contact"
-                                    className="btn-primary w-full text-center"
+                                    href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-primary w-full inline-block text-center"
                                 >
                                     Join Community
                                 </a>

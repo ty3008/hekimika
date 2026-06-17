@@ -61,9 +61,14 @@ export default function Navbar() {
                 {/* CTA + Hamburger */}
                 <div className="flex items-center gap-4">
                     <div className="hidden md:block">
-                        <Link to="/contact" className="btn-primary text-sm px-5 py-2.5">
+                        <a 
+                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary text-sm px-5 py-2.5"
+                        >
                             Join Community
-                        </Link>
+                        </a>
                     </div>
                     <button
                         className="lg:hidden text-white p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -100,9 +105,14 @@ export default function Navbar() {
                                 </li>
                             ))}
                             <li>
-                                <Link to="/contact" className="btn-primary w-full text-center mt-2">
+                                <a 
+                                    href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-primary w-full block text-center mt-2"
+                                >
                                     Join Community
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                     </motion.div>
