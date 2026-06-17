@@ -44,7 +44,7 @@ export default function Contact() {
                             <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Send Prayer Request</span>
                         </a>
                         <a 
-                            href="https://chat.whatsapp.com/IMWKhV4pIVn3D0pSmEPkgG" 
+                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community." 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"

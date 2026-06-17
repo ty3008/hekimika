@@ -188,8 +188,8 @@ export default function Partnerships() {
             <section className="section-pad bg-white">
                 <div className="container-xl">
                     <SectionTitle
-                        overline="Partnerships"
-                        title="Partners in Action"
+                        overline="Impact"
+                        title="Impact on Institutions"
                         subtitle="A visual celebration of our impact and active collaborations with institutions."
                     />
                     <div className="space-y-16 mt-12">
@@ -215,7 +215,7 @@ export default function Partnerships() {
                                             <img
                                                 src={img.src}
                                                 alt={img.alt}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                className="w-full h-full object-contain bg-gray-50 transition-transform duration-500 group-hover:scale-110"
                                             />
                                             <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
                                         </motion.div>
