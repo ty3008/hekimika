@@ -405,14 +405,15 @@ export default function Home() {
 
             {/* ── Blogs Highlight ── */}
             {featuredBlogs.length > 0 && (
-                <section className="section-pad bg-white">
+                <section className="section-pad" style={{ background: 'var(--navy)' }}>
                     <div className="container-xl">
                         <SectionTitle
                             overline="Live Wisdom"
                             title="Wisdom from our Blogs"
                             subtitle="Insights, stories, and teachings from the Wise Nation — written wisdom on love, grace, prayer, marriage, and more."
+                            light
                         />
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-10">
                             {featuredBlogs.map((blog: any, i: number) => (
                                 <motion.div
                                     key={blog.slug}
@@ -420,9 +421,10 @@ export default function Home() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group flex flex-col"
+                                    className="rounded-3xl overflow-hidden shadow-sm border border-white/10 hover:border-gold/50 transition-all group flex flex-col"
+                                    style={{ background: 'rgba(255,255,255,0.04)' }}
                                 >
-                                    <div className="relative h-48 overflow-hidden bg-navy/5">
+                                    <div className="relative h-48 overflow-hidden bg-white/5">
                                         <img 
                                             src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
                                             alt={blog.title} 
@@ -433,13 +435,13 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div className="p-8 flex flex-col flex-1">
-                                        <h3 className="text-xl font-bold text-navy mb-3 line-clamp-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                             {blog.title}
                                         </h3>
-                                        <p className="text-gray-500 mb-6 leading-relaxed line-clamp-3 flex-1">{blog.excerpt}</p>
+                                        <p className="text-white/60 mb-6 leading-relaxed line-clamp-3 flex-1">{blog.excerpt}</p>
                                         <Link 
                                             to={`/blog/${blog.slug}`}
-                                            className="text-navy font-bold hover:text-gold transition-colors flex items-center gap-2 text-sm mt-auto"
+                                            className="text-gold font-bold hover:text-white transition-colors flex items-center gap-2 text-sm mt-auto"
                                         >
                                             Read More <ArrowRight size={16} />
                                         </Link>
@@ -448,7 +450,7 @@ export default function Home() {
                             ))}
                         </div>
                         <div className="mt-12 text-center">
-                            <Link to="/blog" className="inline-flex items-center gap-3 text-navy font-bold hover:text-gold transition-all group">
+                            <Link to="/blog" className="inline-flex items-center gap-3 text-white font-bold hover:text-gold transition-all group">
                                 Explore All Blogs <div className="w-10 h-px bg-gold group-hover:w-16 transition-all" /> <ArrowRight size={20} />
                             </Link>
                         </div>
