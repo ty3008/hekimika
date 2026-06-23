@@ -8,6 +8,24 @@ import {
 } from 'lucide-react';
 import api from '../utils/api';
 
+const getDriveThumbnail = (url: string): string | null => {
+    if (!url) return null;
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
+
 // ── Types ──────────────────────────────────────────────────────────────
 interface Post {
     id: number;
@@ -182,7 +200,8 @@ export default function AdminBlog() {
         }
         setSaving(true);
         try {
-            const payload = { ...form, content };
+            const finalCover = getDriveThumbnail(form.coverImage) || form.coverImage;
+            const payload = { ...form, coverImage: finalCover, content };
             if (editPost) {
                 await api.put(`/blog/${editPost.id}`, payload);
                 toast.success('Post updated!');

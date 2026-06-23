@@ -585,7 +585,7 @@ export default function Home() {
                                 <div className="absolute inset-0 bg-navy/10 group-hover:opacity-0 transition-opacity pointer-events-none" />
                             </div>
                             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-5 shadow-xl z-20">
-                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>7 years+</p>
+                                <p className="text-2xl font-bold" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>10 years+</p>
                                 <p className="text-gray-500 text-sm">impact</p>
                             </div>
                         </motion.div>
