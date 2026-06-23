@@ -153,6 +153,8 @@ export default function Home() {
 
     // Program Highlights
     const { data: highlights } = useApi<{ id: number; title: string; photoUrl: string; youtubeUrl: string }[]>('/highlights', [], { pollInterval: 30000 });
+    const { data: latestBlogs } = useApi<any[]>('/blog', [], { pollInterval: 30000 });
+    const featuredBlogs = latestBlogs?.slice(0, 3) || [];
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const lightboxItems = highlights?.map(h => ({
@@ -400,6 +402,59 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* ── Blogs Highlight ── */}
+            {featuredBlogs.length > 0 && (
+                <section className="section-pad bg-white">
+                    <div className="container-xl">
+                        <SectionTitle
+                            overline="Live Wisdom"
+                            title="Wisdom from our Blogs"
+                            subtitle="Insights, stories, and teachings from the Wise Nation — written wisdom on love, grace, prayer, marriage, and more."
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            {featuredBlogs.map((blog: any, i: number) => (
+                                <motion.div
+                                    key={blog.slug}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group flex flex-col"
+                                >
+                                    <div className="relative h-48 overflow-hidden bg-navy/5">
+                                        <img 
+                                            src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
+                                            alt={blog.title} 
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="absolute top-4 left-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">
+                                            {blog.category}
+                                        </div>
+                                    </div>
+                                    <div className="p-8 flex flex-col flex-1">
+                                        <h3 className="text-xl font-bold text-navy mb-3 line-clamp-2 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                            {blog.title}
+                                        </h3>
+                                        <p className="text-gray-500 mb-6 leading-relaxed line-clamp-3 flex-1">{blog.excerpt}</p>
+                                        <Link 
+                                            to={`/blog/${blog.slug}`}
+                                            className="text-navy font-bold hover:text-gold transition-colors flex items-center gap-2 text-sm mt-auto"
+                                        >
+                                            Read More <ArrowRight size={16} />
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                        <div className="mt-12 text-center">
+                            <Link to="/blog" className="inline-flex items-center gap-3 text-navy font-bold hover:text-gold transition-all group">
+                                Explore All Blogs <div className="w-10 h-px bg-gold group-hover:w-16 transition-all" /> <ArrowRight size={20} />
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* ── Teachings Highlight ── */}
             <section className="section-pad bg-gray-50">

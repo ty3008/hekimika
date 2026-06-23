@@ -4,6 +4,24 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 import { TESTIMONIALS as FALLBACK_TESTIMONIALS } from '../utils/constants';
 
+const getDriveThumbnail = (url: string): string | null => {
+    if (!url) return null;
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
+
 export default function TestimonialCarousel() {
     const { data: apiTestimonials, loading } = useApi<any[]>('/testimonials');
     const [index, setIndex] = useState(0);
@@ -61,7 +79,7 @@ export default function TestimonialCarousel() {
                         "{t.text}"
                     </p>
                     <div className="flex items-center justify-center gap-4">
-                        <img src={t.photo} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2" style={{ borderColor: 'var(--gold)' }} loading="lazy" />
+                        <img src={getDriveThumbnail(t.photo) || t.photo} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2" style={{ borderColor: 'var(--gold)' }} loading="lazy" />
                         <div className="text-left">
                             <p className="font-bold text-navy" style={{ color: 'var(--navy)', fontFamily: 'Poppins, sans-serif' }}>{t.name}</p>
                             <p className="text-sm" style={{ color: 'var(--gold)' }}>{t.program}</p>

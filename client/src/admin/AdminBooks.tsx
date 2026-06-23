@@ -16,7 +16,7 @@ export default function AdminBooks() {
 
     const openForm = (book?: any) => {
         if (book) {
-            setEditingId(book._id);
+            setEditingId(book.id);
             setFormData({
                 title: book.title, author: book.author, description: book.description,
                 price: book.price, coverImage: book.coverImage || '', selarUrl: book.selarUrl
@@ -82,7 +82,7 @@ export default function AdminBooks() {
                     </thead>
                     <tbody>
                         {books?.map((b) => (
-                            <tr key={b._id} className="border-b border-gray-50">
+                            <tr key={b.id} className="border-b border-gray-50">
                                 <td className="px-6 py-3 flex items-center gap-3">
                                     {b.coverImage ? (
                                         <img src={b.coverImage} className="w-10 h-14 object-cover rounded shadow-sm" alt="cover" />
@@ -98,7 +98,7 @@ export default function AdminBooks() {
                                 </td>
                                 <td className="px-6 py-3 text-right">
                                     <button onClick={() => openForm(b)} className="text-gray-400 hover:text-navy mr-3"><Edit2 size={16} /></button>
-                                    <button onClick={() => handleDelete(b._id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
+                                    <button onClick={() => handleDelete(b.id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
                                 </td>
                             </tr>
                         ))}

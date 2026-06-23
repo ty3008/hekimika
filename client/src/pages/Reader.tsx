@@ -95,15 +95,17 @@ export default function Reader() {
                     >
                         <Share2 size={18} />
                     </button>
-                    <a
-                        href={resource.google_drive_link || resource.googleDriveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hidden sm:flex items-center gap-2 p-2.5 hover:bg-white/10 rounded-lg text-white/70 hover:text-gold transition-all"
-                        title="Download / External View"
-                    >
-                        <Download size={18} />
-                    </a>
+                    {resource.type !== 'Devotional' && resource.type !== 'Magazine' && resource.type !== 'TeensLibrary' && (
+                        <a
+                            href={resource.google_drive_link || resource.googleDriveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hidden sm:flex items-center gap-2 p-2.5 hover:bg-white/10 rounded-lg text-white/70 hover:text-gold transition-all"
+                            title="Download / External View"
+                        >
+                            <Download size={18} />
+                        </a>
+                    )}
                 </div>
             </div>
 

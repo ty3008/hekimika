@@ -5,6 +5,24 @@ import { Plus, Edit2, Trash2 } from 'lucide-react';
 import { useApi } from '../hooks/useApi';
 import api from '../utils/api';
 
+const getDriveThumbnail = (url: string): string | null => {
+    if (!url) return null;
+    if (url.includes('/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+            const fileId = parts[1].split('/')[0];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+    }
+    if (url.includes('?id=') || url.includes('&id=')) {
+        const match = url.match(/[?&]id=([^&]+)/);
+        if (match && match[1]) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+    }
+    return url;
+};
+
 export default function AdminTestimonials() {
     const { data: testimonials, loading, refetch } = useApi<any[]>('/testimonials');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +34,7 @@ export default function AdminTestimonials() {
 
     const openForm = (t?: any) => {
         if (t) {
-            setEditingId(t._id);
+            setEditingId(t.id);
             setFormData({
                 name: t.name, program: t.program, text: t.text, photo: t.photo || ''
             });
@@ -80,10 +98,10 @@ export default function AdminTestimonials() {
                     </thead>
                     <tbody>
                         {testimonials?.map((t) => (
-                            <tr key={t._id} className="border-b border-gray-50">
+                            <tr key={t.id} className="border-b border-gray-50">
                                 <td className="px-6 py-3 flex items-center gap-3">
                                     {t.photo ? (
-                                        <img src={t.photo} className="w-10 h-10 object-cover rounded-full shadow-sm" alt="photo" />
+                                        <img src={getDriveThumbnail(t.photo) || t.photo} className="w-10 h-10 object-cover rounded-full shadow-sm" alt="photo" />
                                     ) : <div className="w-10 h-10 bg-gray-200 rounded-full shrink-0"></div>}
                                     <div>
                                         <p className="font-medium text-navy">{t.name}</p>
@@ -95,7 +113,7 @@ export default function AdminTestimonials() {
                                 </td>
                                 <td className="px-6 py-3 text-right shrink-0">
                                     <button onClick={() => openForm(t)} className="text-gray-400 hover:text-navy mr-3"><Edit2 size={16} /></button>
-                                    <button onClick={() => handleDelete(t._id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
+                                    <button onClick={() => handleDelete(t.id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
                                 </td>
                             </tr>
                         ))}

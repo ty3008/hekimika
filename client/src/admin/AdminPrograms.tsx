@@ -22,7 +22,7 @@ export default function AdminPrograms() {
 
     const openForm = (program?: any) => {
         if (program) {
-            setEditingId(program._id);
+            setEditingId(program.id);
             setFormData({
                 title: program.title, category: program.category, description: program.description,
                 fullDescription: program.fullDescription || '', model: program.model, image: program.image || '',
@@ -96,14 +96,14 @@ export default function AdminPrograms() {
                     </thead>
                     <tbody>
                         {programs?.map((p) => (
-                            <tr key={p._id} className="border-b border-gray-50 hover:bg-gray-50/50">
+                            <tr key={p.id} className="border-b border-gray-50 hover:bg-gray-50/50">
                                 <td className="px-6 py-3 font-medium text-navy">{p.title}</td>
                                 <td className="px-6 py-3 text-gray-500">{p.category}</td>
                                 <td className="px-6 py-3 text-gray-500">{p.model}</td>
                                 <td className="px-6 py-3"><a href={p.selarUrl} target="_blank" className="text-blue-500 hover:underline">Link</a></td>
                                 <td className="px-6 py-3 text-right">
                                     <button onClick={() => openForm(p)} className="text-gray-400 hover:text-navy mr-3"><Edit2 size={16} /></button>
-                                    <button onClick={() => handleDelete(p._id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
+                                    <button onClick={() => handleDelete(p.id)} className="text-gray-400 hover:text-red-500"><Trash2 size={16} /></button>
                                 </td>
                             </tr>
                         ))}
