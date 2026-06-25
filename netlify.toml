@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Netlify Configuration for Hekimika (hekimika.org)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[build]
+  # The frontend lives inside /client
+  base    = "client"
+  command = "npm run build"
+  # Vite outputs to client/dist
+  publish = "dist"
+
+[build.environment]
+  # Ensure Node version is consistent
+  NODE_VERSION = "20"
+
+# ─── SPA Redirect ────────────────────────────────────────────────────────────
+# This is CRITICAL. Without this, any direct link to /blog/my-post or
+# /programs/school-of-purity will return a 404 from Netlify instead of
+# being handled by React Router.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# ─── Security Headers ────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# Cache static JS/CSS assets aggressively (they have content hashes in filenames)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Do not cache index.html (so new deploys are picked up immediately)
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

@@ -204,7 +204,7 @@ export default function Home() {
                         {...fadeUp}
                         animate={fadeUp.animate}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
                         style={{ fontFamily: 'Poppins, sans-serif' }}
                     >
                         Raising the generation<br />
@@ -311,6 +311,7 @@ export default function Home() {
                                         <img
                                             src={getDriveThumbnail(h.photoUrl) || h.photoUrl}
                                             alt={h.title}
+                                            loading="lazy"
                                             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).style.opacity = '0';
@@ -428,6 +429,7 @@ export default function Home() {
                                         <img 
                                             src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
                                             alt={blog.title} 
+                                            loading="lazy"
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
                                         <div className="absolute top-4 left-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">

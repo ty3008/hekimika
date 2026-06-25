@@ -59,6 +59,12 @@ app.use('/api', limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Root route — keeps Render's health check happy and prevents the service
+// from being marked as failing/sleeping due to a 404 on GET /
+app.get('/', (_req, res) => {
+    res.json({ status: 'ok', message: 'Hekimika API is live 🚀' });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/programs', programRoutes);
@@ -89,12 +95,37 @@ app.use((_req, res) => {
 
 // Connect to Postgres and start server
 const start = async () => {
+    console.log('');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('   🌿 Hekimika Backend — Starting Up');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`   PORT          : ${PORT}`);
+    console.log(`   NODE_ENV      : ${process.env.NODE_ENV || 'development'}`);
+    console.log(`   Allowed origins: ${allowedOrigins.join(', ')}`);
+    console.log('');
+    console.log('   📦 Routes mounted:');
+    console.log('      GET  /');
+    console.log('      GET  /api/health');
+    console.log('      ALL  /api/auth');
+    console.log('      ALL  /api/programs');
+    console.log('      ALL  /api/books');
+    console.log('      ALL  /api/blog');
+    console.log('      ALL  /api/devotionals');
+    console.log('      ALL  /api/free-resources');
+    console.log('      ALL  /api/events');
+    console.log('      ALL  /api/registrations');
+    console.log('      ALL  /api/contact');
+    console.log('      ALL  /api/testimonials');
+    console.log('      ALL  /api/highlights');
+    console.log('');
+
     try {
         const connected = await testConnection();
         if (connected) {
             await initDB();
             await seedAdmin();
             await seedPrograms();
+            console.log('✅ Database setup complete');
         } else {
             console.warn('⚠️  Starting without database connection');
         }
@@ -103,7 +134,10 @@ const start = async () => {
     }
 
     app.listen(PORT, () => {
-        console.log(`🚀 Hekimika server running on port ${PORT}`);
+        console.log('');
+        console.log(`🚀 Hekimika server is LIVE on port ${PORT}`);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('');
     });
 };
 

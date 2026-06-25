@@ -4,6 +4,8 @@ import api from '../utils/api';
 interface UseApiOptions {
     /** Auto-refresh interval in milliseconds. If set, the hook re-fetches on this cadence. */
     pollInterval?: number;
+    /** Number of times to retry on failure. Defaults to 2. */
+    retries?: number;
 }
 
 interface UseApiResult<T> {
@@ -12,6 +14,8 @@ interface UseApiResult<T> {
     error: string | null;
     refetch: () => void;
 }
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export function useApi<T>(
     endpoint: string,
@@ -27,22 +31,35 @@ export function useApi<T>(
 
     useEffect(() => {
         let cancelled = false;
-        setLoading(true);
-        setError(null);
+        const maxRetries = options?.retries ?? 2;
 
-        api.get<T>(endpoint)
-            .then((res) => {
+        const fetchWithRetry = async (attempt: number): Promise<void> => {
+            try {
+                setLoading(true);
+                setError(null);
+                const res = await api.get<T>(endpoint);
                 if (!cancelled) setData(res.data);
-            })
-            .catch((err) => {
-                if (!cancelled) {
+            } catch (err: any) {
+                if (cancelled) return;
+
+                // Retry on network errors or 5xx server errors (e.g. Render cold start)
+                const isRetryable = !err?.response || err?.response?.status >= 500;
+                if (isRetryable && attempt < maxRetries) {
+                    // Exponential backoff: 1.5s, 3s, ...
+                    const delay = 1500 * Math.pow(2, attempt - 1);
+                    console.warn(`[useApi] ${endpoint} — attempt ${attempt} failed, retrying in ${delay}ms...`);
+                    await sleep(delay);
+                    if (!cancelled) return fetchWithRetry(attempt + 1);
+                } else {
                     setError(err?.response?.data?.error || 'Request failed');
                     if (defaultData !== undefined) setData(defaultData);
                 }
-            })
-            .finally(() => {
+            } finally {
                 if (!cancelled) setLoading(false);
-            });
+            }
+        };
+
+        fetchWithRetry(1);
 
         return () => { cancelled = true; };
     }, [endpoint, trigger]);
