@@ -430,7 +430,7 @@ export default function Home() {
                                             src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
                                             alt={blog.title} 
                                             loading="lazy"
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                                         />
                                         <div className="absolute top-4 left-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">
                                             {blog.category}

@@ -141,7 +141,7 @@ export default function Blog() {
                                                 <img
                                                     src={featured.cover_image || FALLBACK_IMG}
                                                     alt={featured.title}
-                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                                                     loading="lazy"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-r from-navy/30 to-transparent" />
@@ -194,7 +194,7 @@ export default function Blog() {
                                                         <img
                                                             src={post.cover_image || FALLBACK_IMG}
                                                             alt={post.title}
-                                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                                                             loading="lazy"
                                                         />
                                                         <span className="absolute top-3 left-3 text-[11px] font-bold px-2.5 py-1 rounded-full shadow"

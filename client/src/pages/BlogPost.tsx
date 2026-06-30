@@ -147,7 +147,7 @@ export default function BlogPost() {
                 <div className="w-full max-w-3xl mx-auto px-4 md:px-8 mt-2 md:-mt-8 relative z-10">
                     <div className="aspect-square md:aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white flex items-center justify-center bg-gray-50">
                         <img src={post.cover_image || FALLBACK_IMG} alt={post.title}
-                            className="w-full h-full object-cover" />
+                            className="w-full h-full object-contain" />
                     </div>
                 </div>
             )}
