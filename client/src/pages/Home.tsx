@@ -425,7 +425,7 @@ export default function Home() {
                                     className="rounded-3xl overflow-hidden shadow-sm border border-white/10 hover:border-gold/50 transition-all group flex flex-col"
                                     style={{ background: 'rgba(255,255,255,0.04)' }}
                                 >
-                                    <div className="relative h-48 overflow-hidden bg-white/5">
+                                    <div className="relative aspect-[4/3] md:h-48 overflow-hidden bg-white/5">
                                         <img 
                                             src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
                                             alt={blog.title} 

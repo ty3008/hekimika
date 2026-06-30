@@ -62,7 +62,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-4">
                     <div className="hidden md:block">
                         <a 
-                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community."
+                            href="https://chat.whatsapp.com/Gp9LwRFOHxe95VELronPvt"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary text-sm px-5 py-2.5"
@@ -106,7 +106,7 @@ export default function Navbar() {
                             ))}
                             <li>
                                 <a 
-                                    href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community."
+                                    href="https://chat.whatsapp.com/Gp9LwRFOHxe95VELronPvt"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-primary w-full block text-center mt-2"

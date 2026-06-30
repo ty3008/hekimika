@@ -100,7 +100,7 @@ export default function Footer() {
                     {/* Contact - horizontal */}
                     <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
                         <span className="flex items-center gap-2"><Mail size={14} style={{ color: 'var(--gold)' }} /> hekimika001@gmail.com</span>
-                        <span className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--gold)' }} /> +254 708 084 350</span>
+                        <span className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--gold)' }} /> +254 702 338 163</span>
                         <span className="flex items-center gap-2"><MapPin size={14} style={{ color: 'var(--gold)' }} /> Nairobi, Kenya</span>
                     </div>
                 </div>

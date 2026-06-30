@@ -26,7 +26,7 @@ export default function Contact() {
                 <div className="container-xl mb-16">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         <a 
-                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20like%20to%20know%20more%20about%20your%20programs%20and%20ministry." 
+                            href="https://wa.me/254702338163?text=Hello%20Hekimika,%20I%20would%20like%20to%20know%20more%20about%20your%20programs%20and%20ministry." 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
@@ -35,7 +35,7 @@ export default function Contact() {
                             <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Speak to Us on WhatsApp</span>
                         </a>
                         <a 
-                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20have%20a%20prayer%20request." 
+                            href="https://wa.me/254702338163?text=Hello%20Hekimika,%20I%20have%20a%20prayer%20request." 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
@@ -44,7 +44,7 @@ export default function Contact() {
                             <span className="font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>Send Prayer Request</span>
                         </a>
                         <a 
-                            href="https://wa.me/254708084350?text=Hello%20Hekimika,%20I%20would%20love%20to%20join%20the%20community." 
+                            href="https://chat.whatsapp.com/Gp9LwRFOHxe95VELronPvt" 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-xl text-center"
@@ -77,7 +77,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-bold text-navy mb-1">Call or WhatsApp</p>
-                                    <p className="text-gray-500 text-sm">+254 708 084 350</p>
+                                    <p className="text-gray-500 text-sm">+254 702 338 163</p>
                                     <p className="text-xs text-gray-400 mt-1">Available Mon-Fri, 9am - 5pm EAT</p>
                                 </div>
                             </li>

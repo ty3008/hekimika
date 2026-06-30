@@ -137,7 +137,7 @@ export default function Blog() {
                                 {featured && (
                                     <Link to={`/blog/${featured.slug}`} className="group block mb-12">
                                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                            <div className="relative h-64 lg:h-auto overflow-hidden">
+                                            <div className="relative aspect-[4/3] md:aspect-video lg:aspect-auto lg:h-full overflow-hidden">
                                                 <img
                                                     src={featured.cover_image || FALLBACK_IMG}
                                                     alt={featured.title}
@@ -190,7 +190,7 @@ export default function Blog() {
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.07 }}
                                                     className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 flex flex-col group">
-                                                    <Link to={`/blog/${post.slug}`} className="block h-48 overflow-hidden relative">
+                                                    <Link to={`/blog/${post.slug}`} className="block aspect-[4/3] sm:h-48 overflow-hidden relative">
                                                         <img
                                                             src={post.cover_image || FALLBACK_IMG}
                                                             alt={post.title}

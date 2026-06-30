@@ -144,8 +144,8 @@ export default function BlogPost() {
 
             {/* ── Cover Image ───────────────────────────────────────── */}
             {post.cover_image && (
-                <div className="w-full max-w-3xl mx-auto px-4 md:px-8 -mt-6 relative z-10">
-                    <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <div className="w-full max-w-3xl mx-auto px-4 md:px-8 mt-2 md:-mt-8 relative z-10">
+                    <div className="aspect-[4/3] md:aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                         <img src={post.cover_image || FALLBACK_IMG} alt={post.title}
                             className="w-full h-full object-cover" />
                     </div>
