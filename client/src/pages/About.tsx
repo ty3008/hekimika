@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Target, Heart, Lightbulb, ArrowRight } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
+import { OrganizationSchema, PersonSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
 
 import FoundersImg from '../assets/The Mulatis.webp';
 
@@ -31,9 +32,16 @@ export default function About() {
     return (
         <>
             <Helmet>
-                <title>About Us | Hekimika – Wise Nation</title>
-                <meta name="description" content="Learn about Hekimika (Wise Nation), the vision of Pastor Kevin & Lilian Mulati, and the three arms of the ministry." />
+                <title>About Hekimika – Wise Nation | Pastor Kevin & Lilian Mulati</title>
+                <meta name="description" content="Learn about Hekimika (Wise Nation), founded by Pastor Kevin & Lilian Mulati — a global ministry raising the generation of the wise through biblical wisdom on relationships, masculinity, leadership, and purpose." />
+                <link rel="canonical" href="https://hekimika.org/about" />
             </Helmet>
+            <OrganizationSchema />
+            <PersonSchema />
+            <BreadcrumbSchema items={[
+                { name: 'Home', url: '/' },
+                { name: 'About', url: '/about' },
+            ]} />
 
             {/* Hero */}
             <section

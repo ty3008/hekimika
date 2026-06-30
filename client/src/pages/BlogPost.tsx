@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, User, Clock, Tag, Share2, MessageCircle, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../utils/api';
-
+import AuthorBio from '../components/AuthorBio';
+import { ArticleSchema, BreadcrumbSchema, SITE_URL } from '../components/SchemaMarkup';
 interface Post {
     id: number;
     title: string;
@@ -101,12 +102,39 @@ export default function BlogPost() {
     return (
         <>
             <Helmet>
-                <title>{post.title} | Hekimika Blog</title>
+                <title>{post.title} | Hekimika – Biblical Wisdom & Teaching</title>
                 <meta name="description" content={post.excerpt} />
+                <link rel="canonical" href={`${SITE_URL}/blog/${post.slug}`} />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`${SITE_URL}/blog/${post.slug}`} />
                 <meta property="og:title" content={post.title} />
                 <meta property="og:description" content={post.excerpt} />
                 {post.cover_image && <meta property="og:image" content={post.cover_image} />}
+                <meta property="article:published_time" content={post.published_at} />
+                <meta property="article:author" content={post.author} />
+                <meta property="article:section" content={post.category} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={post.title} />
+                <meta name="twitter:description" content={post.excerpt} />
+                {post.cover_image && <meta name="twitter:image" content={post.cover_image} />}
             </Helmet>
+            
+            <ArticleSchema 
+                title={post.title}
+                excerpt={post.excerpt}
+                slug={post.slug}
+                author={post.author}
+                category={post.category}
+                coverImage={post.cover_image}
+                publishedAt={post.published_at}
+                readTime={post.read_time}
+                content={post.content}
+            />
+            <BreadcrumbSchema items={[
+                { name: 'Home', url: '/' },
+                { name: 'Blog', url: '/blog' },
+                { name: post.title, url: `/blog/${post.slug}` },
+            ]} />
 
             {/* ── Hero ──────────────────────────────────────────────── */}
             <section className="pt-36 pb-12 px-4 md:px-8 lg:px-16 relative overflow-hidden"
@@ -153,7 +181,7 @@ export default function BlogPost() {
             )}
 
             {/* ── Article Body ──────────────────────────────────────── */}
-            <section className="py-12 px-4 md:px-8">
+            <article className="py-12 px-4 md:px-8">
                 <div className="max-w-3xl mx-auto">
 
                     {/* Excerpt pull-quote */}
@@ -171,7 +199,7 @@ export default function BlogPost() {
                     />
 
                     {/* ── Share ── */}
-                    <div className="mt-10 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="mt-10 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <p className="text-sm font-semibold text-gray-500">Share this post</p>
                         <button onClick={shareOnWhatsApp}
                             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow"
@@ -179,8 +207,11 @@ export default function BlogPost() {
                             <Share2 size={15} /> Share on WhatsApp
                         </button>
                     </div>
+
+                    {/* E-E-A-T Author Bio Card */}
+                    <AuthorBio authorName={post.author} />
                 </div>
-            </section>
+            </article>
 
             {/* ── Comments Section ──────────────────────────────────── */}
             <section className="py-12 px-4 md:px-8 bg-gray-50">

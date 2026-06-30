@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, User, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import api from '../utils/api';
+import { BlogCollectionSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
 
 interface Post {
     id: number;
@@ -49,9 +50,15 @@ export default function Blog() {
     return (
         <>
             <Helmet>
-                <title>Blog | Hekimika – Wisdom in Writing</title>
-                <meta name="description" content="Insights, stories, and teachings from the Wise Nation — written wisdom on love, grace, prayer, marriage, and more." />
+                <title>Blog | Hekimika – Biblical Wisdom on Relationships, Masculinity & Purpose</title>
+                <meta name="description" content="Read articles and teachings on biblical masculinity, godly relationships, Christian leadership, purity, purpose, and wisdom by Pastor Kevin Mulati and the Hekimika (Wise Nation) community." />
+                <link rel="canonical" href="https://hekimika.org/blog" />
             </Helmet>
+            <BlogCollectionSchema />
+            <BreadcrumbSchema items={[
+                { name: 'Home', url: '/' },
+                { name: 'Blog', url: '/blog' },
+            ]} />
 
             {/* ── Hero Header ─────────────────────────────────────────── */}
             <section className="pt-36 pb-16 px-4 md:px-8 lg:px-16 relative overflow-hidden"

@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# Specifically welcome AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OmgiliBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Block admin area
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/*
+
+Sitemap: https://hekimika.org/sitemap.xml

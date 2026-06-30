@@ -8,6 +8,7 @@ import ProgramCard from '../components/ProgramCard';
 import { PROGRAMS } from '../utils/constants';
 import { useApi } from '../hooks/useApi';
 import Lightbox from '../components/Lightbox';
+import { WebSiteSchema, OrganizationSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
 
 // Featured Books Assets
 import PassionImg from '../assets/book- passion.webp';
@@ -166,9 +167,13 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Hekimika – Wise Nation | Raising the Generation of the Wise</title>
-                <meta name="description" content="Join Hekimika – a global ministry equipping singles, couples, and leaders with wisdom, healing, and purpose. Programs by Pastor Kevin & Lilian Mulati." />
+                <title>Hekimika – Wise Nation | Biblical Wisdom on Relationships, Masculinity & Leadership</title>
+                <meta name="description" content="Hekimika (Wise Nation) is a global ministry equipping singles, couples, and leaders with biblical wisdom on relationships, godly masculinity, Christian leadership, purity, and purpose. Programs, books, and teachings by Pastor Kevin & Lilian Mulati." />
+                <link rel="canonical" href="https://hekimika.org/" />
             </Helmet>
+            <WebSiteSchema />
+            <OrganizationSchema />
+            <BreadcrumbSchema items={[{ name: 'Home', url: '/' }]} />
 
             {/* ── Hero ── */}
             <section 
