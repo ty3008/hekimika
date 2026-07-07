@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Youtube } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 
 interface VideoModalProps {
     youtubeId: string;
@@ -78,7 +78,7 @@ export default function VideoModal({ youtubeId, isOpen, onClose }: VideoModalPro
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-semibold transition-colors shadow-lg hover:shadow-xl"
                             >
-                                <Youtube size={20} />
+                                <ExternalLink size={20} />
                                 <span>Watch on YouTube</span>
                             </a>
                         </div>
