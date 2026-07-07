@@ -8,6 +8,7 @@ import ProgramCard from '../components/ProgramCard';
 import { PROGRAMS } from '../utils/constants';
 import { useApi } from '../hooks/useApi';
 import Lightbox from '../components/Lightbox';
+import VideoModal from '../components/VideoModal';
 import { WebSiteSchema, OrganizationSchema, BreadcrumbSchema } from '../components/SchemaMarkup';
 
 // Featured Books Assets
@@ -132,6 +133,7 @@ export default function Home() {
 
     const [currentImage, setCurrentImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
     useEffect(() => {
         if (isHovered) return;
@@ -255,6 +257,48 @@ export default function Home() {
                     <p className="text-white/50 text-xs uppercase tracking-widest">Scroll</p>
                 </motion.div>
             </section>
+
+            {/* ── Watch Our Story ── */}
+            <section style={{ background: 'var(--navy)' }} className="pt-24 pb-8 px-4 md:px-8 lg:px-16">
+                <div className="container-xl relative z-10 text-center">
+                    <h2 className="text-sm font-semibold uppercase tracking-widest mb-10 text-center" style={{ color: 'var(--gold)' }}>
+                        Watch Our Story
+                    </h2>
+                    
+                    <motion.div 
+                        className="relative max-w-5xl mx-auto aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 hover:border-gold/30 transition-colors duration-500 group cursor-pointer"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        onClick={() => setIsVideoModalOpen(true)}
+                    >
+                        {/* High-res YouTube thumbnail */}
+                        <img 
+                            src="https://img.youtube.com/vi/TLqisyaTUvU/maxresdefault.jpg" 
+                            alt="Hekimika Introduction" 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        
+                        {/* Dark overlay */}
+                        <div className="absolute inset-0 bg-navy/40 group-hover:bg-navy/20 transition-colors duration-500" />
+                        
+                        {/* Play button */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-20 h-20 md:w-24 md:h-24 bg-gold/90 rounded-full flex items-center justify-center text-navy shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]">
+                                <PlayCircle size={48} fill="currentColor" className="ml-1 md:ml-2 w-10 h-10 md:w-12 md:h-12" />
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Video Modal */}
+            <VideoModal 
+                youtubeId="TLqisyaTUvU"
+                isOpen={isVideoModalOpen}
+                onClose={() => setIsVideoModalOpen(false)}
+            />
 
             {/* ── Stats ── */}
             <section style={{ background: 'var(--navy)' }} className="py-16 px-4 md:px-8 lg:px-16">
