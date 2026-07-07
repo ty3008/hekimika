@@ -295,11 +295,12 @@ export default function Home() {
                         className="group relative mx-auto max-w-5xl w-full aspect-video rounded-3xl overflow-hidden cursor-pointer"
                         style={{
                             border: '1px solid rgba(212,175,55,0.35)',
-                            boxShadow: '0 0 50px rgba(212,175,55,0.12), 0 20px 60px rgba(0,0,0,0.5)',
+                            boxShadow: '0 0 60px rgba(212,175,55,0.18), 0 20px 60px rgba(0,0,0,0.5)',
                         }}
                         whileHover={{
-                            boxShadow: '0 0 80px rgba(212,175,55,0.25), 0 25px 70px rgba(0,0,0,0.6)',
-                            borderColor: 'rgba(212,175,55,0.6)',
+                            boxShadow: '0 0 100px rgba(212,175,55,0.4), 0 0 40px rgba(212,175,55,0.2), 0 25px 70px rgba(0,0,0,0.6)',
+                            borderColor: 'rgba(212,175,55,0.8)',
+                            scale: 1.005,
                         }}
                         transition={{ duration: 0.3 }}
                         onClick={() => setIsVideoModalOpen(true)}
@@ -373,15 +374,6 @@ export default function Home() {
                             </motion.div>
                         </div>
 
-                        {/* Bottom caption */}
-                        <div className="absolute bottom-0 left-0 right-0 px-6 py-5 pointer-events-none">
-                            <p
-                                className="text-white/90 text-sm sm:text-base font-medium tracking-wide"
-                                style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}
-                            >
-                                Discover the vision behind Hekimika — Raising the generation of the Wise.
-                            </p>
-                        </div>
                     </motion.div>
                 </div>
             </motion.section>
@@ -568,14 +560,14 @@ export default function Home() {
                                     className="rounded-3xl overflow-hidden shadow-sm border border-white/10 hover:border-gold/50 transition-all group flex flex-col"
                                     style={{ background: 'rgba(255,255,255,0.04)' }}
                                 >
-                                    <div className="relative aspect-square md:h-48 overflow-hidden bg-white/5 flex items-center justify-center">
+                                    <div className="relative aspect-video overflow-hidden">
                                         <img 
                                             src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
                                             alt={blog.title} 
                                             loading="lazy"
-                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
-                                        <div className="absolute top-4 left-4 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">
+                                        <div className="absolute top-3 left-3 bg-gold text-navy text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">
                                             {blog.category}
                                         </div>
                                     </div>
