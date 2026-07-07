@@ -273,12 +273,14 @@ export default function Home() {
                         transition={{ duration: 0.6 }}
                         onClick={() => setIsVideoModalOpen(true)}
                     >
-                        {/* High-res YouTube thumbnail */}
-                        <img 
-                            src="https://img.youtube.com/vi/TLqisyaTUvU/maxresdefault.jpg" 
-                            alt="Hekimika Introduction" 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
+                        {/* Inline Muted Autoplaying Video */}
+                        <div className="absolute inset-0 w-full h-full pointer-events-none">
+                            <iframe
+                                src="https://www.youtube.com/embed/TLqisyaTUvU?autoplay=1&mute=1&controls=0&loop=1&playlist=TLqisyaTUvU&playsinline=1&rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                className="w-full h-full border-0 scale-[1.15] transition-transform duration-700 group-hover:scale-[1.2]"
+                            />
+                        </div>
                         
                         {/* Dark overlay */}
                         <div className="absolute inset-0 bg-navy/40 group-hover:bg-navy/20 transition-colors duration-500" />

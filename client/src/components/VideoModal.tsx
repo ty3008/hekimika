@@ -63,7 +63,7 @@ export default function VideoModal({ youtubeId, isOpen, onClose }: VideoModalPro
                         {/* Video Wrapper */}
                         <div className="w-full aspect-video rounded-xl md:rounded-3xl shadow-2xl overflow-hidden bg-black border border-white/10">
                             <iframe
-                                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=1&rel=0&playsinline=1`}
+                                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=0&controls=1&rel=0&playsinline=1`}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="w-full h-full border-0"
