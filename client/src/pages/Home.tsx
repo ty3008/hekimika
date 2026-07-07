@@ -135,6 +135,8 @@ export default function Home() {
     const [isHovered, setIsHovered] = useState(false);
     const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
+    const VIDEO_ID = 'TLqisyaTUvU';
+
     useEffect(() => {
         if (isHovered) return;
         const timer = setInterval(() => {
@@ -259,47 +261,137 @@ export default function Home() {
             </section>
 
             {/* ── Watch Our Story ── */}
-            <section style={{ background: 'var(--navy)' }} className="pt-24 pb-8 px-4 md:px-8 lg:px-16">
-                <div className="container-xl relative z-10 text-center">
-                    <h2 className="text-sm font-semibold uppercase tracking-widest mb-10 text-center" style={{ color: 'var(--gold)' }}>
-                        Watch Our Story
-                    </h2>
-                    
-                    <motion.div 
-                        className="relative max-w-5xl mx-auto aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10 hover:border-gold/30 transition-colors duration-500 group cursor-pointer"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+            <motion.section
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                style={{ background: 'var(--navy)' }}
+                className="py-16 sm:py-20 md:py-24 px-4"
+            >
+                <div className="container-xl">
+                    {/* Section heading */}
+                    <div className="text-center mb-10 md:mb-14">
+                        <p
+                            className="text-xs font-semibold uppercase tracking-[0.35em] mb-3 opacity-60"
+                            style={{ color: 'var(--gold)' }}
+                        >
+                            Our Vision
+                        </p>
+                        <h2
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                            style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--gold)' }}
+                        >
+                            Watch Our Story
+                        </h2>
+                        <div
+                            className="mx-auto mt-4 h-px w-16 opacity-40"
+                            style={{ background: 'var(--gold)' }}
+                        />
+                    </div>
+
+                    {/* Cinematic video container */}
+                    <motion.div
+                        className="group relative mx-auto max-w-5xl w-full aspect-video rounded-3xl overflow-hidden cursor-pointer"
+                        style={{
+                            border: '1px solid rgba(212,175,55,0.35)',
+                            boxShadow: '0 0 50px rgba(212,175,55,0.12), 0 20px 60px rgba(0,0,0,0.5)',
+                        }}
+                        whileHover={{
+                            boxShadow: '0 0 80px rgba(212,175,55,0.25), 0 25px 70px rgba(0,0,0,0.6)',
+                            borderColor: 'rgba(212,175,55,0.6)',
+                        }}
+                        transition={{ duration: 0.3 }}
                         onClick={() => setIsVideoModalOpen(true)}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Watch Our Story — click to play video"
+                        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setIsVideoModalOpen(true)}
                     >
-                        {/* Inline Muted Autoplaying Video */}
-                        <div className="absolute inset-0 w-full h-full pointer-events-none">
-                            <iframe
-                                src="https://www.youtube.com/embed/TLqisyaTUvU?autoplay=1&mute=1&controls=0&loop=1&playlist=TLqisyaTUvU&playsinline=1&rel=0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                className="w-full h-full border-0 scale-[1.15] transition-transform duration-700 group-hover:scale-[1.2]"
-                            />
+                        {/* Static thumbnail fallback (shown if iframe autoplay is blocked by browser) */}
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            style={{
+                                backgroundImage: `url(https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg)`,
+                            }}
+                        />
+
+                        {/* Muted autoplay iframe overlay */}
+                        <iframe
+                            src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${VIDEO_ID}&playsinline=1&rel=0&modestbranding=1&disablekb=1`}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                            title="Hekimika introductory video (muted preview)"
+                        />
+
+                        {/* Dark cinematic overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/70 group-hover:via-black/30" />
+
+                        {/* Gold triangular Play button */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <motion.div
+                                animate={{ scale: [1, 1.06, 1] }}
+                                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                                className="relative flex items-center justify-center"
+                            >
+                                {/* Outer glow ring */}
+                                <div
+                                    className="absolute rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"
+                                    style={{
+                                        width: '120px',
+                                        height: '120px',
+                                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, transparent 70%)',
+                                    }}
+                                />
+                                {/* Button container */}
+                                <div
+                                    className="relative flex items-center justify-center rounded-full transition-all duration-300"
+                                    style={{
+                                        width: '80px',
+                                        height: '80px',
+                                        background: 'rgba(212,175,55,0.15)',
+                                        backdropFilter: 'blur(8px)',
+                                        border: '2px solid rgba(212,175,55,0.8)',
+                                        boxShadow: '0 0 30px rgba(212,175,55,0.5)',
+                                    }}
+                                >
+                                    {/* Triangular play SVG icon */}
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        className="ml-1"
+                                        style={{
+                                            width: '32px',
+                                            height: '32px',
+                                            fill: 'var(--gold)',
+                                            filter: 'drop-shadow(0 0 6px rgba(212,175,55,0.8))',
+                                        }}
+                                        aria-hidden="true"
+                                    >
+                                        <polygon points="5,3 19,12 5,21" />
+                                    </svg>
+                                </div>
+                            </motion.div>
                         </div>
-                        
-                        {/* Dark overlay */}
-                        <div className="absolute inset-0 bg-navy/40 group-hover:bg-navy/20 transition-colors duration-500" />
-                        
-                        {/* Play button */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-20 h-20 md:w-24 md:h-24 bg-gold/90 rounded-full flex items-center justify-center text-navy shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]">
-                                <PlayCircle size={48} fill="currentColor" className="ml-1 md:ml-2 w-10 h-10 md:w-12 md:h-12" />
-                            </div>
+
+                        {/* Bottom caption */}
+                        <div className="absolute bottom-0 left-0 right-0 px-6 py-5 pointer-events-none">
+                            <p
+                                className="text-white/90 text-sm sm:text-base font-medium tracking-wide"
+                                style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}
+                            >
+                                Discover the vision behind Hekimika — Raising the generation of the Wise.
+                            </p>
                         </div>
                     </motion.div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* Video Modal */}
-            <VideoModal 
-                youtubeId="TLqisyaTUvU"
+            <VideoModal
                 isOpen={isVideoModalOpen}
                 onClose={() => setIsVideoModalOpen(false)}
+                videoId={VIDEO_ID}
+                title="Watch Our Story"
             />
 
             {/* ── Stats ── */}
