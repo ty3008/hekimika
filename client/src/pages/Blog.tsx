@@ -32,7 +32,7 @@ export default function Blog() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        api.get('/blog/categories/all').then(r => setCategories(r.data)).catch(() => {});
+        api.get('/blog/categories/all').then(r => setCategories(r.data)).catch(() => { });
     }, []);
 
     useEffect(() => {
@@ -88,22 +88,20 @@ export default function Blog() {
                     <div className="flex gap-1 py-3 overflow-x-auto scrollbar-hide">
                         <button
                             onClick={() => setActiveCategory('all')}
-                            className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                                activeCategory === 'all'
+                            className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === 'all'
                                     ? 'text-white'
                                     : 'text-gray-500 hover:text-navy bg-gray-100 hover:bg-gray-200'
-                            }`}
+                                }`}
                             style={activeCategory === 'all' ? { background: 'var(--navy)' } : {}}>
                             All Posts
                         </button>
                         {categories.map(cat => (
                             <button key={cat.id}
                                 onClick={() => setActiveCategory(cat.name)}
-                                className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                                    activeCategory === cat.name
+                                className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === cat.name
                                         ? 'text-white'
                                         : 'text-gray-500 hover:text-navy bg-gray-100 hover:bg-gray-200'
-                                }`}
+                                    }`}
                                 style={activeCategory === cat.name ? { background: 'var(--navy)' } : {}}>
                                 {cat.name}
                             </button>
@@ -144,11 +142,11 @@ export default function Blog() {
                                 {featured && (
                                     <Link to={`/blog/${featured.slug}`} className="group block mb-12">
                                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                            <div className="relative aspect-square lg:aspect-auto lg:h-full overflow-hidden flex items-center justify-center bg-gray-50">
+                                            <div className="relative aspect-video lg:aspect-auto lg:h-full overflow-hidden bg-gray-50">
                                                 <img
                                                     src={featured.cover_image || FALLBACK_IMG}
                                                     alt={featured.title}
-                                                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                                     loading="lazy"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-r from-navy/30 to-transparent" />
@@ -197,11 +195,11 @@ export default function Blog() {
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.07 }}
                                                     className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 flex flex-col group">
-                                                    <Link to={`/blog/${post.slug}`} className="block aspect-square sm:h-48 overflow-hidden relative flex items-center justify-center bg-gray-50">
+                                                    <Link to={`/blog/${post.slug}`} className="block aspect-video sm:h-48 overflow-hidden relative flex items-center justify-center bg-gray-50">
                                                         <img
                                                             src={post.cover_image || FALLBACK_IMG}
                                                             alt={post.title}
-                                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                             loading="lazy"
                                                         />
                                                         <span className="absolute top-3 left-3 text-[11px] font-bold px-2.5 py-1 rounded-full shadow"
