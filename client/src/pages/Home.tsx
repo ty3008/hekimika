@@ -197,7 +197,7 @@ export default function Home() {
                         <motion.img
                             key={currentImage}
                             src={CAROUSEL_IMAGES[currentImage]}
-                            alt="Hero Carousel"
+                            alt={`Hekimika ministry moment ${currentImage + 1} of ${CAROUSEL_IMAGES.length}`}
                             className="absolute w-full h-full object-cover"
                             initial={{ opacity: 0, scale: 1.1 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -540,17 +540,17 @@ export default function Home() {
             </section>
 
             {/* ── Blogs Highlight ── */}
-            {featuredBlogs.length > 0 && (
-                <section className="section-pad" style={{ background: 'var(--navy)' }}>
-                    <div className="container-xl">
-                        <SectionTitle
-                            overline="Live Wisdom"
-                            title="Wisdom from our Blogs"
-                            subtitle="Insights, stories, and teachings from the Wise Nation — written wisdom on love, grace, prayer, marriage, and more."
-                            light
-                        />
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-10">
-                            {featuredBlogs.map((blog: any, i: number) => (
+            <section className="section-pad" style={{ background: 'var(--navy)' }}>
+                <div className="container-xl">
+                    <SectionTitle
+                        overline="Live Wisdom"
+                        title="Wisdom from our Blogs"
+                        subtitle="Insights, stories, and teachings from the Wise Nation — written wisdom on love, grace, prayer, marriage, and more."
+                        light
+                    />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-10">
+                        {featuredBlogs.length > 0
+                            ? featuredBlogs.map((blog: any, i: number) => (
                                 <motion.div
                                     key={blog.slug}
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -561,9 +561,9 @@ export default function Home() {
                                     style={{ background: 'rgba(255,255,255,0.04)' }}
                                 >
                                     <div className="relative aspect-video overflow-hidden">
-                                        <img 
-                                            src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'} 
-                                            alt={blog.title} 
+                                        <img
+                                            src={blog.cover_image || '/assets/home-carousel/carousel 1.webp'}
+                                            alt={blog.title}
                                             loading="lazy"
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
@@ -576,7 +576,7 @@ export default function Home() {
                                             {blog.title}
                                         </h3>
                                         <p className="text-white/60 mb-6 leading-relaxed line-clamp-3 flex-1">{blog.excerpt}</p>
-                                        <Link 
+                                        <Link
                                             to={`/blog/${blog.slug}`}
                                             className="text-gold font-bold hover:text-white transition-colors flex items-center gap-2 text-sm mt-auto"
                                         >
@@ -584,16 +584,30 @@ export default function Home() {
                                         </Link>
                                     </div>
                                 </motion.div>
-                            ))}
-                        </div>
-                        <div className="mt-12 text-center">
-                            <Link to="/blog" className="inline-flex items-center gap-3 text-white font-bold hover:text-gold transition-all group">
-                                Explore All Blogs <div className="w-10 h-px bg-gold group-hover:w-16 transition-all" /> <ArrowRight size={20} />
-                            </Link>
-                        </div>
+                            ))
+                            : /* Skeleton while loading / cold start */
+                            Array.from({ length: 3 }).map((_, i) => (
+                                <div key={i} className="rounded-3xl overflow-hidden border border-white/10 flex flex-col animate-pulse"
+                                    style={{ background: 'rgba(255,255,255,0.04)' }}>
+                                    <div className="aspect-video bg-white/10" />
+                                    <div className="p-8 flex flex-col gap-3">
+                                        <div className="h-4 bg-white/10 rounded w-3/4" />
+                                        <div className="h-4 bg-white/10 rounded w-full" />
+                                        <div className="h-4 bg-white/10 rounded w-2/3" />
+                                        <div className="h-3 bg-white/10 rounded w-1/4 mt-4" />
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
-                </section>
-            )}
+                    <div className="mt-12 text-center">
+                        <Link to="/blog" className="inline-flex items-center gap-3 text-white font-bold hover:text-gold transition-all group">
+                            Explore All Blogs <div className="w-10 h-px bg-gold group-hover:w-16 transition-all" /> <ArrowRight size={20} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
 
             {/* ── Teachings Highlight ── */}
             <section className="section-pad bg-gray-50">
@@ -654,9 +668,8 @@ export default function Home() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                                className="p-8 rounded-2xl border border-white/10 hover:border-gold transition-colors group cursor-pointer"
+                                className="p-8 rounded-2xl border border-white/10 hover:border-gold transition-colors group"
                                 style={{ background: 'rgba(255,255,255,0.04)' }}
-                                onClick={() => window.location.href = to}
                             >
                                 <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style={{ background: `${color}20` }}>
                                     <Icon size={28} style={{ color }} />

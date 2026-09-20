@@ -92,4 +92,18 @@
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
+
+  /* ── Blog Post Prose Styles ───────────────────────────── */
+  .blog-prose { font-size: 1.0625rem; }
+  .blog-prose p { margin-bottom: 1.25rem; line-height: 1.8; }
+  .blog-prose h2 { font-size: 1.5rem; font-weight: 700; color: var(--navy); margin: 2rem 0 0.75rem; font-family: Poppins, sans-serif; }
+  .blog-prose h3 { font-size: 1.2rem; font-weight: 600; color: var(--navy); margin: 1.5rem 0 0.5rem; font-family: Poppins, sans-serif; }
+  .blog-prose blockquote { border-left: 4px solid var(--gold); padding: 0.75rem 1.25rem; margin: 1.5rem 0; background: #fafaf7; font-style: italic; color: #4b5563; border-radius: 0 0.5rem 0.5rem 0; }
+  .blog-prose ol { list-style-type: decimal; padding-left: 1.5rem; margin: 1rem 0; }
+  .blog-prose ul { list-style-type: disc; padding-left: 1.5rem; margin: 1rem 0; }
+  .blog-prose li { margin-bottom: 0.4rem; line-height: 1.7; }
+  .blog-prose a { color: var(--navy); text-decoration: underline; font-weight: 600; }
+  .blog-prose strong { font-weight: 700; color: var(--navy); }
+  .blog-prose em { font-style: italic; color: #4b5563; }
+  .blog-prose u { text-decoration: underline; }
 }
