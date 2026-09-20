@@ -373,7 +373,6 @@ export const NAV_LINKS = [
     { label: 'Wisdom Moments', path: '/wisdom-moments' },
     { label: 'Blog', path: '/blog' },
     { label: 'Teens Corner', path: '/young-and-wise' },
-    { label: 'Video Teachings', path: '/video-teachings' },
     { label: 'Resources', path: '/resources' },
     { label: 'Contact', path: '/contact' },
 ];

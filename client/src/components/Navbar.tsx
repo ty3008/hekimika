@@ -26,29 +26,29 @@ export default function Navbar() {
                     : 'bg-transparent'
                 }`}
         >
-            <nav className="container-xl flex items-center justify-between h-20 px-4 md:px-8 lg:px-16">
+            <nav className="container-xl flex items-center justify-between h-20 px-4 md:px-8 lg:px-12 xl:px-16">
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-3 group">
+                <Link to="/" className="flex items-center gap-3 group shrink-0">
                     <img 
                         src="/hekimika_logo.png" 
                         alt="Hekimika Logo" 
-                        className="w-12 h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                     />
                     <div>
-                        <span className="text-white font-bold text-xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                        <span className="text-white font-bold text-lg" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             Hekimika
                         </span>
                         <p className="text-xs" style={{ color: 'var(--gold)', lineHeight: 1 }}>Wise Nation</p>
                     </div>
                 </Link>
 
-                {/* Desktop Nav */}
-                <ul className="hidden lg:flex items-center gap-8">
+                {/* Desktop Nav — visible from lg up */}
+                <ul className="hidden lg:flex items-center gap-5 xl:gap-7">
                     {NAV_LINKS.map((link) => (
-                        <li key={link.path}>
+                        <li key={link.path} className="shrink-0">
                             <Link
                                 to={link.path}
-                                className={`text-sm font-medium transition-colors duration-200 hover:text-gold ${pathname === link.path ? 'text-gold' : 'text-white/90'
+                                className={`text-xs xl:text-sm font-medium whitespace-nowrap transition-colors duration-200 hover:text-gold ${pathname === link.path ? 'text-gold' : 'text-white/90'
                                     }`}
                                 style={{ color: pathname === link.path ? 'var(--gold)' : undefined }}
                             >
@@ -59,13 +59,13 @@ export default function Navbar() {
                 </ul>
 
                 {/* CTA + Hamburger */}
-                <div className="flex items-center gap-4">
-                    <div className="hidden md:block">
+                <div className="flex items-center gap-3 shrink-0">
+                    <div className="hidden xl:block">
                         <a 
                             href="https://chat.whatsapp.com/Gp9LwRFOHxe95VELronPvt"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-primary text-sm px-5 py-2.5"
+                            className="btn-primary text-xs px-4 py-2.5 whitespace-nowrap"
                         >
                             Join Community
                         </a>
