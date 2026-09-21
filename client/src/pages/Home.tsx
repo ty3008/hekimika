@@ -244,7 +244,7 @@ export default function Home() {
                         className="flex flex-wrap gap-4 justify-center pointer-events-auto"
                     >
                         <Link to="/about" className="btn-primary px-8 py-4 text-base flex items-center gap-2">
-                            <PlayCircle size={18} /> Our Story
+                            <ArrowRight size={18} /> About Us
                         </Link>
                     </motion.div>
                 </div>

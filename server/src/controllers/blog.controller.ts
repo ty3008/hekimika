@@ -173,15 +173,15 @@ export const createComment = async (req: Request, res: Response): Promise<void> 
         const postResult = await pool.query('SELECT id FROM blog_posts WHERE slug = $1', [req.params.slug]);
         if (postResult.rows.length === 0) { res.status(404).json({ error: 'Post not found' }); return; }
         const postId = postResult.rows[0].id;
-        const { name, email, message } = req.body;
+        const { name, message } = req.body;
         if (!name?.trim() || !message?.trim()) {
             res.status(400).json({ error: 'Name and message are required' }); return;
         }
-        await pool.query(
-            'INSERT INTO blog_comments (post_id, name, email, message) VALUES ($1, $2, $3, $4)',
-            [postId, name.trim(), email?.trim() || '', message.trim()]
+        const result = await pool.query(
+            'INSERT INTO blog_comments (post_id, name, message, approved) VALUES ($1, $2, $3, true) RETURNING id, name, message, created_at',
+            [postId, name.trim(), message.trim()]
         );
-        res.status(201).json({ message: 'Comment submitted and awaiting moderation. Thank you!' });
+        res.status(201).json({ message: 'Comment posted!', comment: result.rows[0] });
     } catch {
         res.status(500).json({ error: 'Failed to submit comment' });
     }

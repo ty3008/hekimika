@@ -52,9 +52,8 @@ export default function BlogPost() {
     const [loading, setLoading] = useState(true);
     const [notFound, setNotFound] = useState(false);
 
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [form, setForm] = useState({ name: '', message: '' });
     const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -91,10 +90,16 @@ export default function BlogPost() {
         }
         setSubmitting(true);
         try {
-            await api.post(`/blog/${slug}/comments`, form);
-            setSubmitted(true);
-            setForm({ name: '', email: '', message: '' });
-            toast.success('Comment submitted! It will appear after moderation.');
+            const res = await api.post(`/blog/${slug}/comments`, {
+                name: form.name,
+                message: form.message,
+            });
+            // Add comment to list immediately
+            if (res.data?.comment) {
+                setComments(prev => [...prev, res.data.comment]);
+            }
+            setForm({ name: '', message: '' });
+            toast.success('Comment posted!');
         } catch {
             toast.error('Failed to submit. Please try again.');
         } finally {
@@ -408,67 +413,36 @@ export default function BlogPost() {
                         <h3 className="font-bold text-navy mb-4 text-base" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             Leave a Comment
                         </h3>
-                        {submitted ? (
-                            <div className="text-center py-8">
-                                <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3"
-                                    style={{ background: 'var(--gold)' }}>
-                                    <MessageCircle size={28} style={{ color: 'var(--navy)' }} />
-                                </div>
-                                <p className="font-semibold text-navy mb-1">Thank you!</p>
-                                <p className="text-gray-500 text-sm">Your comment has been submitted and will appear after moderation.</p>
-                                <button onClick={() => setSubmitted(false)}
-                                    className="mt-4 text-sm font-semibold hover:underline"
-                                    style={{ color: 'var(--navy)' }}>
-                                    Add another comment
-                                </button>
+                        <form onSubmit={handleComment} className="space-y-4">
+                            <div>
+                                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">
+                                    Name *
+                                </label>
+                                <input
+                                    value={form.name}
+                                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                                    placeholder="Your name"
+                                    className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30 bg-white"
+                                />
                             </div>
-                        ) : (
-                            <form onSubmit={handleComment} className="space-y-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">
-                                            Name *
-                                        </label>
-                                        <input
-                                            value={form.name}
-                                            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                                            placeholder="Your name"
-                                            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30 bg-white"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">
-                                            Email <span className="text-gray-300">(optional)</span>
-                                        </label>
-                                        <input
-                                            type="email"
-                                            value={form.email}
-                                            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                                            placeholder="your@email.com"
-                                            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30 bg-white"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">
-                                        Comment *
-                                    </label>
-                                    <textarea
-                                        value={form.message}
-                                        onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                                        placeholder="Share your thoughts, a testimony, or a question..."
-                                        rows={4}
-                                        className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30 resize-none bg-white"
-                                    />
-                                </div>
-                                <p className="text-xs text-gray-400">All comments are reviewed before appearing publicly.</p>
-                                <button type="submit" disabled={submitting}
-                                    className="flex items-center gap-2 px-6 py-3 rounded-lg text-white text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
-                                    style={{ background: 'var(--navy)' }}>
-                                    {submitting ? 'Submitting…' : <><Send size={15} /> Submit Comment</>}
-                                </button>
-                            </form>
-                        )}
+                            <div>
+                                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">
+                                    Comment *
+                                </label>
+                                <textarea
+                                    value={form.message}
+                                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                                    placeholder="Share your thoughts, a testimony, or a question..."
+                                    rows={4}
+                                    className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30 resize-none bg-white"
+                                />
+                            </div>
+                            <button type="submit" disabled={submitting}
+                                className="flex items-center gap-2 px-6 py-3 rounded-lg text-white text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
+                                style={{ background: 'var(--navy)' }}>
+                                {submitting ? 'Posting…' : <><Send size={15} /> Post Comment</>}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </section>
