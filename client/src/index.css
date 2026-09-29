@@ -106,4 +106,21 @@
   .blog-prose strong { font-weight: 700; color: var(--navy); }
   .blog-prose em { font-style: italic; color: #4b5563; }
   .blog-prose u { text-decoration: underline; }
+
+  /* ── Typewriter cursor — gold blink ──────────────────────── */
+  .type-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: var(--gold);
+    font-weight: 300;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Hide scrollbar (category tabs) ─────────────────────── */
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
 }

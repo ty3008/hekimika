@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Users, Heart, Star, PlayCircle } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 import SectionTitle from '../components/SectionTitle';
 import ProgramCard from '../components/ProgramCard';
 import { PROGRAMS } from '../utils/constants';
@@ -121,10 +122,6 @@ const getDriveThumbnail = (url: string) => {
     return url;
 };
 
-const fadeUp = {
-    initial: { opacity: 0, y: 40 },
-    animate: { opacity: 1, y: 0 },
-};
 
 export default function Home() {
     const heroRef = useRef<HTMLDivElement>(null);
@@ -180,14 +177,15 @@ export default function Home() {
             <BreadcrumbSchema items={[{ name: 'Home', url: '/' }]} />
 
             {/* ── Hero ── */}
-            <section 
-                ref={heroRef} 
-                className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden"
+            <section
+                ref={heroRef}
+                className="relative h-screen min-h-[640px] max-h-[900px] flex items-center justify-center overflow-hidden"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
-                <motion.div 
-                    className="absolute inset-0" 
+                {/* ── Background image layer with Ken Burns ── */}
+                <motion.div
+                    className="absolute inset-0"
                     style={{ y }}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
@@ -198,65 +196,185 @@ export default function Home() {
                             key={currentImage}
                             src={CAROUSEL_IMAGES[currentImage]}
                             alt={`Hekimika ministry moment ${currentImage + 1} of ${CAROUSEL_IMAGES.length}`}
-                            className="absolute w-full h-full object-cover"
-                            initial={{ opacity: 0, scale: 1.1 }}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            initial={{ opacity: 0, scale: 1.08 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            transition={{ duration: 1.8, ease: 'easeOut' }}
                         />
                     </AnimatePresence>
-                    <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.4) 100%)' }} />
+
+                    {/* ── Cinematic multi-stop gradient overlay ── */}
+                    <div
+                        className="absolute inset-0 z-10 pointer-events-none"
+                        style={{
+                            background: `
+                                linear-gradient(
+                                    to bottom,
+                                    rgba(0,20,50,0.72) 0%,
+                                    rgba(0,20,50,0.38) 35%,
+                                    rgba(0,20,50,0.30) 55%,
+                                    rgba(0,20,50,0.65) 100%
+                                )
+                            `
+                        }}
+                    />
+
+                    {/* ── Radial vignette — darkens edges, bright centre ── */}
+                    <div
+                        className="absolute inset-0 z-10 pointer-events-none"
+                        style={{
+                            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,10,30,0.55) 100%)'
+                        }}
+                    />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">
-                    <motion.h1
-                        {...fadeUp}
-                        animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
-                        style={{ fontFamily: 'Poppins, sans-serif' }}
-                    >
-                        Raising the generation<br />
-                        <span style={{ color: 'var(--gold)' }}>of the Wise</span><br />
-                        all over the World.
-                    </motion.h1>
+                {/* ── Hero Content ── */}
+                <div className="relative z-20 text-center px-4 max-w-4xl mx-auto pointer-events-none select-none">
+
+                    {/* Overline badge */}
                     <motion.p
-                        {...fadeUp}
-                        animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-sm font-semibold tracking-widest mb-4 italic mt-12 md:mt-16"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="text-xs font-bold uppercase tracking-[0.3em] mb-5 inline-flex items-center gap-2"
                         style={{ color: 'var(--gold)' }}
                     >
-                        Hekimika is a Swahili word meaning ‘Be Wise’.
+                        <span className="w-6 h-px" style={{ background: 'var(--gold)' }} />
+                        Hekimika · Wise Nation
+                        <span className="w-6 h-px" style={{ background: 'var(--gold)' }} />
                     </motion.p>
+
+                    {/* ── Headline with typewriter ── */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                    >
+                        <h1
+                            className="font-bold text-white leading-tight mb-6"
+                            style={{
+                                fontFamily: 'Poppins, sans-serif',
+                                fontSize: 'clamp(2rem, 6vw, 4rem)',
+                                textShadow: '0 2px 24px rgba(0,10,30,0.55), 0 1px 4px rgba(0,0,0,0.4)',
+                            }}
+                        >
+                            {/* Static first line */}
+                            <span className="block">Raising the generation</span>
+
+                            {/* Gold typed middle line */}
+                            <span
+                                className="block"
+                                style={{ color: 'var(--gold)', textShadow: '0 0 40px rgba(212,175,55,0.35)' }}
+                            >
+                                <TypeAnimation
+                                    sequence={[
+                                        600,
+                                        'of the Wise',
+                                        1200,
+                                    ]}
+                                    wrapper="span"
+                                    speed={55}
+                                    cursor={false}
+                                    repeat={0}
+                                />
+                            </span>
+
+                            {/* Typed last line with blinking cursor */}
+                            <TypeAnimation
+                                sequence={[
+                                    1800,               // wait for gold line to finish
+                                    'all over the World.',
+                                    3000,               // pause with cursor
+                                ]}
+                                wrapper="span"
+                                speed={60}
+                                className="block"
+                                style={{ display: 'block' }}
+                                cursor={true}
+                                repeat={0}
+                            />
+                        </h1>
+                    </motion.div>
+
+                    {/* Swahili subtitle */}
                     <motion.p
-                        {...fadeUp}
-                        animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 3.2 }}
+                        className="text-sm font-semibold tracking-widest italic mb-3"
+                        style={{ color: 'var(--gold)', textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
+                    >
+                        Hekimika is a Swahili word meaning 'Be Wise'.
+                    </motion.p>
+
+                    {/* Tagline */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 3.5 }}
+                        className="text-base md:text-lg text-white/75 mb-10 max-w-xl mx-auto leading-relaxed"
+                        style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
                     >
                         A platform for wisdom for life, wholesome growth, and a life of dominion.
                     </motion.p>
+
+                    {/* CTAs */}
                     <motion.div
-                        {...fadeUp}
-                        animate={fadeUp.animate}
-                        transition={{ duration: 0.8, delay: 0.6 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 3.8 }}
                         className="flex flex-wrap gap-4 justify-center pointer-events-auto"
                     >
-                        <Link to="/about" className="btn-primary px-8 py-4 text-base flex items-center gap-2">
-                            <ArrowRight size={18} /> About Us
+                        <Link to="/about" className="btn-primary px-8 py-4 text-sm font-bold flex items-center gap-2">
+                            <ArrowRight size={17} /> About Us
+                        </Link>
+                        <Link
+                            to="/blog"
+                            className="btn-outline px-8 py-4 text-sm font-bold flex items-center gap-2"
+                            style={{ borderColor: 'rgba(255,255,255,0.5)', color: '#fff', background: 'rgba(255,255,255,0.07)' }}
+                        >
+                            Read our Blog <ArrowRight size={17} />
                         </Link>
                     </motion.div>
                 </div>
 
-                {/* Scroll indicator */}
+                {/* ── Carousel dot indicators ── */}
+                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+                    {CAROUSEL_IMAGES.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => setCurrentImage(i)}
+                            aria-label={`Go to slide ${i + 1}`}
+                            className="relative overflow-hidden rounded-full transition-all duration-300 pointer-events-auto"
+                            style={{
+                                width: i === currentImage ? 28 : 8,
+                                height: 8,
+                                background: i === currentImage ? 'var(--gold)' : 'rgba(255,255,255,0.35)',
+                            }}
+                        >
+                            {i === currentImage && !isHovered && (
+                                <motion.span
+                                    className="absolute inset-0 rounded-full origin-left"
+                                    style={{ background: 'rgba(255,255,255,0.4)' }}
+                                    initial={{ scaleX: 0 }}
+                                    animate={{ scaleX: 1 }}
+                                    transition={{ duration: 5, ease: 'linear' }}
+                                    key={currentImage}
+                                />
+                            )}
+                        </button>
+                    ))}
+                </div>
+
+                {/* ── Scroll indicator ── */}
                 <motion.div
                     animate={{ y: [0, 10, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                    className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20"
                 >
-                    <div className="w-px h-10 bg-white/40" />
-                    <p className="text-white/50 text-xs uppercase tracking-widest">Scroll</p>
+                    <div className="w-px h-8 bg-white/30" />
+                    <p className="text-white/40 text-[10px] uppercase tracking-widest">Scroll</p>
                 </motion.div>
             </section>
 
