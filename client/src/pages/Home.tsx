@@ -596,6 +596,245 @@ export default function Home() {
             )}
 
 
+            {/* ── Find Your Path ── */}
+            <section className="section-pad bg-white">
+                <div className="container-xl">
+                    {/* Section header */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="text-center mb-14"
+                    >
+                        <p
+                            className="text-xs font-bold uppercase tracking-[0.35em] mb-3 opacity-60"
+                            style={{ color: 'var(--navy)' }}
+                        >
+                            Find Your Path
+                        </p>
+                        <h2
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-5"
+                            style={{ fontFamily: 'Poppins, sans-serif' }}
+                        >
+                            Where Are You Right Now?
+                        </h2>
+                        <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
+                            Whatever season you are in, Hekimika was built for you.
+                            Click your situation and let us walk with you.
+                        </p>
+                        <div className="mx-auto mt-5 h-px w-16 bg-gold opacity-50" />
+                    </motion.div>
+
+                    {/* 2×2 Card Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                        {/* Card 1 — Singles */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.0 }}
+                            className="group relative rounded-3xl overflow-hidden cursor-pointer"
+                            style={{ minHeight: '340px' }}
+                        >
+                            {/* Background: carousel image 2 */}
+                            <div
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style={{ backgroundImage: "url('/assets/home-carousel/carousel 2.webp')" }}
+                            />
+                            {/* Multi-stop cinematic overlay */}
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: 'linear-gradient(to bottom, rgba(0,20,50,0.45) 0%, rgba(0,20,50,0.6) 50%, rgba(0,20,50,0.88) 100%)',
+                                }}
+                            />
+                            {/* Gold top accent line */}
+                            <div
+                                className="absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                style={{ background: 'var(--gold)' }}
+                            />
+                            {/* Content */}
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                                {/* Tag */}
+                                <span
+                                    className="self-start mb-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                                    style={{ background: 'rgba(212,175,55,0.2)', color: 'var(--gold)', border: '1px solid rgba(212,175,55,0.4)' }}
+                                >
+                                    For Singles
+                                </span>
+                                {/* Headline */}
+                                <h3
+                                    className="text-white font-bold text-xl md:text-2xl leading-snug mb-3 group-hover:text-gold transition-colors duration-300"
+                                    style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
+                                >
+                                    I'm single and want wisdom on love, relationships & dating
+                                </h3>
+                                {/* Sub-copy */}
+                                <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                                    You are not behind. You are being built.
+                                </p>
+                                {/* CTA */}
+                                <Link
+                                    to="/wisdom-for-singles"
+                                    className="self-start inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-navy transition-all duration-300 group-hover:shadow-lg"
+                                    style={{ background: 'var(--gold)' }}
+                                >
+                                    We Got You <ArrowRight size={15} />
+                                </Link>
+                            </div>
+                        </motion.div>
+
+                        {/* Card 2 — Purity */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="group relative rounded-3xl overflow-hidden cursor-pointer"
+                            style={{ minHeight: '340px' }}
+                        >
+                            <div
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style={{ backgroundImage: "url('/assets/home-carousel/carousel 3.webp')" }}
+                            />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: 'linear-gradient(to bottom, rgba(0,20,50,0.45) 0%, rgba(0,20,50,0.6) 50%, rgba(0,20,50,0.88) 100%)',
+                                }}
+                            />
+                            <div
+                                className="absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                style={{ background: 'var(--gold)' }}
+                            />
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                                <span
+                                    className="self-start mb-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                                    style={{ background: 'rgba(212,175,55,0.2)', color: 'var(--gold)', border: '1px solid rgba(212,175,55,0.4)' }}
+                                >
+                                    For Young People
+                                </span>
+                                <h3
+                                    className="text-white font-bold text-xl md:text-2xl leading-snug mb-3 group-hover:text-gold transition-colors duration-300"
+                                    style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
+                                >
+                                    Is it really possible to live purely as a young person?
+                                </h3>
+                                <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                                    Purity is not outdated. It is powerful.
+                                </p>
+                                <Link
+                                    to="/purity-wisdom"
+                                    className="self-start inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-navy transition-all duration-300 group-hover:shadow-lg"
+                                    style={{ background: 'var(--gold)' }}
+                                >
+                                    Wisdom for This <ArrowRight size={15} />
+                                </Link>
+                            </div>
+                        </motion.div>
+
+                        {/* Card 3 — Coaching */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="group relative rounded-3xl overflow-hidden cursor-pointer"
+                            style={{ minHeight: '340px' }}
+                        >
+                            <div
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style={{ backgroundImage: "url('/assets/home-carousel/carousel 4.webp')" }}
+                            />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: 'linear-gradient(to bottom, rgba(0,20,50,0.45) 0%, rgba(0,20,50,0.6) 50%, rgba(0,20,50,0.88) 100%)',
+                                }}
+                            />
+                            <div
+                                className="absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                style={{ background: 'var(--gold)' }}
+                            />
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                                <span
+                                    className="self-start mb-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                                    style={{ background: 'rgba(212,175,55,0.2)', color: 'var(--gold)', border: '1px solid rgba(212,175,55,0.4)' }}
+                                >
+                                    Personal Coaching
+                                </span>
+                                <h3
+                                    className="text-white font-bold text-xl md:text-2xl leading-snug mb-3 group-hover:text-gold transition-colors duration-300"
+                                    style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
+                                >
+                                    I have many questions — I think I need personal coaching
+                                </h3>
+                                <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                                    You don't have to figure this out alone.
+                                </p>
+                                <Link
+                                    to="/contact?reason=coaching"
+                                    className="self-start inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-navy transition-all duration-300 group-hover:shadow-lg"
+                                    style={{ background: 'var(--gold)' }}
+                                >
+                                    Get In Touch <ArrowRight size={15} />
+                                </Link>
+                            </div>
+                        </motion.div>
+
+                        {/* Card 4 — Couples */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="group relative rounded-3xl overflow-hidden cursor-pointer"
+                            style={{ minHeight: '340px' }}
+                        >
+                            <div
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style={{ backgroundImage: "url('/assets/home-carousel/carousel 5.webp')" }}
+                            />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: 'linear-gradient(to bottom, rgba(0,20,50,0.45) 0%, rgba(0,20,50,0.6) 50%, rgba(0,20,50,0.88) 100%)',
+                                }}
+                            />
+                            <div
+                                className="absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                style={{ background: 'var(--gold)' }}
+                            />
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                                <span
+                                    className="self-start mb-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                                    style={{ background: 'rgba(212,175,55,0.2)', color: 'var(--gold)', border: '1px solid rgba(212,175,55,0.4)' }}
+                                >
+                                    For Couples
+                                </span>
+                                <h3
+                                    className="text-white font-bold text-xl md:text-2xl leading-snug mb-3 group-hover:text-gold transition-colors duration-300"
+                                    style={{ fontFamily: 'Poppins, sans-serif', textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
+                                >
+                                    We want our relationship to truly go the distance
+                                </h3>
+                                <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                                    A great relationship is built, not found.
+                                </p>
+                                <Link
+                                    to="/contact?reason=couples"
+                                    className="self-start inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-navy transition-all duration-300 group-hover:shadow-lg"
+                                    style={{ background: 'var(--gold)' }}
+                                >
+                                    Let's Talk <ArrowRight size={15} />
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* ── Featured Books ── */}
             <section className="section-pad bg-white">
                 <div className="container-xl">

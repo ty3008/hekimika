@@ -39,6 +39,8 @@ const QUICK_LINKS = [
     { label: 'About Us', path: '/about' },
     { label: 'Blog', path: '/blog' },
     { label: 'Programs', path: '/perfected-in-wisdom' },
+    { label: 'Wisdom for Singles', path: '/wisdom-for-singles' },
+    { label: 'Purity Wisdom', path: '/purity-wisdom' },
     { label: 'Video Teachings', path: '/video-teachings' },
     { label: 'Library', path: '/library' },
     { label: 'Resources', path: '/resources' },

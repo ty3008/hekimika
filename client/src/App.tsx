@@ -15,6 +15,8 @@ import ProgramDetail from './pages/ProgramDetail';
 import WisdomMoments from './pages/WisdomMoments';
 import YoungAndWise from './pages/YoungAndWise';
 import Resources from './pages/Resources';
+import WisdomForSingles from './pages/WisdomForSingles';
+import PurityWisdom from './pages/PurityWisdom';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -75,6 +77,8 @@ export default function App() {
       <Route path="/young-and-wise" element={<PublicLayout><YoungAndWise /></PublicLayout>} />
       <Route path="/resources" element={<PublicLayout><Resources /></PublicLayout>} />
       <Route path="/read/:id" element={<Reader />} />
+      <Route path="/wisdom-for-singles" element={<PublicLayout><WisdomForSingles /></PublicLayout>} />
+      <Route path="/purity-wisdom" element={<PublicLayout><PurityWisdom /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
       <Route path="/blog/:slug" element={<PublicLayout><BlogPost /></PublicLayout>} />

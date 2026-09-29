@@ -1,9 +1,34 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, MessageSquare, Users } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
 
 export default function Contact() {
+    const location = useLocation();
+    const [subject, setSubject] = useState('Program Inquiry');
+    const [introContext, setIntroContext] = useState<{ title: string; body: string } | null>(null);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const reason = params.get('reason');
+        
+        if (reason === 'coaching') {
+            setIntroContext({
+                title: "Personal Coaching",
+                body: "We're so glad you reached out. Coaching is one of the most powerful steps you can take. Tell us a bit about where you are and what kind of support you're looking for."
+            });
+            setSubject('Personal Coaching');
+        } else if (reason === 'couples') {
+            setIntroContext({
+                title: "Couples Guidance",
+                body: "What a beautiful decision — to invest in your relationship. We'd love to walk this journey with you. Share a little about yourselves below."
+            });
+            setSubject('Couples Guidance');
+        }
+    }, [location.search]);
+
     return (
         <>
             <Helmet>
@@ -94,10 +119,19 @@ export default function Contact() {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
-                        <div className="flex items-center gap-3 mb-6">
-                            <MessageSquare size={24} className="text-gold" />
-                            <h3 className="text-2xl font-bold text-navy" style={{ fontFamily: 'Poppins, sans-serif' }}>Send a Message</h3>
-                        </div>
+                        {introContext ? (
+                            <div className="mb-6 p-5 rounded-2xl border" style={{ background: 'rgba(212,175,55,0.05)', borderColor: 'rgba(212,175,55,0.2)' }}>
+                                <h3 className="text-lg font-bold text-navy mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    {introContext.title}
+                                </h3>
+                                <p className="text-gray-600 text-sm leading-relaxed">{introContext.body}</p>
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-3 mb-6">
+                                <MessageSquare size={24} className="text-gold" />
+                                <h3 className="text-2xl font-bold text-navy" style={{ fontFamily: 'Poppins, sans-serif' }}>Send a Message</h3>
+                            </div>
+                        )}
                         <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
@@ -115,8 +149,14 @@ export default function Contact() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                                <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold bg-white text-gray-600">
+                                <select 
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold bg-white text-gray-700"
+                                    value={subject}
+                                    onChange={(e) => setSubject(e.target.value)}
+                                >
                                     <option>Program Inquiry</option>
+                                    <option>Personal Coaching</option>
+                                    <option>Couples Guidance</option>
                                     <option>Speaking Engagement</option>
                                     <option>Prayer Request</option>
                                     <option>Store / Book Support</option>
