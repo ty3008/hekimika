@@ -24,7 +24,7 @@ export default function BookShowcaseCard({ book, index = 0 }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-            className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[color:var(--gold)]"
+            className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-gold/40 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[color:var(--gold)]"
         >
             {/* Cover */}
             <div className="relative aspect-square overflow-hidden bg-navy">
@@ -66,15 +66,24 @@ export default function BookShowcaseCard({ book, index = 0 }: Props) {
 
             {/* Body */}
             <div className="flex flex-col flex-1 p-6">
-                {book.series && (
-                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] mb-2 opacity-60" style={{ color: 'var(--navy)' }}>
-                        {book.series}
-                    </p>
-                )}
-                <h3 className="text-navy font-bold text-lg leading-snug mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                    {book.series ? (
+                        <p className="text-[10px] font-bold uppercase tracking-[0.25em] opacity-70" style={{ color: 'var(--navy)' }}>
+                            {book.series}
+                        </p>
+                    ) : (
+                        <span />
+                    )}
+                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                        E-Book / Manual
+                    </span>
+                </div>
+
+                <h3 className="text-navy font-bold text-lg leading-snug mb-1 group-hover:text-gold transition-colors" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     {book.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">{book.desc}</p>
+                <p className="text-xs text-gold font-medium mb-3">By Pastor Kevin Mulati</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{book.desc}</p>
 
                 <a
                     href={href}
