@@ -110,9 +110,11 @@ export default function ProgramDetail() {
                             </>
                         )}
 
+                        {(program.curriculum || []).length > 0 && (
                         <h3 className="text-2xl font-bold text-navy mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             Curriculum Map
                         </h3>
+                        )}
                         <div className="space-y-4 mb-10">
                             {(program.curriculum || []).map((item, i) => {
                                 const itemStr = String(item || '');

@@ -59,13 +59,26 @@ export default function ProgramCard({ title, slug, category, description, model,
                     )}
                 </AnimatePresence>
 
-                <img
-                    src={image}
-                    alt={title}
-                    onLoad={() => setImageLoaded(true)}
-                    className={`w-full h-full object-cover overflow-hidden rounded-xl transition-all duration-700 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
-                    loading="lazy"
-                />
+                {image ? (
+                    <img
+                        src={image}
+                        alt={title}
+                        onLoad={() => setImageLoaded(true)}
+                        className={`w-full h-full object-cover overflow-hidden rounded-xl transition-all duration-700 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+                        loading="lazy"
+                    />
+                ) : (
+                    <div
+                        className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-[1]"
+                        style={{ background: 'linear-gradient(135deg, #001226 0%, #001F3F 55%, #002855 100%)' }}
+                    >
+                        <span className="w-10 h-px mb-5" style={{ background: 'var(--gold)' }} />
+                        <p className="font-bold text-xl leading-snug" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--gold)' }}>
+                            {title}
+                        </p>
+                        <span className="w-10 h-px mt-5" style={{ background: 'var(--gold)' }} />
+                    </div>
+                )}
                 <div className="absolute inset-0 gradient-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute top-3 left-3 z-10">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: 'var(--gold)', color: 'var(--navy)' }}>

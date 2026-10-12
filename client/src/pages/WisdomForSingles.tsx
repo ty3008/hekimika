@@ -1,66 +1,45 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Users, ExternalLink } from 'lucide-react';
+import { ArrowRight, BellRing, ExternalLink, Sparkles, Users } from 'lucide-react';
+import BookShowcaseCard from '../components/BookShowcaseCard';
+import { PROGRAMS as ALL_PROGRAMS } from '../utils/constants';
+import {
+    CATALOG_BOOKS,
+    SOCIAL_LINKS,
+    WHATSAPP_COMMUNITY_URL,
+    whatsappLink,
+} from '../utils/siteContent';
 
-// ── Program cards ────────────────────────────────────────
-const PROGRAMS = [
-    {
-        title: 'Mistakes That Singles Can Avoid',
-        desc: 'Practical wisdom to help you navigate common pitfalls in singlehood and build a strong foundation for your future.',
-    },
-    {
-        title: 'Single and Built – Preparing for Love',
-        desc: 'A transformative program that equips you to be whole, healthy, and ready — before you ever enter a relationship.',
-    },
-    {
-        title: 'Single and Built – Choosing Well',
-        desc: 'Learn how to discern, evaluate, and make wise choices in dating so you attract and select the right person.',
-    },
-    {
-        title: 'Keepers of Love',
-        desc: 'Build the character and values that make you someone worth keeping — and help you recognise who is worth keeping too.',
-    },
-];
+// ── Four major programs (each links to its own program page) ──────────────
+const PROGRAM_TILES = [
+    { slug: 'mistakes-singles-can-avoid', title: 'Mistakes that Singles Can Avoid', isNew: true },
+    { slug: 'preparing-for-love', title: 'Single and Built – Preparing for Love' },
+    { slug: 'choosing-well', title: 'Single and Built – Choosing Well' },
+    { slug: 'keepers', title: 'Keepers of Love', isNew: true },
+].map((tile) => {
+    const program = ALL_PROGRAMS.find((p) => p.slug === tile.slug);
+    return { ...tile, image: program?.image ?? '', desc: program?.description ?? '' };
+});
 
-// ── Books ────────────────────────────────────────────────
+// ── Books (all nine, in the order they were briefed) ──────────────────────
 const BOOKS = [
-    {
-        title: 'Cultured in Love – Creating a Solid Form',
-        desc: 'Your internal reality determines how you experience love. Build the right inner framework.',
-        link: 'https://selar.com/66d7414624',
-    },
-    {
-        title: 'Cultured in Love – Establishing a Solid Core',
-        desc: 'Develop the character, values, and convictions that make for a life well-lived.',
-        link: 'https://selar.com/7770f17ty0',
-    },
-    {
-        title: 'Cultured in Love – Dealing with Ended Relationships',
-        desc: 'Practical and spiritual guidance for healing well and moving forward with clarity.',
-        link: 'https://selar.com/477717r206',
-    },
-    {
-        title: 'Passion',
-        desc: 'Passion is a beautiful thing God has given every person. Learn how to steward it wisely.',
-        link: 'https://selar.com/7hb2n47455',
-    },
-    {
-        title: 'The Pure Man',
-        desc: 'A bold call to godly masculinity and purity in a generation that has lost its standard.',
-        link: 'https://selar.com/puremanbk',
-    },
-];
-
-// ── Social channels ──────────────────────────────────────
-const SOCIALS = [
-    { label: 'Instagram', href: 'https://www.instagram.com/hekimika2?igsh=aWx5YnY1N2x1aW5z', color: '#E1306C' },
-    { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61552354056302', color: '#1877F2' },
-    { label: 'YouTube', href: 'https://www.youtube.com/@Hekimika001', color: '#FF0000' },
-    { label: 'TikTok', href: 'https://www.tiktok.com/@hekimika5?_r=1&_t=ZS-95YHLB2yd3U', color: '#010101' },
+    CATALOG_BOOKS.solidForm,
+    CATALOG_BOOKS.solidCore,
+    CATALOG_BOOKS.endedRelationships,
+    CATALOG_BOOKS.mistakes,
+    CATALOG_BOOKS.preparing,
+    CATALOG_BOOKS.choosing,
+    CATALOG_BOOKS.keepers,
+    CATALOG_BOOKS.passion,
+    CATALOG_BOOKS.pureMan,
 ];
 
 const fadeUp = { initial: { opacity: 0, y: 32 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
+
+const WhatsAppIcon = () => (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+);
 
 export default function WisdomForSingles() {
     return (
@@ -138,11 +117,11 @@ export default function WisdomForSingles() {
                         className="flex flex-wrap gap-4 justify-center"
                     >
                         <a
-                            href="https://chat.whatsapp.com/Gp9LwRFOHxe95VELronPvt"
+                            href={WHATSAPP_COMMUNITY_URL}
                             target="_blank" rel="noopener noreferrer"
                             className="btn-primary px-7 py-3.5 text-sm font-bold flex items-center gap-2"
                         >
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                            <WhatsAppIcon />
                             Join Our Community
                         </a>
                         <Link
@@ -170,10 +149,10 @@ export default function WisdomForSingles() {
                             </p>
                             <p>
                                 It is our desire that you become well equipped and excel both as a single person and in
-                                your next phase of life — which is dating.
+                                your next phase of life which is dating.
                             </p>
                             <p>
-                                We have plenty of resources that will equip you and make you solid as a single person:
+                                We have plenty of resources that will equip you and make you solid as a single person
                                 from programs to podcasts to books to online monthly meetings.{' '}
                                 <strong className="text-navy">We have so much for you.</strong>
                             </p>
@@ -183,7 +162,7 @@ export default function WisdomForSingles() {
             </section>
 
             {/* ── Programs for Singles ─────────────────────────── */}
-            <section className="section-pad" style={{ background: 'var(--navy)' }}>
+            <section id="programs" className="section-pad scroll-mt-24" style={{ background: 'var(--navy)' }}>
                 <div className="container-xl">
                     <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-12">
                         <p className="text-xs font-bold uppercase tracking-[0.3em] mb-3 opacity-60" style={{ color: 'var(--gold)' }}>
@@ -193,76 +172,117 @@ export default function WisdomForSingles() {
                             Programs Built for You
                         </h2>
                         <p className="text-white/60 max-w-xl mx-auto">
-                            Four major programs specifically designed for singles — each with a manual and transformative curriculum.
+                            There are four major programs with manuals/books for singles to help you get started.
+                            Tap any program to learn more.
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                        {PROGRAMS.map((p, i) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                        {PROGRAM_TILES.map((p, i) => (
                             <motion.div
-                                key={p.title}
+                                key={p.slug}
                                 {...fadeUp} transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="rounded-2xl p-7 border border-white/10 hover:border-gold/40 transition-all"
+                                className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/10 hover:border-[color:var(--gold)] hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 focus-within:ring-2 focus-within:ring-[color:var(--gold)]"
                                 style={{ background: 'rgba(255,255,255,0.04)' }}
                             >
-                                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: 'rgba(212,175,55,0.15)' }}>
-                                    <BookOpen size={20} style={{ color: 'var(--gold)' }} />
+                                {/* Poster */}
+                                <div className="relative aspect-square overflow-hidden">
+                                    {p.image ? (
+                                        <img
+                                            src={p.image}
+                                            alt={`${p.title} poster`}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <div
+                                            className="w-full h-full flex flex-col items-center justify-center text-center p-8"
+                                            style={{ background: 'linear-gradient(135deg, #001226 0%, #002855 100%)' }}
+                                        >
+                                            <Sparkles size={30} style={{ color: 'var(--gold)' }} className="mb-5 opacity-80" />
+                                            <span className="w-10 h-px mb-4" style={{ background: 'var(--gold)' }} />
+                                            <p className="font-bold text-xl leading-snug" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--gold)' }}>
+                                                {p.title}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {p.isNew && (
+                                        <span
+                                            className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-lg"
+                                            style={{ background: 'var(--gold)', color: 'var(--navy)' }}
+                                        >
+                                            New
+                                        </span>
+                                    )}
                                 </div>
-                                <h3 className="text-white font-bold text-lg mb-2 leading-snug" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                    {p.title}
-                                </h3>
-                                <p className="text-white/55 text-sm leading-relaxed">{p.desc}</p>
+
+                                {/* Body */}
+                                <div className="flex flex-col flex-1 p-6">
+                                    <h3 className="text-white font-bold text-lg mb-2 leading-snug" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        {p.title}
+                                    </h3>
+                                    <p className="text-white/55 text-sm leading-relaxed mb-5 line-clamp-3">{p.desc}</p>
+                                    <Link
+                                        to={`/programs/${p.slug}`}
+                                        className="mt-auto inline-flex items-center gap-2 text-sm font-bold transition-all group-hover:gap-3 after:absolute after:inset-0 after:content-['']"
+                                        style={{ color: 'var(--gold)' }}
+                                        aria-label={`Learn more about ${p.title}`}
+                                    >
+                                        Learn More <ArrowRight size={15} />
+                                    </Link>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    <div className="text-center">
-                        <Link
-                            to="/perfected-in-wisdom"
-                            className="btn-primary inline-flex items-center gap-2 px-8 py-4 text-sm font-bold"
-                        >
-                            View All Programs <ArrowRight size={16} />
-                        </Link>
-                    </div>
+                    {/* Keep-me-updated notice */}
+                    <motion.div
+                        {...fadeUp} transition={{ duration: 0.6 }}
+                        className="max-w-3xl mx-auto rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 md:gap-8 text-center md:text-left"
+                        style={{ background: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.3)' }}
+                    >
+                        <div className="w-12 h-12 shrink-0 rounded-xl flex items-center justify-center" style={{ background: 'rgba(212,175,55,0.18)' }}>
+                            <BellRing size={22} style={{ color: 'var(--gold)' }} />
+                        </div>
+                        <p className="text-white/80 leading-relaxed flex-1">
+                            <strong className="text-white">Reach out to us</strong> so we can keep you updated when any of the programs are running.
+                        </p>
+                        <div className="flex flex-wrap gap-3 justify-center">
+                            <a
+                                href={whatsappLink('Hello Hekimika, I am single. Please keep me updated when any of the Single and Built programs are running.')}
+                                target="_blank" rel="noopener noreferrer"
+                                className="btn-primary px-5 py-2.5 text-sm"
+                            >
+                                <WhatsAppIcon /> Notify Me
+                            </a>
+                            <Link to="/perfected-in-wisdom" className="btn-outline px-5 py-2.5 text-sm">
+                                All Programs
+                            </Link>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
             {/* ── Books for Singles ────────────────────────────── */}
-            <section className="section-pad bg-gray-50">
+            <section id="books" className="section-pad bg-gray-50 scroll-mt-24">
                 <div className="container-xl">
                     <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-12">
                         <p className="text-xs font-bold uppercase tracking-[0.3em] mb-3 opacity-60" style={{ color: 'var(--navy)' }}>
-                            Featured Books
+                            Books for You
                         </p>
                         <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             Books to Build You
                         </h2>
                         <p className="text-gray-500 max-w-xl mx-auto">
-                            Powerful resources authored by Pastor Kevin Mulati — get your soft copy and start reading today.
+                            There are several books for you too, authored by Pastor Kevin Mulati. Tap a book to
+                            get your copy on Selar and start reading today.
                         </p>
+                        <div className="mx-auto mt-5 h-px w-16 bg-gold opacity-50" />
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
                         {BOOKS.map((b, i) => (
-                            <motion.div
-                                key={b.title}
-                                {...fadeUp} transition={{ duration: 0.5, delay: i * 0.08 }}
-                                className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg transition-all group flex flex-col"
-                            >
-                                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: 'rgba(0,31,63,0.06)' }}>
-                                    <BookOpen size={20} style={{ color: 'var(--navy)' }} />
-                                </div>
-                                <h3 className="text-navy font-bold text-base mb-2 leading-snug flex-1" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                    {b.title}
-                                </h3>
-                                <p className="text-gray-500 text-sm mb-5 leading-relaxed">{b.desc}</p>
-                                <a
-                                    href={b.link} target="_blank" rel="noopener noreferrer"
-                                    className="btn-primary w-full py-2.5 text-sm flex items-center justify-center gap-2 mt-auto"
-                                >
-                                    Get Soft Copy <ExternalLink size={13} />
-                                </a>
-                            </motion.div>
+                            <BookShowcaseCard key={b.key} book={b} index={i} />
                         ))}
                     </div>
 
@@ -285,7 +305,8 @@ export default function WisdomForSingles() {
                             Follow Us for Daily Wisdom
                         </h2>
                         <p className="text-white/60 max-w-lg mx-auto">
-                            Join thousands of young people receiving wisdom daily through our social media platforms.
+                            Visit our social media (Spotify, Instagram, Facebook, YouTube, and TikTok) for more
+                            engagement and content.
                         </p>
                     </motion.div>
 
@@ -293,11 +314,11 @@ export default function WisdomForSingles() {
                         {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}
                         className="flex flex-wrap justify-center gap-4"
                     >
-                        {SOCIALS.map((s) => (
+                        {SOCIAL_LINKS.map((s) => (
                             <a
                                 key={s.label}
                                 href={s.href} target="_blank" rel="noopener noreferrer"
-                                className="px-7 py-3 rounded-full text-white text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105"
+                                className="px-7 py-3 rounded-full text-white text-sm font-bold flex items-center gap-2 border border-white/15 hover:opacity-90 transition-all hover:scale-105"
                                 style={{ background: s.color }}
                             >
                                 {s.label} <ExternalLink size={13} />
@@ -321,19 +342,29 @@ export default function WisdomForSingles() {
                             You Don't Have to Walk Alone
                         </h2>
                         <p className="text-gray-500 leading-relaxed mb-8 max-w-xl mx-auto">
-                            Reach out to us on WhatsApp with any questions or join our{' '}
-                            <strong className="text-navy">Wisdom Moments Singles</strong> community and interact
-                            with other singles on the same journey.
+                            Additionally, you can reach out to us on WhatsApp in case you have any needs or burning
+                            questions, or join{' '}
+                            <strong className="text-navy">Our Wisdom Moments Singles</strong> and interact
+                            with other singles.
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <a
-                                href="https://wa.me/254702338163?text=Hello%20Hekimika,%20I%20am%20single%20and%20would%20love%20more%20wisdom%20on%20love%20and%20relationships."
+                                href={whatsappLink('Hello Hekimika, I am single and would love more wisdom on love and relationships.')}
                                 target="_blank" rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-white font-bold text-sm hover:opacity-90 transition-opacity"
                                 style={{ background: '#25D366' }}
                             >
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                                <WhatsAppIcon />
                                 Reach Out on WhatsApp
+                            </a>
+                            <a
+                                href={WHATSAPP_COMMUNITY_URL}
+                                target="_blank" rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-bold text-sm border-2 hover:bg-navy hover:text-white transition-colors"
+                                style={{ borderColor: 'var(--navy)', color: 'var(--navy)' }}
+                            >
+                                <Users size={17} />
+                                Join Wisdom Moments Singles
                             </a>
                             <Link
                                 to="/contact"

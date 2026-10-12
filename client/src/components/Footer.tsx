@@ -34,6 +34,12 @@ const TikTokIcon = ({ size = 24, ...props }: any) => (
     </svg>
 );
 
+const SpotifyIcon = ({ size = 24, ...props }: any) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.215.352-.676.463-1.028.248-2.816-1.722-6.36-2.112-10.536-1.159-.4.092-.8-.16-.892-.56-.092-.4.16-.8.56-.892 4.568-1.044 8.492-.601 11.648 1.335.352.215.463.676.248 1.028zm1.468-3.262c-.27.44-.848.578-1.288.308-3.224-1.982-8.14-2.556-11.954-1.398-.495.15-1.024-.132-1.174-.627-.15-.495.132-1.024.627-1.174 4.364-1.325 9.788-.684 13.481 1.587.44.27.578.848.308 1.288v.016zm.126-3.41c-3.865-2.295-10.245-2.507-13.931-1.387-.594.18-1.225-.157-1.405-.751-.18-.594.157-1.225.751-1.405 4.237-1.286 11.28-1.037 15.719 1.597.534.317.708 1.011.391 1.545-.317.534-1.011.708-1.545.391z" />
+    </svg>
+);
+
 const QUICK_LINKS = [
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },
@@ -99,6 +105,7 @@ export default function Footer() {
                             {/* Social icons */}
                             <div className="flex gap-3">
                                 {[
+                                    { Icon: SpotifyIcon, href: 'https://open.spotify.com/show/3bSNy9W1so6Z9IjHyFb1IP?si=fcb149a88a274a17', label: 'Spotify' },
                                     { Icon: FacebookIcon, href: 'https://www.facebook.com/profile.php?id=61552354056302', label: 'Facebook' },
                                     { Icon: InstagramIcon, href: 'https://www.instagram.com/hekimika2?igsh=aWx5YnY1N2x1aW5z', label: 'Instagram' },
                                     { Icon: YoutubeIcon, href: 'https://www.youtube.com/@Hekimika001', label: 'YouTube' },

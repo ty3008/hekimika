@@ -27,6 +27,20 @@ export interface Program {
 export const PROGRAMS: Program[] = [
     // Single & Built
     {
+        title: 'Mistakes That Singles Can Avoid',
+        slug: 'mistakes-singles-can-avoid',
+        category: 'Single & Built',
+        description: 'Practical wisdom to help you recognise and avoid the common mistakes singles make, so you can navigate singlehood well and build a strong foundation for your next phase of life.',
+        fullDescription: 'Practical wisdom to help you recognise and avoid the common mistakes singles make, so you can navigate singlehood well and build a strong foundation for your next phase of life. Please reach out to us so we can keep you updated when the program is running.',
+        model: 'Bootcamp',
+        // TODO: drop the new poster into src/assets and import it here (e.g. import MistakesImg from '../assets/Mistakes.webp').
+        // Until then ProgramCard renders a branded fallback tile.
+        image: '',
+        selarUrl: '',
+        curriculum: [],
+        is_open_for_intake: false
+    },
+    {
         title: 'Single & Built (Preparing for Love)',
         slug: 'preparing-for-love',
         category: 'Single & Built',
@@ -83,7 +97,7 @@ export const PROGRAMS: Program[] = [
         is_open_for_intake: true
     },
     {
-        title: 'Single & Built (Keepers)',
+        title: 'Single & Built (Keepers of Love)',
         slug: 'keepers',
         category: 'Single & Built',
         description: 'It is not enough to begin a relationship, it is important to be equipped to have a long-term relationship that can lead to marriage. This is a program for any single person who desires to be equipped to know how to build and keep a relationship.',

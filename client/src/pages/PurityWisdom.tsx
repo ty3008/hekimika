@@ -1,35 +1,22 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, ExternalLink, Shield } from 'lucide-react';
+import { ArrowRight, ExternalLink, Shield } from 'lucide-react';
+import BookShowcaseCard from '../components/BookShowcaseCard';
+import { PROGRAMS } from '../utils/constants';
+import { CATALOG_BOOKS, SOCIAL_LINKS } from '../utils/siteContent';
 
 // ── Purity program ───────────────────────────────────────
+const PURITY_PROGRAM = PROGRAMS.find((p) => p.slug === 'school-of-purity');
 const PROGRAM = {
     title: 'School of Purity – Purity Basics',
     desc: 'A foundational program that addresses the root of purity — the state of your heart. Learn how formation determines function and discover how to live as a dominant son of God in a dark world.',
 };
 
-// ── Books on Purity ──────────────────────────────────────
+// ── Two main books on Purity ─────────────────────────────
 const BOOKS = [
-    {
-        title: 'The Pure Man',
-        desc: 'A bold, direct call to godly masculinity and purity in a generation where the standard has been lost. Written for young men who want to stand out.',
-        link: 'https://selar.com/puremanbk',
-    },
-    {
-        title: 'Cultured in Love – Passion',
-        desc: 'Passion is a beautiful gift from God. This book helps you understand, steward, and channel your passion wisely for life and relationships.',
-        link: 'https://selar.com/7hb2n47455',
-    },
-];
-
-// ── Social channels ──────────────────────────────────────
-const SOCIALS = [
-    { label: 'Spotify', href: 'https://open.spotify.com/show/hekimika', color: '#1DB954' },
-    { label: 'Instagram', href: 'https://www.instagram.com/hekimika2?igsh=aWx5YnY1N2x1aW5z', color: '#E1306C' },
-    { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61552354056302', color: '#1877F2' },
-    { label: 'YouTube', href: 'https://www.youtube.com/@Hekimika001', color: '#FF0000' },
-    { label: 'TikTok', href: 'https://www.tiktok.com/@hekimika5?_r=1&_t=ZS-95YHLB2yd3U', color: '#010101' },
+    CATALOG_BOOKS.pureMan,
+    { ...CATALOG_BOOKS.passion, title: 'Cultured in Love – Passion' },
 ];
 
 const fadeUp = { initial: { opacity: 0, y: 32 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
@@ -118,19 +105,19 @@ export default function PurityWisdom() {
                         <p className="text-2xl font-bold text-navy mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>Hi,</p>
                         <div className="space-y-5 text-gray-600 leading-relaxed text-base md:text-lg">
                             <p>
-                                That is an excellent question. It shows you are moving in the right direction as a young
-                                person — and that you are willing to stand out in a generation where many feel purity is
+                                That is an excellent question. It shows you are in the right direction as a young
+                                person and are willing to stand out in a generation where people feel purity is
                                 outdated.
                             </p>
                             <p>
-                                It is easy to be discouraged and feel like you are the only remnant in a dark world. But
-                                be encouraged — <strong className="text-navy">you are not alone.</strong>
+                                It is easy to be discouraged and feel like you are the only remnant in a dark world, but
+                                be encouraged that <strong className="text-navy">you are not alone.</strong> In life the way you are
+                                formed determines how you live and function. A pure lifestyle is only possible depending
+                                on the state of your heart.
                             </p>
                             <p>
-                                In life, the way you are formed determines how you live and function. A pure lifestyle is
-                                only possible depending on the state of your heart. This platform has a wealth of
-                                resources to help you become formed so that you can live as a dominant son of God in a
-                                dark world.
+                                In this platform we have a lot of resources to help you become formed so that you can
+                                live as a dominant son of God in a dark world.
                             </p>
                         </div>
                     </motion.div>
@@ -154,26 +141,42 @@ export default function PurityWisdom() {
 
                     <motion.div
                         {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}
-                        className="rounded-2xl p-8 border border-white/10 hover:border-gold/40 transition-all mb-8"
+                        className="group relative rounded-2xl p-8 border border-white/10 hover:border-[color:var(--gold)] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 mb-8 focus-within:ring-2 focus-within:ring-[color:var(--gold)]"
                         style={{ background: 'rgba(255,255,255,0.04)' }}
                     >
-                        <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: 'rgba(212,175,55,0.15)' }}>
-                            <Shield size={24} style={{ color: 'var(--gold)' }} />
+                        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start">
+                            {PURITY_PROGRAM?.image && (
+                                <img
+                                    src={PURITY_PROGRAM.image}
+                                    alt={`${PROGRAM.title} poster`}
+                                    loading="lazy"
+                                    className="w-full sm:w-44 aspect-square object-cover rounded-xl shrink-0 transition-transform duration-500 group-hover:scale-[1.03]"
+                                />
+                            )}
+                            <div>
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: 'rgba(212,175,55,0.15)' }}>
+                                    <Shield size={24} style={{ color: 'var(--gold)' }} />
+                                </div>
+                                <p className="text-white/70 text-sm mb-2">Check out the School of Purity Program, where we handle Purity Basics.</p>
+                                <h3 className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    {PROGRAM.title}
+                                </h3>
+                                <p className="text-white/55 leading-relaxed mb-6">{PROGRAM.desc}</p>
+                                <Link
+                                    to="/programs/school-of-purity"
+                                    className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold after:absolute after:inset-0 after:content-['']"
+                                >
+                                    View the School of Purity <ArrowRight size={15} />
+                                </Link>
+                            </div>
                         </div>
-                        <h3 className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                            {PROGRAM.title}
-                        </h3>
-                        <p className="text-white/55 leading-relaxed mb-6">{PROGRAM.desc}</p>
-                        <Link to="/perfected-in-wisdom" className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold">
-                            Find Out More <ArrowRight size={15} />
-                        </Link>
                     </motion.div>
                 </div>
             </section>
 
             {/* ── Books on Purity ──────────────────────────────── */}
             <section className="section-pad bg-gray-50">
-                <div className="container-xl max-w-3xl">
+                <div className="container-xl max-w-4xl">
                     <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-12">
                         <p className="text-xs font-bold uppercase tracking-[0.3em] mb-3 opacity-60" style={{ color: 'var(--navy)' }}>
                             Books on Purity
@@ -186,27 +189,9 @@ export default function PurityWisdom() {
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 mb-10">
                         {BOOKS.map((b, i) => (
-                            <motion.div
-                                key={b.title}
-                                {...fadeUp} transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg transition-all flex flex-col"
-                            >
-                                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: 'rgba(0,31,63,0.06)' }}>
-                                    <BookOpen size={20} style={{ color: 'var(--navy)' }} />
-                                </div>
-                                <h3 className="text-navy font-bold text-base mb-2 flex-1 leading-snug" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                    {b.title}
-                                </h3>
-                                <p className="text-gray-500 text-sm mb-5 leading-relaxed">{b.desc}</p>
-                                <a
-                                    href={b.link} target="_blank" rel="noopener noreferrer"
-                                    className="btn-primary w-full py-2.5 text-sm flex items-center justify-center gap-2 mt-auto"
-                                >
-                                    Get Soft Copy <ExternalLink size={13} />
-                                </a>
-                            </motion.div>
+                            <BookShowcaseCard key={b.key} book={b} index={i} />
                         ))}
                     </div>
 
@@ -236,11 +221,11 @@ export default function PurityWisdom() {
                         {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}
                         className="flex flex-wrap justify-center gap-4"
                     >
-                        {SOCIALS.map((s) => (
+                        {SOCIAL_LINKS.map((s) => (
                             <a
                                 key={s.label}
                                 href={s.href} target="_blank" rel="noopener noreferrer"
-                                className="px-7 py-3 rounded-full text-white text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-all hover:scale-105"
+                                className="px-7 py-3 rounded-full text-white text-sm font-bold flex items-center gap-2 border border-white/15 hover:opacity-90 transition-all hover:scale-105"
                                 style={{ background: s.color }}
                             >
                                 {s.label} <ExternalLink size={13} />
