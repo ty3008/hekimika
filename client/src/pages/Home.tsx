@@ -330,10 +330,10 @@ export default function Home() {
                                         HERO_MESSAGES[0]
                                     ) : (
                                         <TypeAnimation
-                                            sequence={HERO_MESSAGES.flatMap((msg) => [msg, 2600])}
+                                            sequence={HERO_MESSAGES.flatMap((msg) => [msg, 4200])}
                                             wrapper="span"
-                                            speed={55}
-                                            deletionSpeed={75}
+                                            speed={35}
+                                            deletionSpeed={65}
                                             cursor={true}
                                             repeat={Infinity}
                                         />
