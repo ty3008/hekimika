@@ -80,7 +80,7 @@ export function OrganizationSchema() {
         },
         contactPoint: {
             '@type': 'ContactPoint',
-            telephone: '+254702338163',
+            email: 'hekimika001@gmail.com',
             contactType: 'customer service',
             availableLanguage: ['English', 'Swahili'],
         },

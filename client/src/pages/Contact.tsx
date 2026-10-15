@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import {
     Mail,
     MapPin,
-    Phone,
     MessageSquare,
     Users,
     Compass,
@@ -260,7 +259,7 @@ export default function Contact() {
                 <div className="container-xl mb-16">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         <a
-                            href="https://wa.me/254702338163?text=Hello%20Hekimika,%20I%20would%20like%20to%20know%20more%20about%20your%20programs%20and%20ministry."
+                            href={whatsappLink('Hello Hekimika, I would like to know more about your programs and ministry.')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-center group"
@@ -272,7 +271,7 @@ export default function Contact() {
                             <span className="text-white/80 text-xs">Direct chat with our team</span>
                         </a>
                         <a
-                            href="https://wa.me/254702338163?text=Hello%20Hekimika,%20I%20have%20a%20prayer%20request."
+                            href={whatsappLink('Hello Hekimika, I have a prayer request.')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-[#25D366] hover:bg-[#128C7E] text-white py-6 px-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-center group"
@@ -328,15 +327,17 @@ export default function Contact() {
                             </li>
                             <li className="flex items-start gap-4">
                                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 bg-gold/15">
-                                    <Phone size={20} className="text-gold" />
+                                    <MessageSquare size={20} className="text-gold" />
                                 </div>
                                 <div>
-                                    <p className="font-bold text-navy mb-1">Call or WhatsApp</p>
+                                    <p className="font-bold text-navy mb-1">WhatsApp Chat</p>
                                     <a
-                                        href="tel:+254702338163"
+                                        href={whatsappLink('Hello Hekimika, I would like to get in touch with your team.')}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="text-gray-600 text-sm hover:text-gold transition-colors"
                                     >
-                                        +254 702 338 163
+                                        Chat directly with our team
                                     </a>
                                     <p className="text-xs text-gray-400 mt-1">Available Mon–Fri, 9am – 5pm EAT</p>
                                 </div>

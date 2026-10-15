@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 const FacebookIcon = ({ size = 24, ...props }: any) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -153,10 +153,6 @@ export default function Footer() {
                                 <a href="mailto:hekimika001@gmail.com" className="flex items-center gap-3 hover:text-gold transition-colors">
                                     <Mail size={15} style={{ color: 'var(--gold)', flexShrink: 0 }} />
                                     hekimika001@gmail.com
-                                </a>
-                                <a href="tel:+254702338163" className="flex items-center gap-3 hover:text-gold transition-colors">
-                                    <Phone size={15} style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                                    +254 702 338 163
                                 </a>
                                 <span className="flex items-center gap-3">
                                     <MapPin size={15} style={{ color: 'var(--gold)', flexShrink: 0 }} />
