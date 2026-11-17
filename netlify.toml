@@ -22,17 +22,26 @@
   to     = "/index.html"
   status = 200
 
-# ─── Security Headers ────────────────────────────────────────────────────────
+# ─── Security & Modern Protection Headers ────────────────────────────────────
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options        = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy        = "strict-origin-when-cross-origin"
+    X-Frame-Options           = "DENY"
+    X-Content-Type-Options    = "nosniff"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https: http:; media-src 'self' https: blob:; frame-src 'self' https://www.youtube.com https://youtube.com https://open.spotify.com; object-src 'none'; base-uri 'self';"
 
 # Cache static JS/CSS assets aggressively (they have content hashes in filenames)
 [[headers]]
   for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache favicon and static brand media
+[[headers]]
+  for = "/favicon/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 

@@ -8,11 +8,16 @@ import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '../../.env' });
 
-const EMAIL = 'hekimika001@gmail.com';
-const PASSWORD = 'Hekimika@2024';
-const NAME = 'Hekimika Admin';
+const EMAIL = process.env.ADMIN_RESET_EMAIL || process.env.ADMIN_EMAIL;
+const PASSWORD = process.env.ADMIN_RESET_PASSWORD || process.env.ADMIN_PASSWORD;
+const NAME = process.env.ADMIN_RESET_NAME || process.env.ADMIN_NAME || 'Hekimika Admin';
 
 async function resetAdmin() {
+    if (!EMAIL || !PASSWORD) {
+        console.error('❌ Error: Both ADMIN_RESET_EMAIL (or ADMIN_EMAIL) and ADMIN_RESET_PASSWORD (or ADMIN_PASSWORD) environment variables must be set.');
+        process.exit(1);
+    }
+
     const hashed = await bcrypt.hash(PASSWORD, 12);
 
     const existing = await pool.query('SELECT id FROM admins WHERE email = $1', [EMAIL.toLowerCase()]);

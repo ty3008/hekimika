@@ -17,10 +17,37 @@ export const getRegistrations = async (_req: Request, res: Response): Promise<vo
 export const createRegistration = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, email, phone, programSlug, eventId, notes, source } = req.body;
+
+        if (!name?.trim() || !email?.trim()) {
+            res.status(400).json({ error: 'Name and email are required' });
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.trim()) || email.trim().length > 150) {
+            res.status(400).json({ error: 'Please provide a valid email address (max 150 characters)' });
+            return;
+        }
+
+        if (name.trim().length > 100) {
+            res.status(400).json({ error: 'Name must not exceed 100 characters' });
+            return;
+        }
+
+        if (phone && phone.trim().length > 30) {
+            res.status(400).json({ error: 'Phone must not exceed 30 characters' });
+            return;
+        }
+
+        if (notes && notes.trim().length > 2000) {
+            res.status(400).json({ error: 'Notes must not exceed 2000 characters' });
+            return;
+        }
+
         const result = await pool.query(
             `INSERT INTO registrations (name, email, phone, program_slug, event_id, notes, source)
              VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            [name, email.toLowerCase(), phone || '', programSlug || '', eventId || null, notes || '', source || 'general']
+            [name.trim(), email.trim().toLowerCase(), (phone || '').trim(), (programSlug || '').trim(), eventId || null, (notes || '').trim(), (source || 'general').trim()]
         );
         res.status(201).json(result.rows[0]);
     } catch (err: unknown) {
