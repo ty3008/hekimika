@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Users, Heart, Star, PlayCircle } from 'lucide-react';
+import { ArrowRight, Users, Heart, Star, PlayCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import SectionTitle from '../components/SectionTitle';
 import ProgramCard from '../components/ProgramCard';
@@ -186,18 +186,26 @@ export default function Home() {
     const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
 
     const [currentImage, setCurrentImage] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
     const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
     const VIDEO_ID = 'TLqisyaTUvU';
 
+    const nextSlide = () => setCurrentImage((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+    const prevSlide = () => setCurrentImage((prev) => (prev - 1 + CAROUSEL_IMAGES.length) % CAROUSEL_IMAGES.length);
+
     useEffect(() => {
-        if (isHovered) return;
+        // Preload all carousel images so transitions are instant with zero flash
+        CAROUSEL_IMAGES.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        // Rotate slides reliably every 6 seconds in sync with typewriter messages
         const timer = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
-        }, 5000);
+        }, 6000);
         return () => clearInterval(timer);
-    }, [isHovered]);
+    }, [currentImage]);
 
     const handleDragEnd = (_e: any, { offset }: any) => {
         const swipe = offset.x;
@@ -237,8 +245,6 @@ export default function Home() {
             <section
                 ref={heroRef}
                 className="relative h-screen min-h-[640px] max-h-[900px] flex items-center justify-center overflow-hidden"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
             >
                 {/* ── Background image layer with Ken Burns ── */}
                 <motion.div
@@ -385,6 +391,22 @@ export default function Home() {
                     </motion.div>
                 </div>
 
+                {/* ── Carousel navigation chevrons (desktop/hover) ── */}
+                <button
+                    onClick={prevSlide}
+                    aria-label="Previous image"
+                    className="hidden sm:flex absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-black/25 hover:bg-black/55 text-white/70 hover:text-white transition-all backdrop-blur-sm pointer-events-auto border border-white/10 hover:border-gold/50 cursor-pointer shadow-lg"
+                >
+                    <ChevronLeft size={22} />
+                </button>
+                <button
+                    onClick={nextSlide}
+                    aria-label="Next image"
+                    className="hidden sm:flex absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-black/25 hover:bg-black/55 text-white/70 hover:text-white transition-all backdrop-blur-sm pointer-events-auto border border-white/10 hover:border-gold/50 cursor-pointer shadow-lg"
+                >
+                    <ChevronRight size={22} />
+                </button>
+
                 {/* ── Carousel dot indicators ── */}
                 <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
                     {CAROUSEL_IMAGES.map((_, i) => (
@@ -392,20 +414,20 @@ export default function Home() {
                             key={i}
                             onClick={() => setCurrentImage(i)}
                             aria-label={`Go to slide ${i + 1}`}
-                            className="relative overflow-hidden rounded-full transition-all duration-300 pointer-events-auto"
+                            className="relative overflow-hidden rounded-full transition-all duration-300 pointer-events-auto cursor-pointer"
                             style={{
-                                width: i === currentImage ? 28 : 8,
+                                width: i === currentImage ? 32 : 8,
                                 height: 8,
                                 background: i === currentImage ? 'var(--gold)' : 'rgba(255,255,255,0.35)',
                             }}
                         >
-                            {i === currentImage && !isHovered && (
+                            {i === currentImage && (
                                 <motion.span
                                     className="absolute inset-0 rounded-full origin-left"
-                                    style={{ background: 'rgba(255,255,255,0.4)' }}
+                                    style={{ background: 'rgba(255,255,255,0.45)' }}
                                     initial={{ scaleX: 0 }}
                                     animate={{ scaleX: 1 }}
-                                    transition={{ duration: 5, ease: 'linear' }}
+                                    transition={{ duration: 6, ease: 'linear' }}
                                     key={currentImage}
                                 />
                             )}
